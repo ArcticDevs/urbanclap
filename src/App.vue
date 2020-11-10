@@ -5,14 +5,19 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <service />
+
     <Footer />
   </div>
 </template>
 <script>
 import Footer from "./components/Footer";
+import service from "./components/service"
+
 export default {
   components:{
     Footer,
+    service,
   }
   
 }
