@@ -66,9 +66,11 @@ export default {
 </script>
 <style scoped>
 #flexbox{
+    padding-left: 130px;
+    padding-right: 130px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 
 }
@@ -92,7 +94,7 @@ export default {
      /* background-color: grey; */
 
  }
- router-link#box :hover{
+ a #box router-link:hover{
      background-color: #dddddd;
  }
 </style>
