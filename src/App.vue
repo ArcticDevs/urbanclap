@@ -1,33 +1,10 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
-    <!-- <router-view/> -->
-     <Header />
-    <service />
-
-    <Footer />
+    <router-view/>
   </div>
 </template>
-<script>
-import Footer from "./components/Footer";
-import service from "./components/service";
-import Header from "./components/Header";
-
-export default {
-  components:{
-    Footer,
-    service,
-    Header 
-  }
-  
-}
-</script>
 
 <style>
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -48,5 +25,4 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-
 </style>
