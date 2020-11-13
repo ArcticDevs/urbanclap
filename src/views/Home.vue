@@ -22,7 +22,7 @@
      
        <h1 class="pt-4"><b>Cleaning & Pest Control</b></h1>
     <p>Removes Hard stain And More </p> 
-    
+   
      
       <Strip /></div>
      <div class="insurance">
@@ -42,6 +42,7 @@ import Footer from '@/components/Footer.vue'
 import Service from '@/components/service.vue'
 import Strip from '@/components/Strips.vue'
 import Carousel from '@/components/Carousel.vue'
+
 
 export default {
   name: 'Home',

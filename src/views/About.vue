@@ -1,5 +1,14 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+
+    <FirstMod />
   </div>
 </template>
+<script>
+import FirstMod from '@/components/FirstMod.vue'
+export default {
+     components:{
+        FirstMod,
+    }
+}
+</script>

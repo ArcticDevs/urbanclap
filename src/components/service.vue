@@ -2,7 +2,7 @@
   <div class="container service">
     <div id="flexbox">
       <div class="flex-item">
-        <router-link to="/" id="box">
+        <router-link to="/FirstMod" id="box">
           <img src="/haircut.png" alt="" class="mt-2 mb-2" />
           <p>Hair Cut at home</p>
         </router-link>
