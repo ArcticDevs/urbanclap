@@ -3,49 +3,92 @@
     <div class="container-fluid " id="header">
       <h6>Men`s Haircut & Grooming</h6>
     </div>
+
     <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <ul class="list-group mt-3">
+      <div class="container">
+        <ul class="list-group mt-3 " id="mobile">
             <a href="#">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box mr-2 ResponsiveHList" id="hover">
                 Diwali Sale Specials
-              </li></a
-            >
+              </li>
+              </a>
             <a href="#">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box " id="hover">
                 Haircut For Men
-              </li></a
-            >
+              </li>
+              </a>
             <a href="#">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box" id="hover">
                 Kid`s Haircut
-              </li></a
-            >
+              </li>
+              </a>
             <a href="#">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box" id="hover">
                 Shave Beard & Moustache
               </li></a
             >
             <a href="#">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box" id="hover">
                 Hair color
               </li></a
             >
             <a href="#">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box" id="hover">
                 Head & Shoulder Message
               </li></a
             >
             <a href="">
-              <li class="list-group-item   float-right" id="hover">
+              <li class="list-group-item box" id="hover">
+                Make Your Own Package
+              </li></a
+            >
+          </ul>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col" id="Desktop">
+          <ul class="list-group mt-3 row " >
+            <a href="#">
+              <li class="list-group-item active mr-2 float-right" id="hover">
+                Diwali Sale Specials
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item mr-2  float-right" id="hover">
+                Haircut For Men
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item mr-2 float-right" id="hover">
+                Kid`s Haircut
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item mr-2 float-right" id="hover">
+                Shave Beard & Moustache
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item mr-2 float-right" id="hover">
+                Hair color
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item mr-2   float-right" id="hover">
+                Head & Shoulder Message
+              </li></a
+            >
+            <a href="">
+              <li class="list-group-item mr-2   float-right" id="hover">
                 Make Your Own Package
               </li></a
             >
           </ul>
         </div>
 
-        <div class="col col-7">
+        <div class="col col-12 col-md-7 col-sm-12">
           <!-- <div class="container">
             <b-card class="mb-2 mt-2 w-50 ">
               <iframe
@@ -102,13 +145,11 @@
   >
 
      <iframe
-                width="480"
-                height="315"
                 src="https://www.youtube.com/embed/MhlVFVSo-2Q"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
-                class="mt-3 mx-auto"
+                class="mt-3 mx-auto responsive-iframe"
               >
               </iframe>
 
@@ -128,23 +169,26 @@
                   <button type="button" v-on:click="decrease" id="borderInl">-</button>
                 </div>     
            </div>
+           
       </b-card-text>
     </b-card-body>
     <hr>
 
     <b-card-body>
-<p>sadsadsa</p>
+   <ul>
+     <li>More than 5L Men trust with their Haircut | No Mess left behind after the service </li>
+   </ul>
+   <a v-b-modal.modal-scrollable class="float-left" id="text-blue">View Details ></a>
+     <b-modal id="modal-scrollable" scrollable title="Haircut">
+    <p class="my-3" v-for="i in 20" :key="i">
+      Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+      in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+    </p>
+  </b-modal>
     </b-card-body>
   </b-card>
 
-
-
-
-          
-        </div>
-        <!-- <div class="col">
-          sadasdasdasda
-        </div> -->
+       </div>
       </div>
     </div>
   </div>
@@ -164,11 +208,16 @@ export default {
     decrease: function() {
       this.counter--;
     },
+    
   },
 };
 </script>
 
 <style scoped>
+.responsive-iframe {
+  width: 25vw;
+  height: 30vh;
+}
 #header {
   background: grey;
   height: 70px;
@@ -275,5 +324,76 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 #borderInl{
   border-left: 1px solid #304ffe;
+}
+
+#mobile{
+  display: none;
+}
+
+@media(max-width: 1200px) {
+
+  #Desktop{
+    display: none;
+  }
+  #mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  overflow: scroll; 
+  }
+  .box{
+  
+  height: 60px;
+  width: 200px;
+}
+.responsive-iframe {
+  width: 40vw;
+  height: 40vh;
+}
+.ResponsiveHList{
+  margin-left:500px ;
+}
+}
+
+@media(max-width: 991px) {
+  .ResponsiveHList{
+  margin-left:750px ;
+}
+
+}
+@media(max-width: 900px) {
+.responsive-iframe {
+  width: 50vw;
+  height: 40vh;
+}
+
+}
+@media(max-width: 766px) {
+  .ResponsiveHList{
+  margin-left:950px ;
+}
+.responsive-iframe {
+  width: 70vw;
+  height: 40vh;
+}
+}
+@media(max-width: 516px) {
+  .ResponsiveHList{
+  margin-left:1050px ;
+}
+.responsive-iframe {
+  width: 90vw;
+  height: 40vh;
+}
+}
+@media(max-width: 400px) {
+  .ResponsiveHList{
+  margin-left:1150px ;
+}
+.responsive-iframe {
+  width: 85vw;
+  height: 40vh;
+}
 }
 </style>
