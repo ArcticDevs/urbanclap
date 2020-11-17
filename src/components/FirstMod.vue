@@ -13,27 +13,27 @@
               </li>
               </a>
             <a href="#">
-              <li class="list-group-item box " id="hover">
+              <li class="list-group-item box mr-2" id="hover">
                 Haircut For Men
               </li>
               </a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box mr-2" id="hover">
                 Kid`s Haircut
               </li>
               </a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box mr-2" id="hover">
                 Shave Beard & Moustache
               </li></a
             >
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box mr-2" id="hover">
                 Hair color
               </li></a
             >
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box mr-2" id="hover">
                 Head & Shoulder Message
               </li></a
             >
@@ -88,7 +88,7 @@
           </ul>
         </div>
 
-        <div class="col col-12 col-md-7 col-sm-12">
+        <div class="col col-12 col-md-7 col-sm-12 mx-auto">
           <!-- <div class="container">
             <b-card class="mb-2 mt-2 w-50 ">
               <iframe
@@ -345,20 +345,21 @@ input[type="number"]::-webkit-outer-spin-button {
   .box{
   
   height: 60px;
-  width: 200px;
+  width: 230px;
+  text-align: center;
 }
 .responsive-iframe {
   width: 40vw;
   height: 40vh;
 }
 .ResponsiveHList{
-  margin-left:500px ;
+  margin-left:800px ;
 }
 }
 
 @media(max-width: 991px) {
   .ResponsiveHList{
-  margin-left:750px ;
+  margin-left:1050px ;
 }
 
 }
@@ -371,7 +372,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media(max-width: 766px) {
   .ResponsiveHList{
-  margin-left:950px ;
+  margin-left:1150px ;
 }
 .responsive-iframe {
   width: 70vw;
@@ -380,7 +381,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media(max-width: 516px) {
   .ResponsiveHList{
-  margin-left:1050px ;
+  margin-left:1330px ;
 }
 .responsive-iframe {
   width: 90vw;
@@ -389,7 +390,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media(max-width: 400px) {
   .ResponsiveHList{
-  margin-left:1150px ;
+  margin-left:1290px ;
 }
 .responsive-iframe {
   width: 85vw;
