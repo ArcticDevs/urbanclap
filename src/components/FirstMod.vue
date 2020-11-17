@@ -342,9 +342,8 @@ input[type="number"]::-webkit-outer-spin-button {
   flex-wrap: nowrap;
   overflow: scroll; 
   }
-  .box{
-  
-  height: 60px;
+  .box{  
+  height: 40px;
   width: 230px;
   text-align: center;
 }
