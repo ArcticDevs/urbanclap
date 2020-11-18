@@ -16,8 +16,58 @@
       <div class="flex-item">
         <router-link to="/" id="box">
           <img src="/cleaning.png" alt="" class="mt-2 mb-2" />
-          <p>Cleaning & Disinfection</p>
+          <p  v-b-toggle.sidebar-right >Cleaning & Disinfection</p>
         </router-link>
+            <b-sidebar id="sidebar-right" title="Profesional Cleaning Services"  right shadow aria-label   
+            :backdrop-variant="variant"
+            backdrop
+            >
+            Profesional Cleaning Services 
+      <div class="px-1 py-2">
+          <ul class="list-group mt-3 ">
+            <a href="#">
+              <li class="list-group-item " id="hover" >
+               <img src="cnd1.png" alt="" srcset="" id="imgSize"> Office and Shop Desinfection <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li>
+              </a>
+            <a href="#">
+              <li class="list-group-item box " id="hover">
+              <img src="cnd1.png" alt="" srcset="" id="imgSize">  Professional Full House Cleaning <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li>
+              </a>
+            <a href="#">
+              <li class="list-group-item box " id="hover">
+              <img src="cnd1.png" alt="" srcset=""> Car Cleaning <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li>
+              </a>
+            <a href="#">
+              <li class="list-group-item box " id="hover">
+              <img src="cnd1.png" alt="" srcset="" id="imgSize">  Professional Bathroom CLeaning <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item box " id="hover">
+              <img src="cnd1.png" alt="" srcset="" id="imgSize"> Profesional Kitchen Cleaning  <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li></a
+            >
+            <a href="#">
+              <li class="list-group-item box " id="hover">
+              <img src="cnd1.png" alt="" srcset="" id="imgSize">  Professional Carpet Cleaning  <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li></a
+            >
+            <a href="">
+              <li class="list-group-item box" id="hover">
+              <img src="cnd1.png" alt="" srcset="" id="imgSize"> Profesional Sofa Cleaning  <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li></a
+            >
+             <a href="">
+              <li class="list-group-item box" id="hover">
+              <img src="cnd1.png" alt="" srcset="" id="imgSize"> House & Car Disinfection <i class="float-right fa fa-chevron-right pt-2"></i>
+              </li></a
+            >
+          </ul>
+      </div>
+    </b-sidebar>
       </div>
       <div class="flex-item">
         <router-link to="/" id="box">
@@ -80,11 +130,31 @@
 export default {};
 </script>
 <style scoped>
+
 .service {
   background: #fff !important;
   position: relative;
   top: -50px;
   z-index: 2 !important;
+}
+
+#hover {
+  border: 1px solid grey;
+  background: transparent;
+  text-decoration: none;
+  color: #757575 !important;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  padding-right: 10px;
+  text-align: left;
+  
+}
+#hover a {
+  text-decoration: none;
+}
+
+#hover:hover {
+  background: #bdbdbd;
 }
 
 #flexbox {
@@ -140,4 +210,10 @@ a #box router-link:hover {
     top: 0;
   }
 }
+#imgSize{
+  height: 30px;
+  width: 30px;
+}
+
+
 </style>
