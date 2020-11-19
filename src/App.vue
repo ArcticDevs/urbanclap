@@ -5,8 +5,9 @@
 </template>
 
 <style>
+@import url('http://fonts.cdnfonts.com/css/axiforma');
 #app {
-  font-family:axiforma-semiBold, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Axiforma',-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

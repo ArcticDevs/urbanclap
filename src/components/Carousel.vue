@@ -45,15 +45,17 @@ export default {
 
 button.slick-prev:before, button.slick-next:before {
      color: #000 !important;
-      Background: #fff;
-      width:50px !important;
-      height:50px !important;
+      /* max-width:50px;
+      max-height:50px;
+      width:5vw !important;
+      height:5vw !important;
       box-shadow: 0px 0px 5px #000;
       border-radius:35px;
       display:flex;
       justify-content: center;
-      align-items: center;
+      align-items: center; */
     
+     /* display:none; */
      
 }
 
