@@ -47,7 +47,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 * {
   z-index: 1;
 }
@@ -68,16 +68,6 @@ section {
   padding: 0;
   z-index: -1;
 }
-
-// .navbar .navbar-brand img {
-//   width: 290px;
-// }
-
-// .navbar a.nav-link {
-//   color: #fff !important;
-//   padding: 0;
-//   margin-right: 25px;
-// }
 
 #page-address {
   position: inherit;

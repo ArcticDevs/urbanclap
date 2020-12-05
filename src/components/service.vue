@@ -1,27 +1,28 @@
 <template>
   <div class="container service">
     <div id="flexbox">
-      <router-link to="/haircut" id="box" class="flex-item">
-        <img src="/haircut.png" alt="" class="mt-2 mb-2" />
-        <p>Haircut At home</p>
-      </router-link>
+      <div
+        v-for="(service, index) in services"
+        :key="index"
+        class="flex-item"
+        v-if="service.category_services.length != 0"
+      >
+        <router-link v-if="service.category_services.length == 1" to="/">
+          <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
+          <p>{{ service.name }}</p>
+        </router-link>
 
-      <router-link to="/salon-at-home" id="box" class="flex-item">
-        <img src="/salon.png" alt="" class="mt-2 mb-2" />
-        <p>Salon At Home</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item" v-b-toggle.sidebar-right>
-        <img src="/cleaning.png" alt="" class="mt-2 mb-2" />
-        <p>Cleaning & Disinfection</p>
-      </router-link>
+        <button v-if="service.category_services.length > 1">
+          <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
+          <p>{{ service.name }}</p>
+        </button>
+      </div>
 
       <b-sidebar
         id="sidebar-right"
         title="Profesional Cleaning Services"
         right
         shadow
-
         backdrop
       >
         Profesional Cleaning Services
@@ -80,56 +81,26 @@
           </ul>
         </div>
       </b-sidebar>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/repair.png" alt="" class="mt-2 mb-2" />
-        <p>Appliance Repair</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/paint.png" alt="" class="mt-2 mb-2" />
-        <p>Painter</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/electrician.png" alt="" class="mt-2 mb-2" />
-        <p>Eletricians</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/plumber.png" alt="" class="mt-2 mb-2" />
-        <p>Plumbers</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/carpenter.png" alt="" class="mt-2 mb-2" />
-        <p>Carpenters</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/massegeMen.png" alt="" class="mt-2 mb-2" />
-        <p>Massage For Men</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/pest.png" alt="" class="mt-2 mb-2" />
-        <p>Pest Control</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/massegeW.png" alt="" class="mt-2 mb-2" />
-        <p>Massage For Women</p>
-      </router-link>
-
-      <router-link to="/" id="box" class="flex-item">
-        <img src="/geyser.png" alt="" class="mt-2 mb-2" />
-        <p>Geyser Service</p>
-      </router-link>
     </div>
   </div>
 </template>
 <script>
-export default {};
+import axios from "axios";
+export default {
+  data() {
+    return {
+      services: [],
+    };
+  },
+  mounted() {
+    var self = this;
+    axios
+      .get("http://fixorie.herokuapp.com/fo/service_categories")
+      .then(function (response) {
+        self.services = response.data;
+      });
+  },
+};
 </script>
 <style scoped>
 .service {
@@ -152,10 +123,15 @@ export default {};
   width: 15%;
   margin-top: 10px;
   margin-right: 10px;
+
+  height: 90px;
+  text-decoration: none;
+  color: #212121;
 }
 
 .flex-item p {
   margin: 0;
+  color: #000;
 }
 
 .flex-item:hover {
@@ -167,13 +143,13 @@ img {
   width: 35px;
 }
 
-#box {
-  height: 90px;
-  text-decoration: none;
-  color: #212121;
-}
-a #box router-link:hover {
+a .flex-item router-link:hover {
   background-color: #dddddd;
+}
+
+button {
+  background: transparent;
+  border: 0;
 }
 
 #hover {
@@ -185,7 +161,6 @@ a #box router-link:hover {
   margin-bottom: 10px;
   padding-right: 10px;
   text-align: left;
-  
 }
 #hover a {
   text-decoration: none;

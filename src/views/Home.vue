@@ -1,38 +1,25 @@
 <template>
   <div class="home">
-    <div id="header"><Header /></div>
+    <div id="header">
+      <Header />
+    </div>
     <div id="offers"></div>
-    <div id="service"><Service /> <Carousel /></div>
+    <div id="service">
+      <Service />
+      <Promoted />
+    </div>
 
-    <div class="strip">
-      <h1><b> Best Offers</b></h1>
-      <p>Hygenic & Single-use products | Low-contact services</p>
+    <div class="strip" v-for="section in sections" :key="section.id">
+      <h1><b>{{section.title}}</b></h1>
+      <p>{{section.subtitle}}</p>
       <Strip />
     </div>
-    <div class="strip">
-      <h1><b>Applicances: Service & Repair</b></h1>
-      <p>Expert technicians at your doorstep in 2 hours</p>
-      <Strip />
+    
+    <div id="insurance1"></div>
+    <div id="insurance2"></div>
+    <div id="footer">
+      <Footer />
     </div>
-    <div id="carousel">
-      <h1><b>Customer safety is our priority</b></h1>
-      <p>What customers are saying about our safety standards</p>
-
-      <Carousel />
-    </div>
-    <div class="strip">
-      <h1><b>Cleaning & Pest Control</b></h1>
-      <p>Removes Hard stain And More</p>
-
-      <Strip />
-    </div>
-    <div id="insurance1">
-      <!-- <img src="insurance.png" class="container-fluid" id="photoApp" /> -->
-    </div>
-    <div id="insurance2">
-      <!-- <img src="proudpatner.png" class="container-fluid" id="photoApp" /> -->
-    </div>
-    <div id="footer"><Footer /></div>
   </div>
 </template>
 
@@ -43,7 +30,8 @@ import Footer from "@/components/Footer.vue";
 import Service from "@/components/service.vue";
 import Strip from "@/components/Strips.vue";
 import Carousel from "@/components/Carousel.vue";
-
+import Promoted from "@/components/Promoted.vue";
+import axios from 'axios';
 export default {
   name: "Home",
   components: {
@@ -52,14 +40,28 @@ export default {
     Service,
     Strip,
     Carousel,
+    Promoted
   },
+  data() {
+    return {
+      sections: [],
+    };
+  },
+  mounted(){
+     var self = this;
+    axios
+      .get("http://fixorie.herokuapp.com/fo/home_sections")
+      .then(function (response) {
+        self.sections = response.data;
+      });
+  }
 };
 </script>
 
 <style scoped>
 .home {
   position: relative;
-  background: #F2F4F6;
+  background: #f2f4f6;
 }
 
 #header {
@@ -68,42 +70,38 @@ export default {
 
 #service {
   position: relative;
-  height: auto;
   background: #fff;
   margin-bottom: 25px;
-
+  padding-bottom:5vh;
 }
 
 #carousel {
   background: #fff;
   margin-top: 25px;
-    padding-top:8vh;
-
+  padding-top: 8vh;
 }
 .strip {
-  position:relative;
-  background: #FFF;
+  position: relative;
+  background: #fff;
   margin-top: 25px;
-  padding-top:8vh;
+  padding-top: 8vh;
 }
-
 
 #insurance1 {
   margin-top: 20px;
   width: 100%;
-  height:20vh;
-  background: #fff url('/insurance.png') center no-repeat;
-  background-size:contain;
+  height: 20vh;
+  background: #fff url("/insurance.png") center no-repeat;
+  background-size: contain;
 }
 
 #insurance2 {
   margin-top: 20px;
   width: 100%;
-  height:20vh;
-  background: #fff url('/proudpatner.png') center no-repeat;
-  background-size:contain;
+  height: 20vh;
+  background: #fff url("/proudpatner.png") center no-repeat;
+  background-size: contain;
 }
-
 
 @media (max-width: 1200px) {
   #service {
@@ -111,3 +109,4 @@ export default {
   }
 }
 </style>
+

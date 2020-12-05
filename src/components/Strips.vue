@@ -56,6 +56,11 @@ export default {};
 </script>
 
 <style scoped>
+#strip {
+  background: #fff;
+  padding-bottom: 5vh;
+}
+
 #photo:hover {
   transition: 0.3s ease-out;
   transform: scale(1.05);
@@ -84,10 +89,6 @@ export default {};
 #subtextMain {
   font-size: 0.8rem;
   padding-top: 10px;
-}
-#strip {
-  background: #fff;
-  padding-bottom: 3vh;
 }
 
 .img-wrapper {
