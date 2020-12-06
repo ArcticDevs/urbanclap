@@ -7,7 +7,7 @@
         class="flex-item"
         v-if="service.category_services.length != 0"
       >
-        <router-link v-if="service.category_services.length == 1" to="/">
+        <router-link v-if="service.category_services.length == 1" to="/service">
         <div class="service_link">
           <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
           <p>{{ service.name }}</p>

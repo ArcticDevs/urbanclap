@@ -1,6 +1,6 @@
 <template>
   <div class="service">
-    <SecondMod />
+    <SecondMod :data="service"/>
   </div>
 </template>
 

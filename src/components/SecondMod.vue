@@ -6,22 +6,21 @@
       </div>
     </div>
     <div class="header">
+      <img :src="data.bg_img_path" />
       <div class="container">
         <div class="breadcrumbs">
           <b-breadcrumb>
             <b-breadcrumb-item href="#">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="#">New Delhi</b-breadcrumb-item>
-            <b-breadcrumb-item active>Salon At Home</b-breadcrumb-item>
+            <b-breadcrumb-item active>{{ data.name }}</b-breadcrumb-item>
           </b-breadcrumb>
         </div>
         <div class="header-details">
-          <h1>Salon at Home in Delhi</h1>
+          <h1>{{ data.description }}</h1>
           <ul>
-            <li>Branded Cosmetics are used- Loreal, Cheryl's and O3+</li>
-            <li>
-              Hygiene Friendly : Disposables items like wipes, towels are used
+            <li v-for="(feature, index) in data.features" :key="index">
+              {{ feature.name }}
             </li>
-            <li>Beauticians with minimum 5 years of experience</li>
           </ul>
         </div>
       </div>
@@ -110,22 +109,11 @@
           <h5>How it Works</h5>
         </div>
         <div id="working-main-section">
-          <div class="working-point">
+          <div class="working-point" v-for="(point,index) in data.how_it_works" :key="index">
+            <img :src="point.img_path">
             <div class="working-point-text">
-              <p><b>Choose a Salon service</b></p>
-              <p>Select from various salon packages & services</p>
-            </div>
-          </div>
-          <div class="working-point">
-            <div class="working-point-text">
-              <p><b>Choose a Salon service</b></p>
-              <p>Select from various salon packages & services</p>
-            </div>
-          </div>
-          <div class="working-point">
-            <div class="working-point-text">
-              <p><b>Choose a Salon service</b></p>
-              <p>Select from various salon packages & services</p>
+              <p><b>{{point.title}}</b></p>
+              <p>{{point.description}}</p>
             </div>
           </div>
         </div>
@@ -236,8 +224,14 @@
 import Navbar from "@/components/Navbar_dark.vue";
 export default {
   name: "second-mod",
+  data() {
+    return {};
+  },
   components: {
     Navbar,
+  },
+  props: {
+    data: Object,
   },
   methods: {
     loadMore: function () {
@@ -265,10 +259,17 @@ h5 {
 .header {
   height: 457px;
   width: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/img/salon.jpg") no-repeat;
-  background-size: cover;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   position: relative;
+}
+
+.header img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .breadcrumb {
@@ -437,7 +438,7 @@ a.nav-link.active {
   margin: 0px;
   color: #000;
   font-size: 16px;
-  font-weight:500;
+  font-weight: 500;
 }
 
 .right-arrow {
@@ -524,7 +525,6 @@ a.nav-link.active {
 
 /* Services panel End */
 
-
 /* HOW IT WORKS START */
 .working {
   height: 310px;
@@ -545,25 +545,41 @@ a.nav-link.active {
 }
 
 #working-main-section {
-  height: 235px;
+  height: auto;
   width: 100%;
   padding: 0 40px 0 40px;
 }
 
 .working-point {
   height: 78px;
-  width: 90%;
+  /* width: 90%; */
   margin-left: auto;
-  border-bottom: solid 1px rgb(218, 215, 215);
+  position:relative;
+}
+
+.working-point img{
+  height:60%;
+  vertical-align:sub;
 }
 
 .working-point-text {
-  padding: 20px 0 20px 0;
+  padding: 20px 0 18px 30px;
   width: 80%;
   display: inline-block;
+    border-bottom: solid 1px rgb(218, 215, 215);
+
 }
-.working-point-text p {
+
+.working-point-text p{
+  margin:0;
+  font-size:14px;
+  line-height:19px;
+}
+
+.working-point-text p:nth-child(2) {
   margin: 0;
+  font-size:12px;
+  color:#757775;
 }
 .working-point-icon {
   width: 72px;
