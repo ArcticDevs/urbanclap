@@ -29,12 +29,12 @@
               </select>
             </div>
             <input
-              :model="mobile"
+              v-model="mobile"
               type="tel"
               placeholder="Your phone number "
               id="tel"
             />
-            {{ mobile }}
+
           </b-input-group-prepend>
 
           <input
@@ -99,7 +99,7 @@ export default {
  
   data() {
     return {
-      mobile: 0
+      mobile:0
     };
   },
   methods: {

@@ -28,7 +28,47 @@
 
     <!-- SERVICES PANEL START -->
 
-    <div class="services-panel">
+    <div class="services-panel" v-b-modal.modal-center>
+      <b-modal
+        id="modal-center"
+        centered
+        title="AC Service & Repair"
+        hide-footer="true"
+        class="text-center panelModal"
+        size="lg"
+        body-class
+      >
+        <h2 class="my-4 text-center">What Are You Looking For ?</h2>
+
+        <div class="mt-4 mb-4">
+          <h4>
+            <span class="float-left ml-5">AC Service</span
+            ><span class="float-right"
+              ><b-icon icon="arrow-right-circle"></b-icon
+            ></span>
+          </h4>
+        </div>
+        <br />
+        <hr />
+        <div class="mt-4 mb-4">
+          <h4>
+            <span class="float-left ml-5">AC Repair</span
+            ><span class="float-right"
+              ><b-icon icon="arrow-right-circle"></b-icon
+            ></span>
+          </h4>
+        </div>
+        <br />
+        <hr />
+        <div class="mt-4 mb-4">
+          <h4>
+            <span class="float-left ml-5">Installation/Un-Installation</span
+            ><span class="float-right"
+              ><b-icon icon="arrow-right-circle"></b-icon
+            ></span>
+          </h4>
+        </div>
+      </b-modal>
       <div class="panel-services-info">
         <p>View All Beauty Service:</p>
         <div class="panel-buttons">
@@ -109,11 +149,17 @@
           <h5>How it Works</h5>
         </div>
         <div id="working-main-section">
-          <div class="working-point" v-for="(point,index) in data.how_it_works" :key="index">
-            <img :src="point.img_path">
+          <div
+            class="working-point"
+            v-for="(point, index) in data.how_it_works"
+            :key="index"
+          >
+            <img :src="point.img_path" />
             <div class="working-point-text">
-              <p><b>{{point.title}}</b></p>
-              <p>{{point.description}}</p>
+              <p>
+                <b>{{ point.title }}</b>
+              </p>
+              <p>{{ point.description }}</p>
             </div>
           </div>
         </div>
@@ -216,6 +262,26 @@
           </ul>
         </div>
       </div>
+      <!-- ---------POPULAR SERVICES END----------- -->
+
+      <!-- --------FAQS START----------- -->
+      <div class="FAQ">
+        <h5>Frequently Asked Questions</h5>
+        <div class="questions">
+          <div class="question" v-for="(faq, index) in data.faqs" :key="index">
+            <p>{{ faq.question }}</p>
+            <div class="open_arrow">
+              <span @click="show_answer">
+                <b-icon icon="chevron-down"></b-icon>
+              </span>
+            </div>
+            <div id="answer">
+              {{ faq.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- --------FAQS END----------- -->
     </div>
   </div>
 </template>
@@ -244,6 +310,12 @@ export default {
         x.style.display = "none";
         y.style.display = "block";
       }
+    },
+
+    show_answer: function () {
+      var ans = document.getElementById("answer");
+      if (ans.style.display === "none") ans.style.display = "block";
+      else ans.style.display = "none";
     },
   },
 };
@@ -554,32 +626,31 @@ a.nav-link.active {
   height: 78px;
   /* width: 90%; */
   margin-left: auto;
-  position:relative;
+  position: relative;
 }
 
-.working-point img{
-  height:60%;
-  vertical-align:sub;
+.working-point img {
+  height: 60%;
+  vertical-align: sub;
 }
 
 .working-point-text {
   padding: 20px 0 18px 30px;
   width: 80%;
   display: inline-block;
-    border-bottom: solid 1px rgb(218, 215, 215);
-
+  border-bottom: solid 1px rgb(218, 215, 215);
 }
 
-.working-point-text p{
-  margin:0;
-  font-size:14px;
-  line-height:19px;
+.working-point-text p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 19px;
 }
 
 .working-point-text p:nth-child(2) {
   margin: 0;
-  font-size:12px;
-  color:#757775;
+  font-size: 12px;
+  color: #757775;
 }
 .working-point-icon {
   width: 72px;
@@ -841,5 +912,56 @@ a.nav-link.active {
   .page-nav {
     display: none;
   }
+}
+
+.FAQ {
+  margin-top: 30px;
+  padding: 24px;
+  border: solid 1px rgb(218, 215, 215);
+  text-align: left;
+}
+
+.FAQ h5 {
+  font-size: 24px;
+  margin: 16px 0;
+  padding: 0 16px;
+}
+
+.questions {
+  padding: 16px;
+}
+
+.question {
+  background-color: #fff;
+  padding: 24px;
+  margin-bottom: 16px;
+  border: solid 1px rgb(218, 215, 215);
+  border-radius: 4px;
+}
+
+.question p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  padding-right: 24px;
+  color: #212121;
+  display: inline-block;
+  width: 90%;
+}
+
+.open_arrow {
+  padding: 4px 10px;
+  border-radius: 50%;
+  color: #9e9e9e;
+  background-color: #f4f4f4;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#answer {
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 16px;
+  display: none;
 }
 </style>
