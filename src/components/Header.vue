@@ -2,7 +2,7 @@
   <div class="header">
     <section>
       <div class="container">
-       <Navbar />
+       <!-- <Navbar /> -->
         <div id="page-address">HOME / Delhi-Ncr</div>
         <div id="logo"><img src="/img/new_logo_light.png" /></div>
         <h1>Home services, on demand.</h1>
@@ -55,6 +55,7 @@ section {
   height: 550px;
   position: relative;
   color: #fff;
+  padding-top:15vh;
 }
 .bg {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
@@ -75,7 +76,7 @@ section {
   color: #fff;
   font-size: 0.7rem;
   width: auto;
-  margin-top: 15vh;
+  /* margin-top: 15vh; */
 }
 
 #logo {

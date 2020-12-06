@@ -1,22 +1,29 @@
 <template>
   <div class="home">
+    <div id="navbar">
+      <Navbar />
+    </div>
     <div id="header">
       <Header />
     </div>
     <div id="offers"></div>
     <div id="service">
       <Service />
+      
+    </div>
+    <div class="promoted">
       <Promoted />
     </div>
+    
 
     <div class="strip" v-for="section in sections" :key="section.id">
+      <div v-if="section.section_type==='services' || section.section_type==='reviews'">
       <h1><b>{{section.title}}</b></h1>
       <p>{{section.subtitle}}</p>
-      <Strip />
+      </div>
+      <Strip :section="section"/>
     </div>
     
-    <div id="insurance1"></div>
-    <div id="insurance2"></div>
     <div id="footer">
       <Footer />
     </div>
@@ -27,10 +34,12 @@
 // @ is an alias to /src
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import Service from "@/components/service.vue";
+import Service from "@/components/Services.vue";
 import Strip from "@/components/Strips.vue";
 import Carousel from "@/components/Carousel.vue";
 import Promoted from "@/components/Promoted.vue";
+import Navbar from "@/components/Navbar.vue";
+
 import axios from 'axios';
 export default {
   name: "Home",
@@ -40,7 +49,8 @@ export default {
     Service,
     Strip,
     Carousel,
-    Promoted
+    Promoted,
+    Navbar
   },
   data() {
     return {
@@ -69,7 +79,21 @@ export default {
 }
 
 #service {
-  position: relative;
+  /* position: relative; */
+  background: #fff;
+  /* margin-bottom: 25px; */
+  /* padding-bottom:5vh; */
+}
+
+#navbar{
+  position:absolute;
+  top:0;
+  z-index:5;
+  width:100%;
+}
+
+.promoted{
+    position: relative;
   background: #fff;
   margin-bottom: 25px;
   padding-bottom:5vh;
@@ -84,7 +108,11 @@ export default {
   position: relative;
   background: #fff;
   margin-top: 25px;
-  padding-top: 8vh;
+}
+
+.strip h1{
+  padding-top:5vh;
+  font-size:2rem;
 }
 
 #insurance1 {

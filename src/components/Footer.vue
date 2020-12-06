@@ -46,7 +46,7 @@
           </div>
         </div>
 
-          <div class="d-inline-block ml-4">
+          <div class="d-inline-block ml-sm-4 ml-md-4 ml-lg-4 ml-xl-4">
           <p class="text-white ">SGP</p>
           <div id="linksContainerIND">
             <router-link to="/"> <p>Sydney</p></router-link>
@@ -59,13 +59,18 @@
         <div class="d-inline-block text-white w-auto" >
          <img src="/logo_light.png" alt="" srcset="" id="logo" > 
         </div>
-        <div class="d-inline-block text-white w-auto ml-2" >
-        <span style="font-size:12px; color:#cdcdcd"> ©2014-20 UrbanClap Techonologies India Pvt. Ltd.</span>
+        <div class="d-inline-block text-white w-auto ml-4" >
+        <span style="font-size:12px; color:#cdcdcd"> ©2020 Fixorie India</span>
         </div>
       </div>
       
       <div class="d-inline-block w-auto mx-auto">
-       <i class="fab fa-twitter mr-2 text-white "></i>  <i class="fab fa-facebook-square mr-2 text-white "></i> <i class="fab fa-instagram mr-2 text-white "></i> <i class="fab fa-youtube mr-2 text-white "></i> <i class="fab fa-linkedin mr-2 text-white "></i> <i class="fab fa-pinterest-p mr-2 text-white "></i>
+       <i class="fab fa-twitter mr-2 text-white "></i>
+       <i class="fab fa-facebook-square mr-2 text-white "></i>
+       <i class="fab fa-instagram mr-2 text-white "></i>
+       <i class="fab fa-youtube mr-2 text-white "></i>
+       <i class="fab fa-linkedin mr-2 text-white "></i>
+       <i class="fab fa-pinterest-p mr-2 text-white "></i>
       </div>
       
       <div class="d-inline-block w-auto">
@@ -114,8 +119,8 @@ export default {};
   border-bottom: 0.5px solid white;
 }
 #logo{
-  width: 190px;
-  height: 20px;
+  width: 80px;
+  height: 60px;
 }
 #store{
    width: 125px;

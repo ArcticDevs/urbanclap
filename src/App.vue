@@ -26,4 +26,8 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.container{
+  max-width:1400px !important;
+}
 </style>

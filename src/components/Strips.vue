@@ -1,67 +1,78 @@
   <template>
   <div id="strip">
-    <div class="container mt-4">
+    <div class="container pt-5 pb-5" v-if="section.section_type==='services' || section.section_type==='reviews'">
       <div class="row">
-        <div class="service col-lg-3 col-xl-3 col-md-6 col-sm-6 col-6">
-          <div class="img-wrapper">
-            <img src="/bfp1.png" alt="" id="photo" />
-          </div>
-          <div class="subt">
-            <h6 id="subtextMain">
-              Salon At Home For Women <br />
-              <span id="subtext"> Up to 60% off </span>
-            </h6>
-          </div>
-        </div>
-        <div class="service col-lg-3 col-xl-3 col-md-6 col-sm-6 col-6">
-          <div class="img-wrapper">
-            <img src="/bfp2.png" alt="" id="photo" />
-          </div>
-          <div class="subt">
-            <h6 id="subtextMain">
-              Professional Bathroom Cleaning <br />
-              <span id="subtext">Up to 50% off</span>
-            </h6>
-          </div>
-        </div>
-        <div class="service col-lg-3 col-xl-3 col-md-6 col-sm-6 col-6">
-          <div class="img-wrapper">
-            <img src="/bfp3.png" alt="" id="photo" />
-          </div>
-          <div class="subt">
-            <h6 id="subtextMain">
-              Massege Therapy For Women<br />
-              <span id="subtext">Up to 40% off</span>
-            </h6>
-          </div>
-        </div>
-        <div class="service col-lg-3 col-xl-3 col-md-6 col-sm-6 col-6">
-          <div class="img-wrapper">
-            <img src="/bfp4.png" alt="" id="photo" />
-          </div>
-          <div class="subt">
-            <h6 id="subtextMain">
-              Haircut At Home <br />
-              <span id="subtext">Free Head Massege</span>
-            </h6>
+        <!-- Service type -->
+        <div
+          class="service col-lg-3 col-xl-3 col-md-6 col-sm-6 col-6"
+          v-if="section.section_type === 'services'"
+          v-for="service in section.home_section_services"
+          :key="service.id"
+        >
+          <div>
+            <div class="img-wrapper">
+              <img :src="service.bg_img_path" alt="" class="photo" />
+            </div>
+            <div class="subt">
+              <h6 class="subtextMain">
+                {{ service.title }} <br />
+                <span class="subtext">
+                  {{ service.subtitle }}
+                </span>
+              </h6>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      <!-- review type -->
+      <div class="review" v-if="section.section_type === 'reviews'">
+        <Carousel :items="section.home_section_reviews" cid="reviewscopedid"/>
+      </div>
+</div>
+      <!-- Poster type -->
+      <div class="poster" v-if="section.section_type === 'poster'">
+        <img :src="section.poster_img_path">
+      </div>
+    
   </div>
 </template>
 
-    <script>
-export default {};
+<script>
+import Carousel from "@/components/Carousel.vue";
+export default {
+  props: {
+    section: {},
+  },
+  components: {
+    Carousel,
+  },
+};
 </script>
 
 <style scoped>
 #strip {
   background: #fff;
-  padding-bottom: 5vh;
+  /* padding-bottom: 5vh; */
 }
 
-#photo:hover {
+.poster{
+  width:100%;
+  height:18vh;
+}
+
+.poster img{
+  width:100%;
+  height:100%;
+}
+@media(max-width:600px){
+  .poster img{
+    width:160%;
+    margin-left:-30%;
+  }
+}
+
+.photo:hover {
   transition: 0.3s ease-out;
   transform: scale(1.05);
 }
@@ -72,27 +83,26 @@ export default {};
   flex-wrap: wrap;
 }
 
-
-.subt{
-  height:5vh;
+.subt {
+  height: 5vh;
 }
 
-@media(max-width:1200px){
-.subt{
-  height:18vh;
-}
+@media (max-width: 1200px) {
+  .subt {
+    height: 18vh;
+  }
 }
 
-#subtext {
+.subtext {
   font-size: 0.7rem;
 }
-#subtextMain {
+.subtextMain {
   font-size: 0.8rem;
   padding-top: 10px;
 }
 
 .img-wrapper {
-  height: 60%;
+  height: 20vh;
   width: 100%;
 }
 

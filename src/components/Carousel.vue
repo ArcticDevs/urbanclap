@@ -1,5 +1,4 @@
 <template>
-  <div >
 
     <div class="container">
       <div class="carousel-container">
@@ -12,7 +11,7 @@
         >
           <i class="fa fa-arrow-left"></i>
         </span>
-        <div class="carousel-inner-container">
+        <div :class="['carousel-inner-container', cid]">
           <div class="carousel-block" v-for="(item, index) in items" :key="index">
             <img :src="item.img_path" alt="" />
           </div>
@@ -32,7 +31,6 @@
         </span>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -53,25 +51,26 @@ export default {
         return []
       }
     },
+    cid:String
   },
   mounted() {
-    // console.log("mounted called");
-    // console.log($(".carousel-inner-container").innerWidth() / this.add_count_ini);
-    // console.log(this.items);
-    // if (window.innerWidth < 400) {
-    //   this.adWidth = $(".carousel-inner-container").innerWidth();
-    //   $(".carousel-block").css("width", this.adWidth + "px");
-    //   this.add_count_ini = 1;
-    // } else {
-    //   console.log("desktop design called");
-    //   this.adWidth = $(".carousel-inner-container").innerWidth() / this.add_count_ini;
-    //   $(".carousel-block").css("width", this.adWidth + "px");
-    // }
+    console.log("mounted called");
+    console.log($(".carousel-inner-container").innerWidth() / this.add_count_ini);
+    console.log(this.items);
+    if (window.innerWidth < 400) {
+      this.adWidth = $(".carousel-inner-container").innerWidth();
+      $(".carousel-block").css("width", this.adWidth + "px");
+      this.add_count_ini = 1;
+    } else {
+      console.log("desktop design called");
+      this.adWidth = $(".carousel-inner-container").innerWidth() / this.add_count_ini;
+      $(".carousel-block").css("width", this.adWidth + "px");
+    }
   },
   methods: {
     adscrollLeft: function(event) {
       if (this.adscrollPos - this.adWidth >= 0) {
-        $(".carousel-inner-container").animate(
+        $("."+this.cid).animate(
           { scrollLeft: this.adscrollPos - this.adWidth },
           200
         );
@@ -80,7 +79,7 @@ export default {
     },
     adscrollRight: function(event) {
       if (this.adscrollPos < (this.items.length-this.add_count_ini) * this.adWidth) {
-        $(".carousel-inner-container").animate(
+        $("."+this.cid).animate(
           { scrollLeft: this.adscrollPos + this.adWidth },
           200
         );

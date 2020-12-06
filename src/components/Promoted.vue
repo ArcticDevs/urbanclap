@@ -1,7 +1,7 @@
 <template>
     <div id="promoted">
         <div>
-            <Carousel :items="this.promoted_items">
+            <Carousel :items="this.promoted_items" cid="promotedscopedid">
                 </Carousel>
         </div>
         
