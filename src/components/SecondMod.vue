@@ -510,7 +510,7 @@ h5 {
   font-weight: 600;
   margin: 0;
 }
-
+/* modal CSS */
 #service_type{
   display:none;
 }
@@ -530,7 +530,7 @@ h5 {
     border:none
 
 }
-
+/* Modal Css end  */
 
 .mobile-mainBlock{
   display:none;
