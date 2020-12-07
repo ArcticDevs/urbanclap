@@ -1,103 +1,142 @@
 <template>
   <div class="home">
-   <div id="header"> <Header /></div>
-   <div id="offers"></div>
-   <div id="service"> <Service /> <Carousel /></div>
-  
-   <div class="strip">
-         <h1 class="pt-4"><b> Best Offers</b></h1>
-    <p> Hygenic & Single-use products | Low-contact services</p>
-      <Strip /></div>
-   <div class="strip">   
-        <h1 class="pt-4"><b>Applicances: Service & Repair</b></h1>
-    <p>Expert technicicans at your doorstep in 2 hours</p> 
-      <Strip /></div>
-    <div id="carousel">
-     
-      <h1 class="pt-4"><b>Customer safety is our priority</b></h1>
-    <p>What customers are saying about our safety standards</p> 
-    
-    <Carousel /></div>
-   <div class="strip">
-     
-       <h1 class="pt-4"><b>Cleaning & Pest Control</b></h1>
-    <p>Removes Hard stain And More </p> 
-   
-     
-      <Strip /></div>
-     <div class="insurance">
-      <img src="insurance.png" class="container-fluid" id="photoApp">
+    <div id="navbar">
+      <Navbar />
     </div>
-    <div class="insurance">
-      <img src="proudpatner.png" class="container-fluid" id="photoApp">
-    </div> 
-    <div id="footer"><Footer /></div>
+    <div id="header">
+      <Header />
+    </div>
+    <div id="offers"></div>
+    <div id="service">
+      <Service />
+      
+    </div>
+    <div class="promoted">
+      <Promoted />
+    </div>
+    
+
+    <div class="strip" v-for="section in sections" :key="section.id">
+      <div v-if="section.section_type==='services' || section.section_type==='reviews'">
+      <h1><b>{{section.title}}</b></h1>
+      <p>{{section.subtitle}}</p>
+      </div>
+      <Strip :section="section"/>
+    </div>
+    
+    <div id="footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
-import Footer from '@/components/Footer.vue'
-import Service from '@/components/service.vue'
-import Strip from '@/components/Strips.vue'
-import Carousel from '@/components/Carousel.vue'
+import Header from "@/components/Header.vue";
+import Footer from "@/components/Footer.vue";
+import Service from "@/components/Services.vue";
+import Strip from "@/components/Strips.vue";
+import Carousel from "@/components/Carousel.vue";
+import Promoted from "@/components/Promoted.vue";
+import Navbar from "@/components/Navbar.vue";
 
-
+import axios from 'axios';
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     Header,
     Footer,
     Service,
     Strip,
-    Carousel
+    Carousel,
+    Promoted,
+    Navbar
+  },
+  data() {
+    return {
+      sections: [],
+    };
+  },
+  mounted(){
+     var self = this;
+    axios
+      .get("http://fixorie.herokuapp.com/fo/home_sections")
+      .then(function (response) {
+        self.sections = response.data;
+      });
   }
-}
+};
 </script>
 
 <style scoped>
-
-.home{
+.home {
   position: relative;
-  background:#F2F4F6;
+  background: #f2f4f6;
 }
 
-#header{
+#header {
   position: relative;
 }
 
-#service{
-  position: relative;
-  height:80vh;
-  background:#fff;
-  margin-bottom:25px;
+#service {
+  /* position: relative; */
+  background: #fff;
+  /* margin-bottom: 25px; */
+  /* padding-bottom:5vh; */
+}
+
+#navbar{
+  position:absolute;
+  top:0;
+  z-index:5;
+  width:100%;
+}
+
+@media (max-width: 1200px) {
+  #navbar {
+    display: none;
+  }
+}
+
+.promoted{
+    position: relative;
+  background: #fff;
+  margin-bottom: 25px;
+  padding-bottom:5vh;
 }
 
 #carousel {
-  background:#fff;
-margin-top:25px;
+  background: #fff;
+  margin-top: 25px;
+  padding-top: 8vh;
 }
-.strip{
-  background: #FFF;
-  margin-top:25px;
-}
-
-#footer{
-
+.strip {
+  position: relative;
+  background: #fff;
+  margin-top: 25px;
 }
 
-.insurance{
-  margin-top:20px;
-  width:100%;
-}
-.insurance img{
-  padding:0;
+.strip h1{
+  padding-top:5vh;
+  font-size:2rem;
 }
 
-@media(max-width:1200px){
-  #service{
-    top:0;
+#insurance1 {
+  margin-top: 20px;
+  width: 100%;
+  height: 20vh;
+}
+
+#insurance2 {
+  margin-top: 20px;
+  width: 100%;
+  height: 20vh;
+}
+
+@media (max-width: 1200px) {
+  #service {
+    top: 0;
   }
 }
 </style>
+

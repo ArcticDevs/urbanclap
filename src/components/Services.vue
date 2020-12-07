@@ -7,14 +7,18 @@
         class="flex-item"
         v-if="service.category_services.length != 0"
       >
-        <router-link v-if="service.category_services.length == 1" to="/">
+        <router-link v-if="service.category_services.length == 1" to="/service">
+        <div class="service_link">
           <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
           <p>{{ service.name }}</p>
+          </div>
         </router-link>
 
         <button v-if="service.category_services.length > 1">
+          <span>
           <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
           <p>{{ service.name }}</p>
+          </span>
         </button>
       </div>
 
@@ -29,51 +33,51 @@
         <div class="px-1 py-2">
           <ul class="list-group mt-3">
             <a href="#">
-              <li class="list-group-item" id="hover">
+              <li class="list-group-item hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" /> Office and
                 Shop Desinfection
                 <i class="float-right fa fa-chevron-right pt-2"></i>
               </li>
             </a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" />
                 Professional Full House Cleaning
                 <i class="float-right fa fa-chevron-right pt-2"></i>
               </li>
             </a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" /> Car Cleaning
                 <i class="float-right fa fa-chevron-right pt-2"></i>
               </li>
             </a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" />
                 Professional Bathroom CLeaning
                 <i class="float-right fa fa-chevron-right pt-2"></i></li
             ></a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" /> Profesional
                 Kitchen Cleaning
                 <i class="float-right fa fa-chevron-right pt-2"></i></li
             ></a>
             <a href="#">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" />
                 Professional Carpet Cleaning
                 <i class="float-right fa fa-chevron-right pt-2"></i></li
             ></a>
             <a href="">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" /> Profesional
                 Sofa Cleaning
                 <i class="float-right fa fa-chevron-right pt-2"></i></li
             ></a>
             <a href="">
-              <li class="list-group-item box" id="hover">
+              <li class="list-group-item box hover" >
                 <img src="cnd1.png" alt="" srcset="" id="imgSize" /> House & Car
                 Disinfection
                 <i class="float-right fa fa-chevron-right pt-2"></i></li
@@ -134,8 +138,17 @@ export default {
   color: #000;
 }
 
+.flex-item p:hover{
+  text-decoration: underline;
+}
+
 .flex-item:hover {
   background: #f5f5f5;
+}
+
+.service_link{
+  height:100%;
+  width:100%;
 }
 
 img {
@@ -147,12 +160,24 @@ a .flex-item router-link:hover {
   background-color: #dddddd;
 }
 
-button {
+button, button:focus {
   background: transparent;
   border: 0;
+  outline:none;
+  height:100%;
+  width:100%;
+  padding:0;
+  position:relative;
 }
 
-#hover {
+button span{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+}
+
+.hover {
   border: 1px solid grey;
   background: transparent;
   text-decoration: none;
@@ -162,10 +187,10 @@ button {
   padding-right: 10px;
   text-align: left;
 }
-#hover a {
+.hover a {
   text-decoration: none;
 }
-#hover:hover {
+.hover:hover {
   background: #bdbdbd;
 }
 

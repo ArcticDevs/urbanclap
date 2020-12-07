@@ -2,27 +2,7 @@
   <div class="header">
     <section>
       <div class="container">
-        <div class="header-nav">
-          <b-navbar toggleable="xl">
-            <b-navbar-brand href="#" class="text-white">
-              <img src="/img/logo_light.png" />
-            </b-navbar-brand>
-
-            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-            <!-- <b-collapse id="nav-collapse" is-nav> -->
-            <!-- Right aligned nav items -->
-            <b-navbar-nav class="ml-auto nav-items">
-              <b-nav-item href="#">Blog</b-nav-item>
-              <b-nav-item href="#"
-                ><u>Register As A Professional</u></b-nav-item
-              >
-              <b-nav-item href="#">Login / Sign Up</b-nav-item>
-            </b-navbar-nav>
-            <!-- </b-collapse> -->
-          </b-navbar>
-        </div>
-
+       <!-- <Navbar /> -->
         <div id="page-address">HOME / Delhi-Ncr</div>
         <div id="logo"><img src="/img/new_logo_light.png" /></div>
         <h1>Home services, on demand.</h1>
@@ -58,8 +38,12 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
 export default {
   name: "Header",
+  components:{
+    Navbar
+  }
 };
 </script>
 
@@ -68,9 +52,10 @@ export default {
   z-index: 1;
 }
 section {
-  height: 500px;
+  height: 550px;
   position: relative;
   color: #fff;
+  padding-top:15vh;
 }
 .bg {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
@@ -85,23 +70,13 @@ section {
   z-index: -1;
 }
 
-.navbar .navbar-brand img {
-  width: 290px;
-}
-
-.navbar a.nav-link {
-  color: #fff !important;
-  padding: 0;
-  margin-right: 25px;
-}
-
 #page-address {
   position: inherit;
   margin: auto;
   color: #fff;
   font-size: 0.7rem;
   width: auto;
-  margin-top: 15vh;
+  /* margin-top: 15vh; */
 }
 
 #logo {
@@ -147,6 +122,7 @@ select {
 
 #search #search-subtext {
   margin-top: 10px;
+  padding-left:50px;
 }
 
 #search-subtext p {

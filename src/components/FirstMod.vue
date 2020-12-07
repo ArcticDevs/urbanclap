@@ -89,55 +89,7 @@
         </div>
 
         <div class="col col-12 col-md-7 col-sm-12 mx-auto">
-          <!-- <div class="container">
-            <b-card class="mb-2 mt-2 w-50 ">
-              <iframe
-                width="480"
-                height="315"
-                src="https://www.youtube.com/embed/MhlVFVSo-2Q"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
-              <b-card-text>
-                <div class="container">
-                <div class="float-left">
-                  <h6>Hair Cut</h6>
-                  <p>Rs300</p>
-                  <i class="mt-0">30 min</i>
-                </div>
-                <div class="float-right mt-4">
-                  <button type="button" v-on:click="increase">+</button>
-                  {{ counter }}
-                  <button type="button" v-on:click="decrease">-</button>
-                </div>     
-                </div>
-              </b-card-text>
-
-                  <b-card-footer>This is a footer</b-card-footer>
-            </b-card>
-            
-          </div> -->
-          <!-- <div>
-            <div class="container d-flex justify-content-left">
-              <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/MhlVFVSo-2Q"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              >
-              </iframe>
-            </div>
-
-            <button type="button" v-on:click="increase">+</button>
-            {{ counter }}
-            <button type="button" v-on:click="decrease">-</button>
-          </div> -->
-
-
+    
 <b-card
     no-body
     style="max-width:35rem;"
@@ -155,8 +107,6 @@
 
 
     <b-card-body>
-      <!-- <b-card-title>Card Title</b-card-title>
-      <b-card-sub-title class="mb-2">Card Sub Title</b-card-sub-title> -->
       <b-card-text>
           <div class="container">
                 <div class="float-left">
