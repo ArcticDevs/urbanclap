@@ -24,6 +24,140 @@
           </ul>
         </div>
       </div>
+
+      <div class="mob-service-panel">
+        <div class="mob-service-panel-root">
+          <p class="mob-panel-heading">View All Beauty Services:</p>
+          <ul>
+            <li>
+              <div class="mob-service-img"></div>
+              <p>Exclusive Packages</p>
+              <span><b-icon icon="chevron-right"></b-icon></span>
+            </li>
+            <li>
+              <div class="mob-service-img"></div>
+              <p>Exclusive Packages</p>
+              <span><b-icon icon="chevron-right"></b-icon></span>
+            </li>
+            <li>
+              <div class="mob-service-img"></div>
+              <p>Exclusive Packages</p>
+              <span><b-icon icon="chevron-right"></b-icon></span>
+            </li>
+            <li>
+              <div class="mob-service-img"></div>
+              <p>Exclusive Packages</p>
+              <span><b-icon icon="chevron-right"></b-icon></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mobile-mainBlock">
+      <button class="free-delivery-btn">
+        <div>Get Free Salon Home Delivery</div>
+      </button>
+
+      <div class="external-link">
+        <h5>Beauty Parlour at home in Delhi</h5>
+        <p>Tired of going to the salon? Urban Comapny provides services ...</p>
+        <a href="#"><u>Men's Haircut and Grooming in Delhi</u></a>
+      </div>
+
+      <section class="fulfilled">
+        <section class="fulfilled-inner">
+          <div class="fulfilled-img">
+            <div class="fulfilled-img-inner">
+              <img src="/fulfilled-img.png" />
+            </div>
+          </div>
+          <ul>
+            <li>
+              <span class="fulfilled-icon"
+                ><b-icon icon="house-door-fill"></b-icon
+              ></span>
+              <span>Free at Home Service</span>
+            </li>
+            <li>
+              <span class="fulfilled-icon"
+                ><b-icon icon="person-check-fill"></b-icon
+              ></span>
+              <span>Verified and Senior Beauticians</span>
+            </li>
+            <li>
+              <span class="fulfilled-icon"
+                ><b-icon icon="shield-fill-check"></b-icon
+              ></span>
+              <span>High Quality and Genuine Products</span>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section class="mob-beautician">
+        <div class="mob-beautician-heading">Beauticians</div>
+        <h2>1,253 Beauty Service Professionals in New Delhi</h2>
+        <ul>
+          <li>
+            <span><b-icon icon="star-fill"></b-icon></span>
+            <span>Only 4+ star rated professionals</span>
+          </li>
+          <li>
+            <span><b-icon icon="briefcase-fill"></b-icon></span>
+            <span>Minimum 3 years of experience</span>
+          </li>
+          <li>
+            <span><b-icon icon="person-square"></b-icon></span>
+            <span>Background verified and Urban Company trained</span>
+          </li>
+        </ul>
+        <div class="mob-beautician-info">
+          <div class="mob-beautician-info-inner">
+            <ul>
+              <li>
+                <div class="mob-pro-list-root"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mob-faqs">
+        <h2>Frequently Asked Questions</h2>
+        <ul>
+          <li>
+            <span>How long does the hair have to be for waxing?</span>
+            <p>
+              The longer the hair, the better the wax will grab the hair and
+              will pull it out. Ideally one can wait for 3-5 weeks before
+              getting waxing done depending on the hair growth. In case of
+              emergency in the face of an event you need to go to, we suggest
+              you wait for at least 7 days before another round of body waxing.
+              A word of advice- never clip your hair before your waxing day.
+            </p>
+          </li>
+          <li>
+            <span>What should I do to prepare for waxing?</span>
+            <p>
+              Although our salon at home professionals will do everything
+              possible to make this process as pain free and satisfying as
+              possible, there are certain things that you can do to ensure a
+              great waxing session: Ensure the room you get the service done is
+              air conditioned (unless it is winter) Exfoliate the skin lightly
+              Moisturise till the day before your waxing appointment Let the
+              hair grow. Longer the hair, the better Check yourself for burns,
+              cuts etc. We recommend you treat it before getting waxing done or
+              inform the professional Let the professional know if you are
+              allergic to anything particular to the service
+            </p>
+          </li>
+        </ul>
+        <div class="see-more-btn-root">
+          <button class="see-more-btn">
+            <div class="see-more-title">See More</div>
+          </button>
+        </div>
+      </section>
     </div>
 
     <!-- SERVICES PANEL START -->
@@ -328,11 +462,19 @@ h5 {
   margin: 0;
 }
 
+.mobile-mainBlock{
+  display:none;
+}
+
 .header {
-  height: 457px;
+  height: 60vh;
   width: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   position: relative;
+}
+
+.mob-service-panel {
+  display: none;
 }
 
 .header img {
@@ -963,5 +1105,414 @@ a.nav-link.active {
   line-height: 24px;
   margin-top: 16px;
   display: none;
+}
+
+/* **********MOBILE CSS********** */
+.mob-service-panel-root {
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 16px 0 0;
+  margin: 0 16px 24px;
+  box-shadow: 0 7px 23px 0 #ddd;
+}
+
+.mob-panel-heading {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.52;
+  color: #212121;
+  margin: 0;
+  text-align: left;
+  padding: 16px 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mob-service-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 16px;
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.mob-service-panel-root ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.mob-service-panel-root ul li {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  background-position: 50%;
+  transition: background 0.5s;
+}
+
+.mob-service-panel-root ul li p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #212121;
+  padding: 0;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  width: calc(100% - 92px);
+  border: none;
+}
+
+.mob-service-panel-root ul li span {
+  color: #212121;
+  font-size: 12px;
+  position: relative;
+  left: 12px;
+}
+/* ****mobile view css***** */
+.mobile-mainBlock{
+  padding-bottom:40px;
+}
+
+.free-delivery-btn {
+  background-color: #fd5c63 !important;
+  border: 1px solid #fd5c63 !important;
+  position: fixed !important;
+  bottom: 16px !important;
+  left: 16px !important;
+  font-size: 16px;
+  z-index: 5;
+  transition: transform 0.3s;
+  animation: SEOListingMobile__reveal--1TVbz 0.4s
+    cubic-bezier(0.5, 0.5, 0.75, 1.5) 0s 1 normal forwards;
+  color: #212121;
+  border-radius: 4px;
+  width: calc(100% - 32px) !important;
+  padding: 17px 12px;
+  margin-top: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  background-position: 50%;
+  outline: none;
+}
+
+.free-delivery-btn div {
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: #fff;
+  font-family: Axiforma;
+  font-size: 16px;
+}
+
+.fulfilled {
+  background-color: #fff;
+}
+
+.fulfilled-inner {
+  border-radius: 0;
+  background-color: #fff6ec;
+  padding: 24px 16px;
+}
+
+.fulfilled-img {
+  width: 120px !important;
+  height: 45px !important;
+  position: relative;
+}
+
+.fulfilled-img-inner {
+  position: absolute;
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    90deg,
+    #f6f7f8 0,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8
+  );
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: TemplateShimmer__placeholderShimmer--3ABuG;
+  animation-timing-function: linear;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fulfilled-img-inner img {
+  width: 100%;
+}
+
+.fulfilled-inner ul {
+  padding: 0;
+  margin: 20px 0 0;
+  list-style-type: none;
+}
+
+.fulfilled-inner ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  height: 20px;
+  text-align: -webkit-match-parent;
+}
+
+.fulfilled-icon {
+  font-size: 24px;
+  margin-right: 16px;
+  position: relative;
+  top: 4px;
+  line-height: 1.43;
+  color: #333;
+}
+
+.fulfilled-inner ul li span:nth-child(2) {
+  font-size: 14px;
+  line-height: 1.43;
+  color: #333;
+}
+
+.mob-beautician {
+  padding: 28px 0 16px;
+  background-color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  text-align: left;
+}
+
+.mob-beautician .b-icon {
+  color: #fd5c63;
+}
+
+.mob-beautician-heading {
+  margin: 0 16px 6px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #212121;
+}
+
+.mob-beautician h2 {
+  font-size: 14px;
+  line-height: 1.43;
+  color: #757575;
+  font-weight: 400;
+  margin: 0;
+  padding: 0 16px 16px;
+  display: inline-block;
+}
+
+.mob-beautician ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.mob-beautician ul li {
+  display: flex;
+  align-items: center;
+  padding: 0 16px 8px;
+}
+
+.mob-beautician ul li span:nth-child(1) {
+  font-size: 24px;
+  position: relative;
+  top: 5px;
+}
+
+.mob-beautician ul li span:nth-child(2) {
+  font-size: 14px;
+  line-height: 1.43;
+  color: #757575;
+  margin-left: 12px;
+}
+
+.mob-beautician-info {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mob-beautician-info-inner {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  top: 20px;
+  scroll-behavior: smooth;
+  position: relative;
+  width: 100%;
+}
+
+.mob-beautician-info-inner ul {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  list-style-type: none;
+}
+
+.mob-beautician-info-inner ul li {
+  display: inline-block;
+}
+
+.mob-pro-list-root {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+  padding: 16px;
+  display: inline-block;
+  width: 80vw;
+  margin-left: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  vertical-align: top;
+  background-position: 50%;
+  transition: all 0.3s;
+}
+
+.mob-faqs {
+  height: 500px;
+  overflow: hidden;
+  padding: 28px 16px;
+  background-color: #fff;
+  position: relative;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.mob-faqs h2 {
+  margin: 0 16px 6px 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #212121;
+}
+
+.mob-faqs ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.mob-faqs ul li:nth-child(1) {
+  padding-top: 0;
+}
+
+.mob-faqs ul li {
+  padding: 24px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mob-faqs ul li span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #212121;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+.mob-faqs ul li p {
+  font-size: 12px;
+  line-height: 1.71;
+  color: #999;
+  margin: 0;
+}
+
+.see-more-btn-root {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100px;
+  width: 100%;
+  background-image: linear-gradient(
+    180deg,
+    hsla(0, 0%, 100%, 0) 0,
+    hsla(0, 0%, 100%, 0.5) 20%,
+    #fff
+  );
+}
+
+.see-more-btn {
+  border-radius: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 9px 30px;
+  margin-top: 45px;
+  background-color: #fff;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background-position: 50%;
+  transition: background 0.3s;
+  outline: none;
+  color: #212121;
+}
+
+.see-more-title{
+      font-size: 12px;
+    color: #fd5c63;
+}
+
+/* VIEW CHANGE MEDIA QUERY */
+@media (max-width: 1200px) {
+  .desktop-mainBlock {
+    display: none;
+  }
+  .mobile-mainBlock{
+    display: block;
+  }
+  .services-panel {
+    display: none;
+  }
+  .mob-service-panel {
+    display: block !important;
+    z-index: 2;
+  }
+  .breadcrumbs {
+    display: none;
+  }
+  .external-link {
+    margin: 0;
+    border: none;
+  }
+  .header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-color: #f5f5f5;
+    background-blend-mode: multiply;
+    height: auto;
+  }
+  .header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40% !important;
+    object-fit: cover;
+    filter: brightness(0.4);
+    z-index: 1 !important;
+  }
+
+  .header-details ul {
+    display: none;
+  }
+  .header-details h1 {
+    font-size: 1.5rem;
+    padding: 15vh 0 0;
+    margin: 0 !important;
+    z-index: 3 !important;
+  }
 }
 </style>

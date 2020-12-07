@@ -53,12 +53,12 @@ export default {
 <style scoped>
 #strip {
   background: #fff;
-  /* padding-bottom: 5vh; */
 }
 
 .poster{
   width:100%;
   height:18vh;
+  overflow:hidden;
 }
 
 .poster img{
@@ -102,7 +102,7 @@ export default {
 }
 
 .img-wrapper {
-  height: 20vh;
+  height: 18vh;
   width: 100%;
 }
 

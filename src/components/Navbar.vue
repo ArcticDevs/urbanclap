@@ -16,8 +16,8 @@
           right
           shadow
           backdrop
-          no-close-on-backdrop="false"
-          no-close-on-esc="false"
+          no-close-on-backdrop = "false"
+          no-close-on-esc = "false"
         >
           <b-input-group-prepend is-text id="bg">
             <div class="d-inline-block dropdown">
@@ -99,7 +99,7 @@ export default {
  
   data() {
     return {
-      mobile:0
+      mobile:''
     };
   },
   methods: {
@@ -128,6 +128,11 @@ export default {
 .b-sidebar-backdrop {
   opacity: 0.7 !important;
 }
+
+#login___title__{
+  font-size:1em !important;
+}
+
 .navbar a.nav-link {
   color: #fff !important;
   padding: 0;
@@ -140,11 +145,11 @@ export default {
   font-size: 14px;
 }
 
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .navbar {
     display: none;
   }
-}
+} */
 
 #login{
   font-size:14px !important;

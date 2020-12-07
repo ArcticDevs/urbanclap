@@ -92,6 +92,12 @@ export default {
   width:100%;
 }
 
+@media (max-width: 1200px) {
+  #navbar {
+    display: none;
+  }
+}
+
 .promoted{
     position: relative;
   background: #fff;
@@ -119,16 +125,12 @@ export default {
   margin-top: 20px;
   width: 100%;
   height: 20vh;
-  background: #fff url("/insurance.png") center no-repeat;
-  background-size: contain;
 }
 
 #insurance2 {
   margin-top: 20px;
   width: 100%;
   height: 20vh;
-  background: #fff url("/proudpatner.png") center no-repeat;
-  background-size: contain;
 }
 
 @media (max-width: 1200px) {
