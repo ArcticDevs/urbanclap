@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav">
+  <div class="nav">
     <b-navbar toggleable="xl">
       <b-navbar-brand href="#" class="text-white">
         <img src="/img/logo_light.png" />
@@ -59,24 +59,28 @@
                   pattern="[0-9]{1}"
                   id="otp"
                   class="mr-2 ml-2"
+                  v-model="otp1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
                   class="mr-2 ml-2"
+                  v-model="otp2"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
                   class="mr-2 ml-2"
+                  v-model="otp3"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
                   class="mr-2 ml-2"
+                  v-model="otp4"
                 />
               </div>
             </div>
@@ -85,6 +89,7 @@
               type="submit"
               value="Log In"
               id="btn"
+              @click="login"
             />
           </b-sidebar>
         </b-sidebar>
@@ -99,7 +104,11 @@ export default {
  
   data() {
     return {
-      mobile:''
+      mobile:'',
+      otp1:'',
+      otp2:'',
+      otp3:'',
+      otp4:'',
     };
   },
   methods: {
@@ -107,14 +116,27 @@ export default {
       var self = this;
       axios
         .post("http://fixorie.herokuapp.com/accounts/generate_otp/", {
-          "phone_number": this.mobile
+          "phone_number": "+91"+this.mobile
         })
         .then(function (response) {
-          if(response.data.success != NULL) {
+          if(response.data.success != null) {
             console.log(response.data.success)
           }
         });
     },
+    login(){
+       var self = this;
+      axios
+        .post("http://fixorie.herokuapp.com/accounts/login/", {
+          "username": "+91"+this.mobile,
+          "password": self.otp1+self.otp2+self.otp3+self.otp4
+        })
+        .then(function (response) {
+          if(response.data.token != null) {
+            console.log(response.data.token)
+          }
+        });
+    }
   },
 };
 </script>
@@ -142,6 +164,7 @@ export default {
 .navbar {
   height: 60px;
   max-width: 100%;
+  width:100%;
   font-size: 14px;
 }
 

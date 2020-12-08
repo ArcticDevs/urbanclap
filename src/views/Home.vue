@@ -3,27 +3,35 @@
     <div id="navbar">
       <Navbar />
     </div>
+    <div id="nav_bottom">
+      <NavbarBottom />
+    </div>
     <div id="header">
       <Header />
     </div>
     <div id="offers"></div>
     <div id="service">
       <Service />
-      
     </div>
     <div class="promoted">
       <Promoted />
     </div>
-    
 
     <div class="strip" v-for="section in sections" :key="section.id">
-      <div v-if="section.section_type==='services' || section.section_type==='reviews'">
-      <h1><b>{{section.title}}</b></h1>
-      <p>{{section.subtitle}}</p>
+      <div
+        v-if="
+          section.section_type === 'services' ||
+          section.section_type === 'reviews'
+        "
+      >
+        <h1>
+          <b>{{ section.title }}</b>
+        </h1>
+        <p>{{ section.subtitle }}</p>
       </div>
-      <Strip :section="section"/>
+      <Strip :section="section" />
     </div>
-    
+
     <div id="footer">
       <Footer />
     </div>
@@ -39,8 +47,9 @@ import Strip from "@/components/Strips.vue";
 import Carousel from "@/components/Carousel.vue";
 import Promoted from "@/components/Promoted.vue";
 import Navbar from "@/components/Navbar.vue";
+import NavbarBottom from "@/components/Navbar_bottom.vue";
 
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "Home",
   components: {
@@ -50,21 +59,22 @@ export default {
     Strip,
     Carousel,
     Promoted,
-    Navbar
+    Navbar,
+    NavbarBottom,
   },
   data() {
     return {
       sections: [],
     };
   },
-  mounted(){
-     var self = this;
+  mounted() {
+    var self = this;
     axios
       .get("http://fixorie.herokuapp.com/fo/home_sections")
       .then(function (response) {
         self.sections = response.data;
       });
-  }
+  },
 };
 </script>
 
@@ -79,30 +89,34 @@ export default {
 }
 
 #service {
-  /* position: relative; */
   background: #fff;
-  /* margin-bottom: 25px; */
-  /* padding-bottom:5vh; */
 }
 
-#navbar{
-  position:absolute;
-  top:0;
-  z-index:5;
-  width:100%;
+#navbar {
+  position: absolute;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+}
+
+#nav_bottom{
+  display:none;
 }
 
 @media (max-width: 1200px) {
   #navbar {
     display: none;
   }
+  #nav_bottom{
+    display:block;
+  }
 }
 
-.promoted{
-    position: relative;
+.promoted {
+  position: relative;
   background: #fff;
   margin-bottom: 25px;
-  padding-bottom:5vh;
+  padding-bottom: 5vh;
 }
 
 #carousel {
@@ -116,9 +130,9 @@ export default {
   margin-top: 25px;
 }
 
-.strip h1{
-  padding-top:5vh;
-  font-size:2rem;
+.strip h1 {
+  padding-top: 5vh;
+  font-size: 2rem;
 }
 
 #insurance1 {

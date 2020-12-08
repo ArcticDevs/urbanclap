@@ -2,7 +2,6 @@
   <div class="header">
     <section>
       <div class="container">
-       <!-- <Navbar /> -->
         <div id="page-address">HOME / Delhi-Ncr</div>
         <div id="logo"><img src="/img/new_logo_light.png" /></div>
         <h1>Home services, on demand.</h1>
@@ -38,11 +37,9 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
 export default {
   name: "Header",
   components:{
-    Navbar
   }
 };
 </script>

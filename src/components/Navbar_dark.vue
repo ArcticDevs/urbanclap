@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav">
+  <div class="nav-dark">
     <b-navbar toggleable="xl">
       <b-navbar-brand href="#" class="text-white">
         <img src="/img/logo_light.png" />

@@ -161,7 +161,6 @@
     </div>
 
     <!-- SERVICES PANEL START -->
-
     <div class="services-panel" v-b-modal.modal-center>
       <b-modal
         id="modal-center"
@@ -172,35 +171,74 @@
         size="lg"
         body-class
       >
-        <h2 class="my-4 text-center">What Are You Looking For ?</h2>
+        <div id="modal-serve">
+          <h2 class="my-4 text-center">What Are You Looking For ?</h2>
 
-        <div class="mt-4 mb-4">
-          <h4>
-            <span class="float-left ml-5">AC Service</span
-            ><span class="float-right"
-              ><b-icon icon="arrow-right-circle"></b-icon
-            ></span>
-          </h4>
+          <div class="mt-4 mb-4" @click="ShowService">
+            <h4>
+              <span class="float-left ml-5">AC Service</span
+              ><span class="float-right"
+                ><b-icon icon="arrow-right-circle"></b-icon
+              ></span>
+            </h4>
+          </div>
+          <br />
+          <hr />
+          <div class="mt-4 mb-4">
+            <h4>
+              <span class="float-left ml-5">AC Repair</span
+              ><span class="float-right"
+                ><b-icon icon="arrow-right-circle"></b-icon
+              ></span>
+            </h4>
+          </div>
+          <br />
+          <hr />
+          <div class="mt-4 mb-4">
+            <h4>
+              <span class="float-left ml-5">Installation/Un-Installation</span
+              ><span class="float-right"
+                ><b-icon icon="arrow-right-circle"></b-icon
+              ></span>
+            </h4>
+          </div>
         </div>
-        <br />
-        <hr />
-        <div class="mt-4 mb-4">
-          <h4>
-            <span class="float-left ml-5">AC Repair</span
-            ><span class="float-right"
-              ><b-icon icon="arrow-right-circle"></b-icon
-            ></span>
-          </h4>
-        </div>
-        <br />
-        <hr />
-        <div class="mt-4 mb-4">
-          <h4>
-            <span class="float-left ml-5">Installation/Un-Installation</span
-            ><span class="float-right"
-              ><b-icon icon="arrow-right-circle"></b-icon
-            ></span>
-          </h4>
+        <div id="service_type">
+          <h4 class="text-center mb-5">ADD AC(s) for service</h4>
+          <div class="mt-4 mb-4">
+            <h4>
+              <span class="float-left ml-5">Installation/Un-Installation</span
+              ><span class="float-right">
+                <div class="float-right" id="border">
+                  <button type="button" v-on:click="increase" id="borderInr">
+                    +
+                  </button>
+                  {{ counter }}
+                  <button type="button" v-on:click="decrease" id="borderInl">
+                    -
+                  </button>
+                </div>
+              </span>
+            </h4>
+          </div>
+          <br />
+          <hr />
+          <div class="mt-4 mb-4">
+            <h4>
+              <span class="float-left ml-5">Installation/Un-Installation</span
+              ><span class="float-right">
+                <div class="float-right" id="border">
+                  <button type="button" v-on:click="increase" id="borderInr">
+                    +
+                  </button>
+                  {{ counter }}
+                  <button type="button" v-on:click="decrease" id="borderInl">
+                    -
+                  </button>
+                </div>
+              </span>
+            </h4>
+          </div>
         </div>
       </b-modal>
       <div class="panel-services-info">
@@ -437,19 +475,28 @@ export default {
     loadMore: function () {
       var x = document.getElementById("second-rating");
       var y = document.getElementById("load-more");
-      if (x.style.display === "none") {
         x.style.display = "block";
         y.style.display = "none";
-      } else {
-        x.style.display = "none";
-        y.style.display = "block";
-      }
+
     },
 
     show_answer: function () {
       var ans = document.getElementById("answer");
-      if (ans.style.display === "none") ans.style.display = "block";
+      if (ans.style.display == "none") ans.style.display = "block";
       else ans.style.display = "none";
+    },
+    ShowService: function () {
+      var ser = document.getElementById("service_type");
+      var service_modal = document.getElementById("modal-serve");
+
+      service_modal.style.display = "none";
+      ser.style.display = "block";
+    },
+    increase: function () {
+      this.counter++;
+    },
+    decrease: function () {
+      this.counter--;
     },
   },
 };
@@ -457,13 +504,32 @@ export default {
 
 
 <style scoped>
+/* modal CSS */
+#service_type {
+  display: none;
+}
+#border {
+  border: 1px solid #304ffe;
+}
+#borderInr {
+  border-right: 1px solid #304ffe;
+  background-color: transparent;
+  border: none;
+}
+#borderInl {
+  border-left: 1px solid #304ffe;
+  background-color: transparent;
+  border: none;
+}
+/* Modal Css end  */
+
 h5 {
   font-weight: 600;
   margin: 0;
 }
 
-.mobile-mainBlock{
-  display:none;
+.mobile-mainBlock {
+  display: none;
 }
 
 .header {
@@ -1172,8 +1238,8 @@ a.nav-link.active {
   left: 12px;
 }
 /* ****mobile view css***** */
-.mobile-mainBlock{
-  padding-bottom:40px;
+.mobile-mainBlock {
+  padding-bottom: 40px;
 }
 
 .free-delivery-btn {
@@ -1456,9 +1522,9 @@ a.nav-link.active {
   color: #212121;
 }
 
-.see-more-title{
-      font-size: 12px;
-    color: #fd5c63;
+.see-more-title {
+  font-size: 12px;
+  color: #fd5c63;
 }
 
 /* VIEW CHANGE MEDIA QUERY */
@@ -1466,7 +1532,7 @@ a.nav-link.active {
   .desktop-mainBlock {
     display: none;
   }
-  .mobile-mainBlock{
+  .mobile-mainBlock {
     display: block;
   }
   .services-panel {
