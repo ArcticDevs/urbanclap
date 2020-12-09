@@ -57,7 +57,7 @@ export default {
 
 .poster{
   width:100%;
-  height:18vh;
+  /* height:18vh; */
   overflow:hidden;
 }
 

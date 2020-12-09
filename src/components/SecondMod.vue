@@ -29,24 +29,9 @@
         <div class="mob-service-panel-root">
           <p class="mob-panel-heading">View All Beauty Services:</p>
           <ul>
-            <li>
+            <li v-for="(sub_service, index) in data.sub_services" :key="index">
               <div class="mob-service-img"></div>
-              <p>Exclusive Packages</p>
-              <span><b-icon icon="chevron-right"></b-icon></span>
-            </li>
-            <li>
-              <div class="mob-service-img"></div>
-              <p>Exclusive Packages</p>
-              <span><b-icon icon="chevron-right"></b-icon></span>
-            </li>
-            <li>
-              <div class="mob-service-img"></div>
-              <p>Exclusive Packages</p>
-              <span><b-icon icon="chevron-right"></b-icon></span>
-            </li>
-            <li>
-              <div class="mob-service-img"></div>
-              <p>Exclusive Packages</p>
+              <p>{{ sub_service.name }}</p>
               <span><b-icon icon="chevron-right"></b-icon></span>
             </li>
           </ul>
@@ -125,30 +110,10 @@
       <section class="mob-faqs">
         <h2>Frequently Asked Questions</h2>
         <ul>
-          <li>
-            <span>How long does the hair have to be for waxing?</span>
+          <li v-for="(faq, index) in data.faqs" :key="index">
+            <span>{{ faq.question }}</span>
             <p>
-              The longer the hair, the better the wax will grab the hair and
-              will pull it out. Ideally one can wait for 3-5 weeks before
-              getting waxing done depending on the hair growth. In case of
-              emergency in the face of an event you need to go to, we suggest
-              you wait for at least 7 days before another round of body waxing.
-              A word of advice- never clip your hair before your waxing day.
-            </p>
-          </li>
-          <li>
-            <span>What should I do to prepare for waxing?</span>
-            <p>
-              Although our salon at home professionals will do everything
-              possible to make this process as pain free and satisfying as
-              possible, there are certain things that you can do to ensure a
-              great waxing session: Ensure the room you get the service done is
-              air conditioned (unless it is winter) Exfoliate the skin lightly
-              Moisturise till the day before your waxing appointment Let the
-              hair grow. Longer the hair, the better Check yourself for burns,
-              cuts etc. We recommend you treat it before getting waxing done or
-              inform the professional Let the professional know if you are
-              allergic to anything particular to the service
+              {{ faq.answer }}
             </p>
           </li>
         </ul>
@@ -158,144 +123,117 @@
           </button>
         </div>
       </section>
+
+      <section class="mob-about" v-html="data.about">
+        <div class="see-more-btn-root">
+          <button class="see-more-btn">
+            <div class="see-more-title">See More</div>
+          </button>
+        </div>
+      </section>
     </div>
-
-    <!-- SERVICES PANEL START -->
-
-    <div class="services-panel" v-b-modal.modal-center  >
-      <b-modal
-        id="modal-center"
-        centered
-        title="AC Service & Repair"
-        hide-footer="true"
-        class="text-center panelModal"
-        size="lg"
-        body-class
-      >
-      <div  id="modal-serve">
-        <h2 class="my-4 text-center">What Are You Looking For ?</h2>
-        
-          <div class="mt-4 mb-4" @click="ShowService">
-            <h4>
-              <span class="float-left ml-5">AC Service</span
-              ><span class="float-right"
-                ><b-icon icon="arrow-right-circle"></b-icon
-              ></span>
-            </h4>
-          </div>
-          <br />
-          <hr />
-          <div class="mt-4 mb-4">
-            <h4>
-              <span class="float-left ml-5">AC Repair</span
-              ><span class="float-right"
-                ><b-icon icon="arrow-right-circle"></b-icon
-              ></span>
-            </h4>
-          </div>
-          <br />
-          <hr />
-          <div class="mt-4 mb-4">
-            <h4>
-              <span class="float-left ml-5">Installation/Un-Installation</span
-              ><span class="float-right"
-                ><b-icon icon="arrow-right-circle"></b-icon
-              ></span>
-            </h4>
-          </div>
-        </div>
-        <div id="service_type">
-          <h4 class="text-center mb-5">ADD AC(s) for service</h4>
-          <div class="mt-4 mb-4">
-            <h4>
-              <span class="float-left ml-5">Installation/Un-Installation</span
-              ><span class="float-right">
-                <div class="float-right  " id="border">
-                  <button type="button" v-on:click="increase" id="borderInr">+</button>
-                  {{ counter }}
-                  <button type="button" v-on:click="decrease" id="borderInl">-</button>
-                </div>  
-                </span>
-            </h4>
-          </div>
-          <br>
-          <hr>           
-          <div class="mt-4 mb-4">
-            <h4>
-              <span class="float-left ml-5">Installation/Un-Installation</span
-              ><span class="float-right">
-                <div class="float-right " id="border">
-                  <button type="button" v-on:click="increase" id="borderInr">+</button>
-                  {{ counter }}
-                  <button type="button" v-on:click="decrease" id="borderInl">-</button>
-                </div>  
-                </span>
-            </h4>
-          </div>
-        </div>
-      </b-modal>
-      <div class="panel-services-info">
-        <p>View All Beauty Service:</p>
-        <div class="panel-buttons">
-          <div class="panel-buttons-inner">
-            <button class="service-button">
-              <div class="service-icon">
-                <img src="service-panel-1.png" />
-              </div>
-              <p>Exclusive Packages</p>
-              <span class="right-arrow">
-                <b-icon icon="chevron-right" font-scale="1.4"></b-icon>
-              </span>
-            </button>
-            <button class="service-button">
-              <div class="service-icon">
-                <img src="service-panel-2.jpeg" />
-              </div>
-              <p>Waxing & Threading</p>
-              <span class="right-arrow">
-                <b-icon icon="chevron-right" font-scale="1.4"></b-icon>
-              </span>
-            </button>
-            <button class="service-button">
-              <div class="service-icon">
-                <img src="service-panel-3.jpeg" />
-              </div>
-              <p>Manicure + Pedicure</p>
-              <span class="right-arrow">
-                <b-icon icon="chevron-right" font-scale="1.4"></b-icon>
-              </span>
-            </button>
-            <button class="service-button">
-              <div class="service-icon">
-                <img src="service-panel-4.jpeg" />
-              </div>
-              <p>Facial & Hair Services</p>
-              <span class="right-arrow">
-                <b-icon icon="chevron-right" font-scale="1.4"></b-icon>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="panel-rating">
-        <div class="aggregate-rating">
-          <div class="aggregate-rating-value">
-            <span><b-icon icon="star-fill"></b-icon></span>
-            <span>4.8<span>/5</span></span>
-          </div>
-          <p>based on 96,767 ratings</p>
-        </div>
-        <div class="total-bookings">
-          <span>2,58,803</span>
-          <p>Bookings done in last 1 year</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SERVICES PANEL END -->
 
     <div class="desktop-mainBlock">
-      <!-- *******main Block Nav********** -->
+      <!-- SERVICES PANEL START -->
+      <div class="services-panel">
+        <b-modal
+          id="modal-tall"
+          centered
+          hide-footer="true"
+          class="text-center panelModal"
+          size="lg"
+          body-class
+        >
+          <div id="modal-serve" v-if="selected_sub_service_index == -1">
+            <h2 class="my-4 text-center">What Are You Looking For ?</h2>
+
+            <div
+              class="sub-service"
+              v-for="(sub_service, index) in this.data.sub_services"
+              @click="ShowService(index)"
+              :key="index"
+            >
+              <div class="sub-service-heading">{{ sub_service.name }}</div>
+              <span class="right-arrow-subservice">
+                <span><b-icon icon="chevron-right"> </b-icon></span>
+              </span>
+            </div>
+          </div>
+          <div id="service_type" v-if="selected_sub_service_index != -1">
+            <h4 class="text-center mb-5">ADD AC(s) for service</h4>
+            <div
+              class="mt-4 mb-4"
+              v-for="(sub_service_type, type_index) in this.data.sub_services[
+                selected_sub_service_index
+              ].sub_service_types"
+              :key="type_index"
+            >
+              <h4>
+                <span class="float-left ml-5">{{ sub_service_type.name }}</span
+                ><span class="float-right">
+                  <div class="float-right" id="border">
+
+                    <button type="button" v-if="!in_cart(sub_service_type.id)" @click="add_to_cart(sub_service_type.id)"> + Add </button>
+
+                    <div v-else>
+                      <button type="button" id="borderInl" @click="cart[ get_cart_index(sub_service_type.id) ].quantity--">
+                        -
+                      </button>
+                      {{ cart[ get_cart_index(sub_service_type.id) ].quantity }}
+                      <button type="button" id="borderInr" @click="cart[ get_cart_index(sub_service_type.id) ].quantity++">
+                        +
+                      </button>
+                    </div>
+
+                  </div>
+                </span>
+              </h4>
+            </div>
+            <br />
+            <hr />
+            
+          </div>
+        </b-modal>
+        <div class="panel-services-info">
+          <p>View All Beauty Service:</p>
+          <div class="panel-buttons">
+            <div class="panel-buttons-inner">
+              <button
+                class="service-button"
+                v-for="(sub_service, index) in data.sub_services"
+                :key="index"
+                
+                v-b-modal.modal-tall
+              >
+                <div class="service-icon">
+                  <img src="service-panel-1.png" />
+                </div>
+                <p>{{ sub_service.name }}</p>
+                <span class="right-arrow">
+                  <b-icon icon="chevron-right" font-scale="1.4"></b-icon>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-rating">
+          <div class="aggregate-rating">
+            <div class="aggregate-rating-value">
+              <span><b-icon icon="star-fill"></b-icon></span>
+              <span>4.8<span>/5</span></span>
+            </div>
+            <p>based on 96,767 ratings</p>
+          </div>
+          <div class="total-bookings">
+            <span>2,58,803</span>
+            <p>Bookings done in last 1 year</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES PANEL END -->
+
+      <!-- *******Desktop Nav********** -->
       <div class="page-nav">
         <b-navbar toggleable="xl">
           <b-navbar-nav class="mx-auto nav-items">
@@ -435,112 +373,202 @@
         <div class="questions">
           <div class="question" v-for="(faq, index) in data.faqs" :key="index">
             <p>{{ faq.question }}</p>
-            <div class="open_arrow">
-              <span @click="show_answer">
+            <div class="open_arrow" @click=" selected_faq_index != -1 && selected_faq_index == index ? selected_faq_index = -1 : selected_faq_index = index">
+              <span>
                 <b-icon icon="chevron-down"></b-icon>
               </span>
             </div>
-            <div id="answer">
+            <div id="answer" v-if="selected_faq_index == index">
               {{ faq.answer }}
             </div>
           </div>
         </div>
       </div>
       <!-- --------FAQS END----------- -->
+      <div id="aboutSection" v-html="data.about"></div>
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar_dark.vue";
+import axios from "axios";
 export default {
   name: "second-mod",
   data() {
     return {
-            counter: 0,
+      counter: 0,
+      data: {},
+      selected_sub_service_index: -1,
+      cart: [],
+
+      selected_faq_index: -1,
     };
   },
   components: {
     Navbar,
   },
-  props: {
-    data: Object,
+  mounted() {
+    var url = window.location.href;
+    var service_url = "/" + url.substring(url.lastIndexOf("/") + 1);
+
+    axios.get("http://fixorie.herokuapp.com/fo/category_url/").then((res) => {
+      for (var i = 0; i < res.data.length; i++) {
+        if (res.data[i].url == service_url) {
+          var service_id = res.data[i].id;
+          axios
+            .get("http://fixorie.herokuapp.com/fo/services/" + service_id)
+            .then((res2) => {
+              this.data = res2.data;
+            });
+        }
+      }
+    });
   },
   methods: {
     loadMore: function () {
       var x = document.getElementById("second-rating");
       var y = document.getElementById("load-more");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-        y.style.display = "none";
-      } else {
-        x.style.display = "none";
-        y.style.display = "block";
-      }
+      x.style.display = "block";
+      y.style.display = "none";
     },
 
     show_answer: function () {
       var ans = document.getElementById("answer");
-      if (ans.style.display === "none") ans.style.display = "block";
+      if (ans.style.display == "none") ans.style.display = "block";
       else ans.style.display = "none";
     },
-  
-  ShowService: function(){
-  var ser= document.getElementById("service_type");
-  var service_modal = document.getElementById("modal-serve");  
-  
-    service_modal.style.display = "none";
-    ser.style.display = "block";
-    
-    
-  },
-      increase: function() {
+
+
+    ShowService: function (sub_service_index) {
+      // console.log("---->>>>" + sub_service_index);
+
+      this.selected_sub_service_index = sub_service_index;
+
+    },
+    increase: function () {
       this.counter++;
     },
-    decrease: function() {
+    decrease: function () {
       this.counter--;
     },
-}
-}
+
+    add_to_cart(sub_service_type_id) {
+      this.cart.push({
+        sub_service_type_id: sub_service_type_id,
+        quantity: 1,
+      });
+    },
+
+    in_cart(sub_service_type_id) {
+     for(var i=0;i<this.cart.length;i++) {
+        if(this.cart[i].sub_service_type_id == sub_service_type_id) {
+          return true;
+        }
+      }
+      return false;
+    },
+
+    get_cart_index(sub_service_type_id) {
+      for(var i=0;i<this.cart.length;i++) {
+        if(this.cart[i].sub_service_type_id == sub_service_type_id) {
+          return i;
+        }
+      }
+    },
+  },
+};
 </script>
 
 
 <style scoped>
+/* modal CSS */
+.modal-content {
+  height: 100% !important;
+}
+#border {
+  border: 1px solid #304ffe;
+}
+#borderInr {
+  border-right: 1px solid #304ffe;
+  background-color: transparent;
+  border: none;
+}
+#borderInl {
+  border-left: 1px solid #304ffe;
+  background-color: transparent;
+  border: none;
+}
+.sub-service {
+  /* display: table-row; */
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 1px solid #e2e2e2;
+}
+.sub-service-heading {
+  padding: 28px 16px;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  line-height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #212121;
+}
+.right-arrow-subservice {
+  width: 55px;
+  text-align: center;
+  padding: 28px 16px;
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.right-arrow-subservice span {
+  height: 24px;
+  width: 24px;
+  border: 1px solid rgba(48, 79, 254, 0.24);
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  background-color: rgba(48, 79, 254, 0.04);
+}
+
+.right-arrow-subservice span .b-icon {
+  font-size: 12px;
+  position: relative;
+  top: -4px;
+  left: 1px;
+  color: #304ffe;
+}
+
+@media (min-width: 768px) {
+  .sub-service-heading {
+    padding-left: 96px;
+  }
+  .right-arrow-subservice {
+    padding-right: 96px;
+  }
+}
+/* Modal Css end  */
+
 h5 {
   font-weight: 600;
   margin: 0;
 }
-/* modal CSS */
-#service_type{
-  display:none;
-}
 
-#border{
-  border: 1px solid #304ffe;
-
-}
-#borderInr{
-  border-right: 1px solid #304ffe;
-  background-color: transparent;
-      border:none
-}
-#borderInl{
-  border-left: 1px solid #304ffe;
-    background-color: transparent;
-    border:none
-
-}
-/* Modal Css end  */
-
-.mobile-mainBlock{
-  display:none;
+.mobile-mainBlock {
+  display: none;
 }
 
 .header {
-  height: 60vh;
+  height: 70vh;
   width: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   position: relative;
+  padding-top:60px;
 }
 
 .mob-service-panel {
@@ -553,6 +581,7 @@ h5 {
   position: absolute;
   top: 0;
   left: 0;
+  object-fit: cover;
   z-index: -1;
 }
 
@@ -606,6 +635,14 @@ h5 {
   justify-content: initial;
   align-items: center;
   position: sticky;
+}
+
+.nav{
+    position: absolute;
+  top: 0;
+  z-index: 5;
+  width: 100%;
+  background:#fff;
 }
 
 .nav-item {
@@ -1174,7 +1211,20 @@ a.nav-link.active {
   font-size: 16px;
   line-height: 24px;
   margin-top: 16px;
-  display: none;
+}
+
+#aboutSection {
+  text-align: left;
+  font-size: 90%;
+  border: 1px solid #f0f0f0;
+  margin-top: 30px;
+  padding: 24px;
+}
+
+#aboutSection > section > h2 {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #000 !important;
 }
 
 /* **********MOBILE CSS********** */
@@ -1242,8 +1292,8 @@ a.nav-link.active {
   left: 12px;
 }
 /* ****mobile view css***** */
-.mobile-mainBlock{
-  padding-bottom:40px;
+.mobile-mainBlock {
+  padding-bottom: 80px;
 }
 
 .free-delivery-btn {
@@ -1495,6 +1545,26 @@ a.nav-link.active {
   margin: 0;
 }
 
+.mob-about {
+  height: 500px;
+  overflow: hidden;
+  border: none;
+  padding: 28px 16px 24px;
+  margin-bottom: 24px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+  z-index: 2;
+  margin: 28px auto 0;
+  text-align: left;
+  font-size: 90%;
+}
+
+.mob-about section h2 {
+  font-size: 1rem !important;
+}
+
 .see-more-btn-root {
   text-align: center;
   position: absolute;
@@ -1526,9 +1596,9 @@ a.nav-link.active {
   color: #212121;
 }
 
-.see-more-title{
-      font-size: 12px;
-    color: #fd5c63;
+.see-more-title {
+  font-size: 12px;
+  color: #fd5c63;
 }
 
 /* VIEW CHANGE MEDIA QUERY */
@@ -1536,7 +1606,7 @@ a.nav-link.active {
   .desktop-mainBlock {
     display: none;
   }
-  .mobile-mainBlock{
+  .mobile-mainBlock {
     display: block;
   }
   .services-panel {

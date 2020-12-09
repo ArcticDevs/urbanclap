@@ -1,5 +1,5 @@
 <template>
-  <div class="header-nav">
+  <div class="nav container">
     <b-navbar toggleable="xl">
       <b-navbar-brand href="#" class="text-white">
         <img src="/img/logo_light.png" />
@@ -16,26 +16,20 @@
           right
           shadow
           backdrop
-          no-close-on-backdrop = "false"
-          no-close-on-esc = "false"
+          no-close-on-backdrop =false
+          no-close-on-esc =false
         >
-          <b-input-group-prepend is-text id="bg">
-            <div class="d-inline-block dropdown">
-              <select name="country" id="country">
-                <option value="+91"><img src="/ind.png" /> +91</option>
-                <option value="+971">+971</option>
-                <option value="+61">+61</option>
-                <option value="+65">+65</option>
-              </select>
-            </div>
+          <b-input-group prepend="+91" id="bg">
+
             <input
               v-model="mobile"
               type="tel"
               placeholder="Your phone number "
               id="tel"
+              maxlength="10"
             />
 
-          </b-input-group-prepend>
+          </b-input-group >
 
           <input
             v-b-toggle.sidebar-OTP
@@ -58,25 +52,33 @@
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
+                  v-model="otp1"
+                  maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
+                  v-model="otp2"
+                  maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
+                  v-model="otp3"
+                  maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
+                  v-model="otp4"
+                  maxlength="1"
                 />
               </div>
             </div>
@@ -85,6 +87,7 @@
               type="submit"
               value="Log In"
               id="btn"
+              @click="login"
             />
           </b-sidebar>
         </b-sidebar>
@@ -99,7 +102,11 @@ export default {
  
   data() {
     return {
-      mobile:''
+      mobile:'',
+      otp1:'',
+      otp2:'',
+      otp3:'',
+      otp4:'',
     };
   },
   methods: {
@@ -107,20 +114,40 @@ export default {
       var self = this;
       axios
         .post("http://fixorie.herokuapp.com/accounts/generate_otp/", {
-          "phone_number": this.mobile
+          "phone_number": "+91"+this.mobile
         })
         .then(function (response) {
-          if(response.data.success != NULL) {
-            console.log(response.data.success)
+          if(response.data.success != null) {
+            // console.log(response.data.success)
           }
         });
     },
+    login(){
+       var self = this;
+      axios
+        .post("http://fixorie.herokuapp.com/accounts/login/", {
+          "username": "+91"+this.mobile,
+          "password": self.otp1+self.otp2+self.otp3+self.otp4
+        })
+        .then(function (response) {
+          if(response.data.token != null) {
+            console.log(response.data.token)
+          }
+        });
+    },    
   },
+  mounted(){
+         $(".inputs").keyup(function () {
+        if (this.value.length == this.maxLength) {
+          $(this).next('.inputs').focus();
+        }
+  });
+  }
 };
 </script>
 <style scoped>
 .navbar .navbar-brand img {
-  margin: 40px 0 0 30px;
+  margin:0 0 0 30px;
   height: 100%;
   width: 80px;
 }
@@ -129,20 +156,26 @@ export default {
   opacity: 0.7 !important;
 }
 
-#login___title__{
+/* #login___title__{
   font-size:1em !important;
-}
+} */
 
 .navbar a.nav-link {
   color: #fff !important;
   padding: 0;
   margin-right: 25px;
 }
-
+.input-group-text{
+  background-color:#fff !important ;
+  border: 1px solid #bdbdbd !important;
+  margin-left: 19px;
+}
 .navbar {
   height: 60px;
   max-width: 100%;
-  font-size: 14px;
+  width:100%;
+  font-size: 16px;
+  font-weight:bolder;
 }
 
 /* @media (max-width: 1200px) {
