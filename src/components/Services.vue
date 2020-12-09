@@ -7,7 +7,7 @@
         class="flex-item"
         v-if="service.category_services.length != 0"
       >
-        <router-link v-if="service.category_services.length == 1" to="/service">
+        <router-link v-if="service.category_services.length == 1" :to="'/service'+service.category_services[0].url">
         <div class="service_link">
           <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
           <p>{{ service.name }}</p>
@@ -15,7 +15,7 @@
         </router-link>
 
         <button v-if="service.category_services.length > 1">
-          <span>
+          <span v-b-toggle.sidebar-right>
           <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
           <p>{{ service.name }}</p>
           </span>
@@ -110,8 +110,8 @@ export default {
 .service {
   background: #fff !important;
   position: relative;
-  top: -120px;
-  z-index: 2 !important;
+  top: -60px;
+  z-index: 5 !important;
 }
 
 #flexbox {
@@ -175,6 +175,10 @@ position:absolute;
 top:0;
 left:0;
 width:100%;
+}
+
+#sidebar-right{
+  z-index:50;
 }
 
 .hover {

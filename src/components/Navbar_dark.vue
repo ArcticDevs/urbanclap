@@ -12,8 +12,8 @@
         right
         shadow
         backdrop
-        no-close-on-backdrop="false"
-        no-close-on-esc="false"
+        :no-close-on-backdrop=false
+        :no-close-on-esc=false
         is-nav
       >
         <div class="sidebar-contents">
@@ -72,7 +72,7 @@
 }
 
 .navbar .navbar-brand img {
-  /* margin: 40px 0 0 30px; */
+  margin: 0;
   height: 100%;
   width: 80px;
 }

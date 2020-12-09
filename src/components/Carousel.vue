@@ -54,15 +54,15 @@ export default {
     cid:String
   },
   mounted() {
-    console.log("mounted called");
-    console.log($(".carousel-inner-container").innerWidth() / this.add_count_ini);
-    console.log(this.items);
+    // console.log("mounted called");
+    // console.log($(".carousel-inner-container").innerWidth() / this.add_count_ini);
+    // console.log(this.items);
     if (window.innerWidth < 400) {
       this.adWidth = $(".carousel-inner-container").innerWidth();
       $(".carousel-block").css("width", this.adWidth + "px");
       this.add_count_ini = 1;
     } else {
-      console.log("desktop design called");
+      // console.log("desktop design called");
       this.adWidth = $(".carousel-inner-container").innerWidth() / this.add_count_ini;
       $(".carousel-block").css("width", this.adWidth + "px");
     }
@@ -95,7 +95,7 @@ export default {
           $(".carousel-block").css("width", this.adWidth + "px");
           this.add_count_ini = 1;
         } else {
-          console.log("desktop design called");
+          // console.log("desktop design called");
           this.adWidth = $(".carousel-inner-container").innerWidth() / this.add_count_ini;
           $(".carousel-block").css("width", this.adWidth + "px");
         }

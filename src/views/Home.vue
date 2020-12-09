@@ -95,7 +95,7 @@ export default {
 #navbar {
   position: absolute;
   top: 0;
-  z-index: 5;
+  z-index: 3;
   width: 100%;
 }
 

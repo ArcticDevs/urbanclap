@@ -1,92 +1,96 @@
 <template>
   <div>
-    <navbar />    
+    <navbar />
     <div class="container mt-5">
-        <h4 class="text-center">My Bookings</h4>
-        <div class="text-center container mt-5">
-                <span class="button active">  Bookings</span>
-                <span class="button" >History</span>
-
-        </div>
-        <div class="container mt-5 mb-5">
-            <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-        </div>
-        <div class="container">
-             <span class="btn">Book A Service</span>
-        </div>
+      <h4 class="text-center">My Bookings</h4>
+      <div class="text-center container mt-5">
+        <span class="button activeButton"> Bookings</span>
+        <span class="button">History</span>
+      </div>
+      <div class="container mt-5 mb-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Invoice Number</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(booking, index) in bookings" :key="index">
+              <th scope="row">{{ booking.invoice_no }}</th>
+              <td>{{ booking.total_amount }}</td>
+              <td>{{ booking.status }}</td>
+              <td>{{ booking.date_time }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="container">
+        <span class="btn">Book A Service</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from './Navbar_dark.vue'
+import Navbar from "./Navbar_dark.vue";
+import axios from "axios";
 export default {
+  data() {
+    return {
+      bookings: "",
+      // token:'5655b8137591d70dad0833134446b62b64d17c0a',
+    };
+  },
   components: { Navbar },
-    mounted(){
-        $(document).ready(function(){
-            $('.button').click(function(){
-            $('.button').removeClass("activeButton");
-            $(this).addClass("active");
-});
-});
-    }
-}
+  mounted() {
+    $(document).ready(function () {
+      $(".button").click(function () {
+        $(".button").removeClass("activeButton");
+        $(this).addClass("activeButton");
+      });
+    });
+    var self = this;
+    axios
+      .get("http://fixorie.herokuapp.com/fo/invoices/", {
+        headers: {
+          Authorization: "token 5655b8137591d70dad0833134446b62b64d17c0a",
+        },
+      })
+      .then(function (response) {
+        self.bookings = response.data;
+      });
+  },
+};
 </script>
 
 <style>
-.button{
-    height: 48px;
-    width: 148px;
-    text-align: center;
-    border: 1px solid black;
-    border-radius:0px ;
-    padding:10px;
-    cursor: pointer;
+.button {
+  height: 48px;
+  width: 148px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 10px;
+  cursor: pointer;
 }
-.btn{
-    height: 48px;
-    width: 148px;
-    text-align: center;
-    border: 1px solid black;
-    border-radius:0px ;
-         color: white;
-    background-color: #000;
-    padding: 10px 10px;
+.btn {
+  height: 48px;
+  width: 148px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 0px;
+  color: white;
+  background-color: #000;
+  padding: 10px 10px;
 }
-.btn:hover{
-    color: white;
+.btn:hover {
+  color: white;
 }
-.activeButton{
-     color: white;
-    background-color: #000;
+.activeButton {
+  color: white;
+  background-color: #000;
 }
 </style>

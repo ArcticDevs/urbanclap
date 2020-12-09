@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav container">
     <b-navbar toggleable="xl">
       <b-navbar-brand href="#" class="text-white">
         <img src="/img/logo_light.png" />
@@ -16,8 +16,8 @@
           right
           shadow
           backdrop
-          no-close-on-backdrop = "false"
-          no-close-on-esc = "false"
+          no-close-on-backdrop =false
+          no-close-on-esc =false
         >
           <b-input-group-prepend is-text id="bg">
             <div class="d-inline-block dropdown">
@@ -120,7 +120,7 @@ export default {
         })
         .then(function (response) {
           if(response.data.success != null) {
-            console.log(response.data.success)
+            // console.log(response.data.success)
           }
         });
     },
@@ -142,7 +142,7 @@ export default {
 </script>
 <style scoped>
 .navbar .navbar-brand img {
-  margin: 40px 0 0 30px;
+  margin:0 0 0 30px;
   height: 100%;
   width: 80px;
 }
@@ -151,9 +151,9 @@ export default {
   opacity: 0.7 !important;
 }
 
-#login___title__{
+/* #login___title__{
   font-size:1em !important;
-}
+} */
 
 .navbar a.nav-link {
   color: #fff !important;
@@ -165,7 +165,8 @@ export default {
   height: 60px;
   max-width: 100%;
   width:100%;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight:bolder;
 }
 
 /* @media (max-width: 1200px) {
