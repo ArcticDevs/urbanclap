@@ -51,7 +51,7 @@ export default {
     cid: String,
   },
   mounted() {
-    if (window.innerWidth < 400) {
+    if (window.innerWidth < 500) {
       this.adWidth = $(".carousel-inner-container").innerWidth();
       $(".carousel-block").css("width", this.adWidth + "px");
       this.add_count_ini = 1;
@@ -87,7 +87,7 @@ export default {
   watch: {
     items: {
       handler: function (newValue) {
-        if (window.innerWidth < 400) {
+        if (window.innerWidth < 500) {
           this.adWidth = $(".carousel-inner-container").innerWidth();
           $(".carousel-block").css("width", this.adWidth + "px");
           this.add_count_ini = 1;
@@ -137,7 +137,7 @@ export default {
   transition: all 0.2s ease-in;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .carousel-container .carousel-inner-container .carousel-block {
     width: 100%;
   }

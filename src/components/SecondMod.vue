@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="header">
-      <img :src="data.bg_img_path" />
+      <img class="header-img" :src="data.bg_img_path" />
       <div class="container">
         <div class="breadcrumbs">
           <b-breadcrumb>
@@ -29,8 +29,8 @@
         <div class="mob-service-panel-root">
           <p class="mob-panel-heading">View All Beauty Services:</p>
           <ul>
-            <li v-for="(sub_service, index) in data.sub_services" :key="index">
-              <div class="mob-service-img"></div>
+            <li v-for="(sub_service, index) in data.sub_services" :key="index" v-b-modal.modal-tall>
+              <div class="mob-service-img"><img src="/sub_service_icon.png" /></div>
               <p>{{ sub_service.name }}</p>
               <span><b-icon icon="chevron-right"></b-icon></span>
             </li>
@@ -138,7 +138,6 @@
       <div class="services-panel">
         <b-modal
           id="modal-tall"
-          centered
           hide-footer="true"
           class="text-center panelModal"
           size="lg"
@@ -387,11 +386,14 @@
       <!-- --------FAQS END----------- -->
       <div id="aboutSection" v-html="data.about"></div>
     </div>
+  <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar_dark.vue";
+import Footer from "@/components/Footer.vue";
+
 import axios from "axios";
 export default {
   name: "second-mod",
@@ -407,6 +409,7 @@ export default {
   },
   components: {
     Navbar,
+    Footer
   },
   mounted() {
     var url = window.location.href;
@@ -500,7 +503,6 @@ export default {
   border: none;
 }
 .sub-service {
-  /* display: table-row; */
   width: 100%;
   cursor: pointer;
   text-align: left;
@@ -575,7 +577,7 @@ h5 {
   display: none;
 }
 
-.header img {
+.header-img{
   width: 100%;
   height: 100%;
   position: absolute;
@@ -748,6 +750,19 @@ a.nav-link.active {
 .service-icon img {
   width: 32px;
   height: 32px;
+}
+
+.mob-service-img{
+    display: inline-block;
+  height: 32px;
+  margin: 0px 16px 0px 0px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.mob-service-img img{
+    width: 100%;
+  height: 100%;
 }
 
 .service-button p {
@@ -1237,7 +1252,7 @@ a.nav-link.active {
 }
 
 .mob-panel-heading {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.52;
   color: #212121;
@@ -1293,7 +1308,7 @@ a.nav-link.active {
 }
 /* ****mobile view css***** */
 .mobile-mainBlock {
-  padding-bottom: 80px;
+  padding-bottom: 10px;
 }
 
 .free-delivery-btn {
@@ -1303,7 +1318,7 @@ a.nav-link.active {
   bottom: 16px !important;
   left: 16px !important;
   font-size: 16px;
-  z-index: 5;
+  z-index: 3;
   transition: transform 0.3s;
   animation: SEOListingMobile__reveal--1TVbz 0.4s
     cubic-bezier(0.5, 0.5, 0.75, 1.5) 0s 1 normal forwards;
@@ -1630,19 +1645,17 @@ a.nav-link.active {
     text-align: center;
     padding-top: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
-    background-color: #f5f5f5;
     background-blend-mode: multiply;
     height: auto;
   }
-  .header img {
+  .header-img{
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 40% !important;
+    height: 320px;
     object-fit: cover;
     filter: brightness(0.4);
-    z-index: 1 !important;
   }
 
   .header-details ul {
@@ -1650,9 +1663,8 @@ a.nav-link.active {
   }
   .header-details h1 {
     font-size: 1.5rem;
-    padding: 15vh 0 0;
+    padding: 120px 16px 32px;
     margin: 0 !important;
-    z-index: 3 !important;
   }
 }
 </style>

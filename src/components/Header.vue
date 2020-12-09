@@ -2,57 +2,64 @@
   <div class="header">
     <section>
       <div class="bg">
-                <div id="logo"><img src="/img/logo_light.png" /></div>
+        <div id="logo"><img src="/img/logo_light.png" /></div>
       </div>
-<div class="mob-bg-bottom">
-      <div class="container">
-        <div id="page-address">
-          <b-breadcrumb>
-            <b-breadcrumb-item href="#">Home</b-breadcrumb-item>
-            <b-breadcrumb-item href="#">Delhi NCR</b-breadcrumb-item>
-          </b-breadcrumb>
-        </div>
-        <h1>Home services, on demand.</h1>
-        <div id="search" class="row">
-          <div class="dropdown col-5 col-sm-3">
-            <select name="cities" id="cities">
-              <option value="saab">Delhi NCR</option>
-              <option value="volvo">Ahmedabad</option>
-              <option value="mercedes">Jodhpur</option>
-              <option value="audi">Rajkot</option>
-            </select>
-
+      <div class="mob-bg-bottom">
+        <div class="container">
+          <div id="page-address">
+            <b-breadcrumb>
+              <b-breadcrumb-item href="#">Home</b-breadcrumb-item>
+              <b-breadcrumb-item href="#">Delhi NCR</b-breadcrumb-item>
+            </b-breadcrumb>
           </div>
-          <div class="search-form col-7 col-sm-9">
-            <div class="search-container row">
-              <div class="row">
-                <div class="col-2 col-sm-1 p-0"><i class="fa fa-search"></i></div>
-                <div class="col-8 col-sm-10">
-                  <input
-                    type="text"
-                    v-model="searchField"
-                    placeholder="Search for a service"
-                  />
-                </div>
-                <div class="col-2 col-sm-1 p-0">
-                  <i
-                    class="fa fa-times-circle"
-                    v-if="searchField.length > 2"
-                    @click="searchField = ''"
-                  ></i>
+          <h1>Home services, on demand.</h1>
+          <div id="search" class="row">
+            <div class="dropdown col-5 col-sm-3">
+              <select name="cities" id="cities">
+                <option value="saab">Delhi NCR</option>
+                <option value="volvo">Ahmedabad</option>
+                <option value="mercedes">Jodhpur</option>
+                <option value="audi">Rajkot</option>
+              </select>
+            </div>
+            <div class="search-form col-7 col-sm-9">
+              <div class="search-container row">
+                <div class="row">
+                  <div class="col-2 col-sm-1 p-0">
+                    <i class="fa fa-search"></i>
+                  </div>
+                  <div class="col-8 col-sm-10">
+                    <input
+                      type="text"
+                      v-model="searchField"
+                      placeholder="Search for a service"
+                    />
+                  </div>
+                  <div class="col-2 col-sm-1 p-0">
+                    <i
+                      class="fa fa-times-circle"
+                      v-if="searchField.length > 2"
+                      @click="searchField = ''"
+                    ></i>
+                  </div>
                 </div>
               </div>
+              <br />
+              <span class="example-div">
+                <router-link to="/service/delhi-ncr-carpenters">
+                  Carpenters</router-link
+                >,
+                <router-link to="/service/delhi-ncr-massage-for-men">
+                  Massage For Men</router-link
+                >,
+                <router-link to="/service/delhi-ncr-spa-at-home">
+                  Spa
+                </router-link>
+                etc
+              </span>
             </div>
-            <br />
-            <span class="example-div">
-              <router-link to="/service/delhi-ncr-carpenters"> Carpenters</router-link>, 
-              <router-link to="/service/delhi-ncr-massage-for-men"> Massage For Men</router-link>,
-              <router-link to="/service/delhi-ncr-spa-at-home"> Spa </router-link>
-              etc
-            </span>
           </div>
         </div>
-      </div>
       </div>
     </section>
   </div>
@@ -121,7 +128,7 @@ section {
 }
 #logo {
   display: none;
-   width: 100px;
+  width: 100px;
 }
 
 #logo img {
@@ -139,7 +146,7 @@ h1 {
 #search {
   width: 65%;
   margin: auto;
-  height:100%;
+  height: 100%;
 }
 
 .dropdown {
@@ -153,19 +160,17 @@ h1 {
   padding: 0;
 }
 
-
-
 select {
   border: none;
   outline: 0;
   height: 100%;
   width: 100%;
   padding: 10px 0;
- border-radius: 4px;
+  border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;       /* Remove default arrow */
-  background-image: url('/caret-down-solid.svg'); 
+  appearance: none; /* Remove default arrow */
+  background-image: url("/caret-down-solid.svg");
   background-repeat: no-repeat;
   background-position-x: 95%;
   background-position-y: center;
@@ -176,9 +181,6 @@ select {
   text-align: center;
 }
 
-.search-form .row{
-  /* margin-right:0; */
-}
 
 .search-container {
   display: inline-block;
@@ -189,7 +191,6 @@ select {
   border: none;
   background-color: #fff;
 }
-
 
 .search-form .search-container .row {
   padding-right: 15px;
@@ -258,13 +259,13 @@ select {
     z-index: -1;
   }
 
-  .mob-bg-bottom{
-    height:40%;
-    width:100%;
-    padding-top:50px;
-    position:absolute;
-    bottom:0;
-    left:0;
+  .mob-bg-bottom {
+    height: 40%;
+    width: 100%;
+    padding-top: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   .example-div {
@@ -274,6 +275,7 @@ select {
   .dropdown {
     border-radius: 4px 0 0 4px;
     border: 1px solid #e2e2e2;
+    padding: 0 !important;
   }
 
   .search-container {
@@ -308,8 +310,8 @@ select {
     width: 100%;
   }
 
-  .search-form{
-    padding:0 !important;
+  .search-form {
+    padding: 0 !important;
   }
 }
 </style>
