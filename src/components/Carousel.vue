@@ -1,42 +1,39 @@
 <template>
-
-    <div class="container">
-      <div class="carousel-container">
-        <span
-          class="scroll-left"
-          @click="adscrollLeft"
-          :style="{
-            visibility: this.adscrollPos <= 0 ? 'hidden' : 'visible',
-          }"
-        >
-          <i class="fa fa-arrow-left"></i>
-        </span>
-        <div :class="['carousel-inner-container', cid]">
-          <div class="carousel-block" v-for="(item, index) in items" :key="index">
-            <img :src="item.img_path" alt="" />
-          </div>
+  <div class="container">
+    <div class="carousel-container">
+      <span
+        class="scroll-left"
+        @click="adscrollLeft"
+        :style="{
+          visibility: this.adscrollPos <= 0 ? 'hidden' : 'visible',
+        }"
+      >
+        <i class="fa fa-arrow-left"></i>
+      </span>
+      <div :class="['carousel-inner-container', cid]">
+        <div class="carousel-block" v-for="(item, index) in items" :key="index">
+         <router-link :to="'/service'+item.service.url"> <img :src="item.img_path" alt="" /></router-link>
         </div>
-        <span
-          class="scroll-right"
-          @click="adscrollRight"
-          v-if="items.length != 0"
-          :style="{
-            visibility:
-              adscrollPos >= (items.length-add_count_ini)  * adWidth
-                ? 'hidden'
-                : 'visible',
-          }"
-        >
-          <i class="fa fa-arrow-right"></i>
-        </span>
       </div>
+      <span
+        class="scroll-right"
+        @click="adscrollRight"
+        v-if="items.length != 0"
+        :style="{
+          visibility:
+            adscrollPos >= (items.length - add_count_ini) * adWidth
+              ? 'hidden'
+              : 'visible',
+        }"
+      >
+        <i class="fa fa-arrow-right"></i>
+      </span>
     </div>
+  </div>
 </template>
 
 <script>
-
 export default {
-
   data() {
     return {
       adWidth: 0,
@@ -44,42 +41,42 @@ export default {
       add_count_ini: 4,
     };
   },
-  props:{
-    items:{
+  props: {
+    items: {
       type: Array,
       default: function () {
-        return []
-      }
+        return [];
+      },
     },
-    cid:String
+    cid: String,
   },
   mounted() {
-    // console.log("mounted called");
-    // console.log($(".carousel-inner-container").innerWidth() / this.add_count_ini);
-    // console.log(this.items);
     if (window.innerWidth < 400) {
       this.adWidth = $(".carousel-inner-container").innerWidth();
       $(".carousel-block").css("width", this.adWidth + "px");
       this.add_count_ini = 1;
     } else {
-      // console.log("desktop design called");
-      this.adWidth = $(".carousel-inner-container").innerWidth() / this.add_count_ini;
+      this.adWidth =
+        $(".carousel-inner-container").innerWidth() / this.add_count_ini;
       $(".carousel-block").css("width", this.adWidth + "px");
     }
   },
   methods: {
-    adscrollLeft: function(event) {
+    adscrollLeft: function (event) {
       if (this.adscrollPos - this.adWidth >= 0) {
-        $("."+this.cid).animate(
+        $("." + this.cid).animate(
           { scrollLeft: this.adscrollPos - this.adWidth },
           200
         );
         this.adscrollPos -= this.adWidth;
       }
     },
-    adscrollRight: function(event) {
-      if (this.adscrollPos < (this.items.length-this.add_count_ini) * this.adWidth) {
-        $("."+this.cid).animate(
+    adscrollRight: function (event) {
+      if (
+        this.adscrollPos <
+        (this.items.length - this.add_count_ini) * this.adWidth
+      ) {
+        $("." + this.cid).animate(
           { scrollLeft: this.adscrollPos + this.adWidth },
           200
         );
@@ -89,20 +86,21 @@ export default {
   },
   watch: {
     items: {
-      handler: function(newValue) {
+      handler: function (newValue) {
         if (window.innerWidth < 400) {
           this.adWidth = $(".carousel-inner-container").innerWidth();
           $(".carousel-block").css("width", this.adWidth + "px");
           this.add_count_ini = 1;
         } else {
           // console.log("desktop design called");
-          this.adWidth = $(".carousel-inner-container").innerWidth() / this.add_count_ini;
+          this.adWidth =
+            $(".carousel-inner-container").innerWidth() / this.add_count_ini;
           $(".carousel-block").css("width", this.adWidth + "px");
         }
       },
-      deep: true
-    }
-  }
+      deep: true,
+    },
+  },
 };
 </script>
 
@@ -139,7 +137,7 @@ export default {
   transition: all 0.2s ease-in;
 }
 
-@media(max-width:400px) {
+@media (max-width: 400px) {
   .carousel-container .carousel-inner-container .carousel-block {
     width: 100%;
   }

@@ -1,38 +1,40 @@
 <template>
   <div class="header">
     <section>
-      <div class="bg"></div>
+      <div class="bg">
+                <div id="logo"><img src="/img/logo_light.png" /></div>
+      </div>
 <div class="mob-bg-bottom">
       <div class="container">
         <div id="page-address">
           <b-breadcrumb>
-            <b-breadcrumb-item href="#"> Home </b-breadcrumb-item>
-            <b-breadcrumb-item href="#">Ahmedabad</b-breadcrumb-item>
+            <b-breadcrumb-item href="#">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="#">Delhi NCR</b-breadcrumb-item>
           </b-breadcrumb>
         </div>
-        <div id="logo"><img src="/img/logo_light.png" /></div>
         <h1>Home services, on demand.</h1>
         <div id="search" class="row">
-          <div class="dropdown col-3">
-            <select name="cars" id="cars">
+          <div class="dropdown col-5 col-sm-3">
+            <select name="cities" id="cities">
+              <option value="saab">Delhi NCR</option>
               <option value="volvo">Ahmedabad</option>
-              <option value="saab">Delhi nCR</option>
               <option value="mercedes">Jodhpur</option>
               <option value="audi">Rajkot</option>
             </select>
+
           </div>
-          <div class="search-form col-9">
+          <div class="search-form col-7 col-sm-9">
             <div class="search-container row">
               <div class="row">
-                <div class="col-1 p-0"><i class="fa fa-search"></i></div>
-                <div class="col-10">
+                <div class="col-2 col-sm-1 p-0"><i class="fa fa-search"></i></div>
+                <div class="col-8 col-sm-10">
                   <input
                     type="text"
                     v-model="searchField"
                     placeholder="Search for a service"
                   />
                 </div>
-                <div class="col-1 p-0">
+                <div class="col-2 col-sm-1 p-0">
                   <i
                     class="fa fa-times-circle"
                     v-if="searchField.length > 2"
@@ -43,8 +45,9 @@
             </div>
             <br />
             <span class="example-div">
-              <a href="#"> Carpenters</a>, <a href="#"> Massage For Men</a>,
-              <a href="#"> Pest Control</a>
+              <router-link to="/service/delhi-ncr-carpenters"> Carpenters</router-link>, 
+              <router-link to="/service/delhi-ncr-massage-for-men"> Massage For Men</router-link>,
+              <router-link to="/service/delhi-ncr-spa-at-home"> Spa </router-link>
               etc
             </span>
           </div>
@@ -118,10 +121,11 @@ section {
 }
 #logo {
   display: none;
+   width: 100px;
 }
 
 #logo img {
-  width: 100px;
+  width: 100%;
 }
 
 h1 {
@@ -135,6 +139,7 @@ h1 {
 #search {
   width: 65%;
   margin: auto;
+  height:100%;
 }
 
 .dropdown {
@@ -148,17 +153,33 @@ h1 {
   padding: 0;
 }
 
+
+
 select {
   border: none;
   outline: 0;
   height: 100%;
   width: 100%;
-  padding: 10px;
+  padding: 10px 0;
+ border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;       /* Remove default arrow */
+  background-image: url('/caret-down-solid.svg'); 
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center;
+  background-size: 15px;
 }
 .search-form {
   display: block;
   text-align: center;
 }
+
+.search-form .row{
+  /* margin-right:0; */
+}
+
 .search-container {
   display: inline-block;
   border-radius: 4px;
@@ -168,6 +189,8 @@ select {
   border: none;
   background-color: #fff;
 }
+
+
 .search-form .search-container .row {
   padding-right: 15px;
   padding-left: 15px;
@@ -193,7 +216,7 @@ select {
   font-size: 18px;
   font-weight: 100;
   line-height: 100%;
-  margin-right: 10px;
+  margin-right: 15px;
   cursor: pointer;
   height: 100%;
   width: 20px;
@@ -235,6 +258,15 @@ select {
     z-index: -1;
   }
 
+  .mob-bg-bottom{
+    height:40%;
+    width:100%;
+    padding-top:50px;
+    position:absolute;
+    bottom:0;
+    left:0;
+  }
+
   .example-div {
     display: none;
   }
@@ -249,10 +281,6 @@ select {
     border: 1px solid #e2e2e2;
   }
 
-  .col-9 {
-    padding-left: 0;
-  }
-
   .navbar {
     display: none;
   }
@@ -262,7 +290,7 @@ select {
   #logo {
     display: block;
     position: absolute;
-    bottom: 140px;
+    bottom: 0;
     left: 50%;
     right: 50%;
     transform: translate(-50%, -50%);
@@ -271,13 +299,17 @@ select {
     font-size: 20px;
     min-width: 100%;
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
     right: 50%;
     transform: translate(-50%, -50%);
   }
   #search {
     width: 100%;
+  }
+
+  .search-form{
+    padding:0 !important;
   }
 }
 </style>

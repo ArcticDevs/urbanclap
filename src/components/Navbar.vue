@@ -19,23 +19,17 @@
           no-close-on-backdrop =false
           no-close-on-esc =false
         >
-          <b-input-group-prepend is-text id="bg">
-            <div class="d-inline-block dropdown">
-              <select name="country" id="country">
-                <option value="+91"><img src="/ind.png" /> +91</option>
-                <option value="+971">+971</option>
-                <option value="+61">+61</option>
-                <option value="+65">+65</option>
-              </select>
-            </div>
+          <b-input-group prepend="+91"  id="bg">
+
             <input
               v-model="mobile"
               type="tel"
               placeholder="Your phone number "
               id="tel"
+              maxlength="10"
             />
 
-          </b-input-group-prepend>
+          </b-input-group >
 
           <input
             v-b-toggle.sidebar-OTP
@@ -58,29 +52,33 @@
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
                   v-model="otp1"
+                  maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
                   v-model="otp2"
+                  maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
                   v-model="otp3"
+                  maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
                   id="otp"
-                  class="mr-2 ml-2"
+                  class="mr-2 ml-2 inputs"
                   v-model="otp4"
+                  maxlength="1"
                 />
               </div>
             </div>
@@ -110,6 +108,13 @@ export default {
       otp3:'',
       otp4:'',
     };
+  },
+  mounted(){
+         $(".inputs").keyup(function () {
+        if (this.value.length == this.maxLength) {
+          $(this).next('.inputs').focus();
+        }
+  });
   },
   methods: {
     gen_otp() {
@@ -151,9 +156,11 @@ export default {
   opacity: 0.7 !important;
 }
 
-/* #login___title__{
-  font-size:1em !important;
-} */
+.input-group-text{
+  background-color:#fff !important ;
+  border: 1px solid #bdbdbd !important;
+  margin-left: 19px;
+}
 
 .navbar a.nav-link {
   color: #fff !important;
@@ -169,14 +176,10 @@ export default {
   font-weight:bolder;
 }
 
-/* @media (max-width: 1200px) {
-  .navbar {
-    display: none;
-  }
-} */
 
 #login{
   font-size:14px !important;
+  z-index:10 !important;
 }
 
 #otp {

@@ -195,7 +195,7 @@
           </div>
         </b-modal>
         <div class="panel-services-info">
-          <p>View All Beauty Service:</p>
+          <p>View All {{ data.name }} Services:</p>
           <div class="panel-buttons">
             <div class="panel-buttons-inner">
               <button
@@ -206,7 +206,7 @@
                 v-b-modal.modal-tall
               >
                 <div class="service-icon">
-                  <img src="service-panel-1.png" />
+                  <img src="/sub_service_icon.png" />
                 </div>
                 <p>{{ sub_service.name }}</p>
                 <span class="right-arrow">
@@ -282,7 +282,7 @@
         <!-- -------Employee reviews and ratings start-------- -->
         <div class="employee">
           <div class="info">
-            <img src="employee.jpeg" />
+            <img src="/employee.jpeg" />
             <div class="details">
               <p class="name">Reena Tyagi</p>
               <p class="address">Vikas Nagar, Delhi, India</p>
