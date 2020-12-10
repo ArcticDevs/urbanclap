@@ -19,7 +19,7 @@
           no-close-on-backdrop =false
           no-close-on-esc =false
         >
-          <b-input-group prepend="+91" id="bg">
+          <b-input-group prepend="+91"  id="bg">
 
             <input
               v-model="mobile"
@@ -109,6 +109,13 @@ export default {
       otp4:'',
     };
   },
+  mounted(){
+         $(".inputs").keyup(function () {
+        if (this.value.length == this.maxLength) {
+          $(this).next('.inputs').focus();
+        }
+  });
+  },
   methods: {
     gen_otp() {
       var self = this;
@@ -134,15 +141,8 @@ export default {
             console.log(response.data.token)
           }
         });
-    },    
+    }
   },
-  mounted(){
-         $(".inputs").keyup(function () {
-        if (this.value.length == this.maxLength) {
-          $(this).next('.inputs').focus();
-        }
-  });
-  }
 };
 </script>
 <style scoped>
@@ -156,20 +156,18 @@ export default {
   opacity: 0.7 !important;
 }
 
-/* #login___title__{
-  font-size:1em !important;
-} */
+.input-group-text{
+  background-color:#fff !important ;
+  border: 1px solid #bdbdbd !important;
+  margin-left: 19px;
+}
 
 .navbar a.nav-link {
   color: #fff !important;
   padding: 0;
   margin-right: 25px;
 }
-.input-group-text{
-  background-color:#fff !important ;
-  border: 1px solid #bdbdbd !important;
-  margin-left: 19px;
-}
+
 .navbar {
   height: 60px;
   max-width: 100%;
@@ -178,14 +176,10 @@ export default {
   font-weight:bolder;
 }
 
-/* @media (max-width: 1200px) {
-  .navbar {
-    display: none;
-  }
-} */
 
 #login{
   font-size:14px !important;
+  z-index:10 !important;
 }
 
 #otp {

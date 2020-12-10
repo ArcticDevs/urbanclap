@@ -7,81 +7,53 @@
         class="flex-item"
         v-if="service.category_services.length != 0"
       >
-        <router-link v-if="service.category_services.length == 1" :to="'/service'+service.category_services[0].url">
-        <div class="service_link">
-          <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
-          <p>{{ service.name }}</p>
+        <router-link
+          v-if="service.category_services.length == 1"
+          :to="'/service' + service.category_services[0].url"
+        >
+          <div class="service_link">
+            <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
+            <p>{{ service.name }}</p>
           </div>
         </router-link>
 
-        <button v-if="service.category_services.length > 1">
-          <span v-b-toggle.sidebar-right>
-          <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
-          <p>{{ service.name }}</p>
+        <button v-if="service.category_services.length > 1" @click="selected_service_category_index = index">
+          <span @click="ModelOpenStatus = true">
+            <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
+            <p>{{ service.name }}</p>
           </span>
         </button>
       </div>
 
-      <b-sidebar
-        id="sidebar-right"
-        title="Profesional Cleaning Services"
-        right
-        shadow
-        backdrop
-      >
-        Profesional Cleaning Services
-        <div class="px-1 py-2">
+      <b-sidebar 
+      v-model="ModelOpenStatus" 
+      right 
+      shadow 
+      backdrop
+      :title="services[selected_service_category_index].name" 
+      v-if="selected_service_category_index != -1">
+        <div class="">
           <ul class="list-group mt-3">
-            <a href="#">
-              <li class="list-group-item hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" /> Office and
-                Shop Desinfection
-                <i class="float-right fa fa-chevron-right pt-2"></i>
-              </li>
-            </a>
-            <a href="#">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" />
-                Professional Full House Cleaning
-                <i class="float-right fa fa-chevron-right pt-2"></i>
-              </li>
-            </a>
-            <a href="#">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" /> Car Cleaning
-                <i class="float-right fa fa-chevron-right pt-2"></i>
-              </li>
-            </a>
-            <a href="#">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" />
-                Professional Bathroom CLeaning
-                <i class="float-right fa fa-chevron-right pt-2"></i></li
-            ></a>
-            <a href="#">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" /> Profesional
-                Kitchen Cleaning
-                <i class="float-right fa fa-chevron-right pt-2"></i></li
-            ></a>
-            <a href="#">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" />
-                Professional Carpet Cleaning
-                <i class="float-right fa fa-chevron-right pt-2"></i></li
-            ></a>
-            <a href="">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" /> Profesional
-                Sofa Cleaning
-                <i class="float-right fa fa-chevron-right pt-2"></i></li
-            ></a>
-            <a href="">
-              <li class="list-group-item box hover" >
-                <img src="cnd1.png" alt="" srcset="" id="imgSize" /> House & Car
-                Disinfection
-                <i class="float-right fa fa-chevron-right pt-2"></i></li
-            ></a>
+            <li
+              class="list-group-item"
+              v-for="(sidebar_service, service_index) in services[selected_service_category_index].category_services"
+              :key="service_index"
+            >
+              <router-link
+                :to="'/service' + sidebar_service.url"
+                class="hover row"
+              >
+                <div class="service_icon col-3">
+                  <img :src="sidebar_service.bg_img_path" />
+                </div>
+                <div class="sidebar_service col-7">
+                  {{ sidebar_service.name }}
+                </div>
+                <div class="col-1">
+                  <i class="fa fa-chevron-right"></i>
+                </div>
+              </router-link>
+            </li>
           </ul>
         </div>
       </b-sidebar>
@@ -94,6 +66,8 @@ export default {
   data() {
     return {
       services: [],
+      ModelOpenStatus: false,
+      selected_service_category_index:-1
     };
   },
   mounted() {
@@ -138,17 +112,17 @@ export default {
   color: #000;
 }
 
-.flex-item p:hover{
-  text-decoration: underline;
+.flex-item a{
+  text-decoration: none !important;
 }
 
 .flex-item:hover {
   background: #f5f5f5;
 }
 
-.service_link{
-  height:100%;
-  width:100%;
+.service_link {
+  height: 100%;
+  width: 100%;
 }
 
 img {
@@ -160,29 +134,38 @@ a .flex-item router-link:hover {
   background-color: #dddddd;
 }
 
-button, button:focus {
+button,
+button:focus {
   background: transparent;
   border: 0;
-  outline:none;
-  height:100%;
-  width:100%;
-  padding:0;
-  position:relative;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  position: relative;
 }
 
-button span{
-position:absolute;
-top:0;
-left:0;
-width:100%;
+button span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
-#sidebar-right{
-  z-index:50;
+.b-sidebar-outer {
+  z-index: 100 !important;
+}
+
+.b-sidebar-header .close {
+  font-size:25px !important;
+}
+
+.list-group-item{
+  padding:0 !important;
+  padding-left:10px !important;
 }
 
 .hover {
-  border: 1px solid grey;
   background: transparent;
   text-decoration: none;
   color: #757575 !important;
@@ -190,12 +173,44 @@ width:100%;
   margin-bottom: 10px;
   padding-right: 10px;
   text-align: left;
+  margin-right:0 !important;
+  margin-left:0 !important;
+
 }
-.hover a {
-  text-decoration: none;
+
+.list-group-item:hover {
+  background: #F2F2F2;
 }
-.hover:hover {
-  background: #bdbdbd;
+
+.col-7 {
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.col-1 svg {
+  display: inline !important;
+  line-height: 60px !important;
+  height: 60px !important;
+}
+
+.service_icon {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.sidebar_service{
+font-size: 14px;
+color:#000;
+}
+
+.service_icon img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+  /* margin-right: 16px; */
 }
 
 .container {

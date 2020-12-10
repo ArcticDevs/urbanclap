@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div id="navbar">
+    <div id="navbar" style="z-index:8;">
       <Navbar />
     </div>
     <div id="nav_bottom">
