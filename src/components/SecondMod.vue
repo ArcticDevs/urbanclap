@@ -188,8 +188,27 @@
                 </span>
               </h4>
             </div>
-          <button id="" @click="rzpbutton1">Pay</button>
-            
+           <div class="container">
+             <h1 class="text-center">Cart</h1>
+
+              <b-list-group>
+                <b-list-group-item class="border-0">
+                  <div class="cart_add">hello</div>
+              <span class="cart_price ">
+                 <span id="discount_price">₹3299</span> 
+                      <span>₹2795</span>
+              </span></b-list-group-item>
+
+              </b-list-group>
+              <div id="total_div">
+               <div class="cart_add">Total</div>
+              <span class="cart_price ">
+
+                      <span>₹2795</span>
+              </span>
+              </div >
+             <button id="paybtn" @click="rzpbutton1" class="text-center">Pay</button>
+          </div>
           </div>
         </b-modal>
         <div class="panel-services-info">
@@ -543,12 +562,52 @@ export default {
   background-color: transparent;
   border: none;
 }
+#paybtn{
+  background: #000;
+  color: #fff;
+  border:none ;
+  width: 25%;
+  height: 35px;
+  padding-bottom:5px ;
+  border-radius:10px ;
+}
 .sub-service {
   width: 100%;
   cursor: pointer;
   text-align: left;
   border-bottom: 1px solid #e2e2e2;
 }
+#total_div{
+  width: 95%;
+  padding-left: 15px;
+}
+.cart_add {
+  padding: 28px 16px;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  line-height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #212121;
+
+}
+.cart_price {
+  /* width: 55px; */
+  text-align: center;
+  padding: 28px 16px;
+  display: table-cell;
+  vertical-align: middle;
+  /* cursor: pointer; */
+}
+#discount_price{
+text-decoration: line-through;
+padding-right: 9px; 
+color: grey;
+font-size: 13px;
+}
+
 .sub-service-heading {
   padding: 28px 16px;
   display: table-cell;
