@@ -16,11 +16,10 @@
           right
           shadow
           backdrop
-          no-close-on-backdrop =false
-          no-close-on-esc =false
+          no-close-on-backdrop="false"
+          no-close-on-esc="false"
         >
-          <b-input-group prepend="+91"  id="bg">
-
+          <b-input-group prepend="+91" id="bg">
             <input
               v-model="mobile"
               type="tel"
@@ -28,8 +27,7 @@
               id="tel"
               maxlength="10"
             />
-
-          </b-input-group >
+          </b-input-group>
 
           <input
             v-b-toggle.sidebar-OTP
@@ -97,57 +95,59 @@
 </template>
 
 <script>
- import axios from 'axios';
+import axios from "axios";
 export default {
- 
   data() {
     return {
-      mobile:'',
-      otp1:'',
-      otp2:'',
-      otp3:'',
-      otp4:'',
+      mobile: "",
+      otp1: "",
+      otp2: "",
+      otp3: "",
+      otp4: "",
     };
   },
-  mounted(){
-         $(".inputs").keyup(function () {
-        if (this.value.length == this.maxLength) {
-          $(this).next('.inputs').focus();
-        }
-  });
+  mounted() {
+    $(".inputs").keyup(function () {
+      if (this.value.length == this.maxLength) {
+        $(this).next(".inputs").focus();
+      }
+    });
   },
   methods: {
     gen_otp() {
       var self = this;
       axios
         .post("http://fixorie.herokuapp.com/accounts/generate_otp/", {
-          "phone_number": "+91"+this.mobile
+          phone_number: "+91" + this.mobile,
         })
         .then(function (response) {
-          if(response.data.success != null) {
+          if (response.data.success != null) {
             // console.log(response.data.success)
           }
         });
     },
-    login(){
-       var self = this;
+    login() {
+      var self = this;
       axios
         .post("http://fixorie.herokuapp.com/accounts/login/", {
-          "username": "+91"+this.mobile,
-          "password": self.otp1+self.otp2+self.otp3+self.otp4
+          username: "+91" + this.mobile,
+          password: self.otp1 + self.otp2 + self.otp3 + self.otp4,
         })
         .then(function (response) {
-          if(response.data.token != null) {
-            console.log(response.data.token)
+          if (response.data.token != null) {
+            console.log(response.data.token)(
+              // self.$store.commit('set_token', response.data.token);
+              (document.cookie = "token=" + response.data.token)
+            );
           }
         });
-    }
+    },
   },
 };
 </script>
 <style scoped>
 .navbar .navbar-brand img {
-  margin:0 0 0 30px;
+  margin: 0 0 0 30px;
   height: 100%;
   width: 80px;
 }
@@ -156,8 +156,8 @@ export default {
   opacity: 0.7 !important;
 }
 
-.input-group-text{
-  background-color:#fff !important ;
+.input-group-text {
+  background-color: #fff !important ;
   border: 1px solid #bdbdbd !important;
   margin-left: 19px;
 }
@@ -171,15 +171,14 @@ export default {
 .navbar {
   height: 60px;
   max-width: 100%;
-  width:100%;
+  width: 100%;
   font-size: 16px;
-  font-weight:bolder;
+  font-weight: bolder;
 }
 
-
-#login{
-  font-size:14px !important;
-  z-index:10 !important;
+#login {
+  font-size: 14px !important;
+  z-index: 10 !important;
 }
 
 #otp {

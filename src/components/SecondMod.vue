@@ -29,8 +29,14 @@
         <div class="mob-service-panel-root">
           <p class="mob-panel-heading">View All Beauty Services:</p>
           <ul>
-            <li v-for="(sub_service, index) in data.sub_services" :key="index" v-b-modal.modal-tall>
-              <div class="mob-service-img"><img src="/sub_service_icon.png" /></div>
+            <li
+              v-for="(sub_service, index) in data.sub_services"
+              :key="index"
+              v-b-modal.modal-tall
+            >
+              <div class="mob-service-img">
+                <img src="/sub_service_icon.png" />
+              </div>
               <p>{{ sub_service.name }}</p>
               <span><b-icon icon="chevron-right"></b-icon></span>
             </li>
@@ -138,7 +144,7 @@
       <div class="services-panel">
         <b-modal
           id="modal-tall"
-          hide-footer="true"
+          :hide-footer="true"
           class="text-center panelModal"
           size="lg"
           body-class
@@ -159,38 +165,95 @@
             </div>
           </div>
           <div id="service_type" v-if="selected_sub_service_index != -1">
-            <h4 class="text-center mb-5">ADD AC(s) for service</h4>
+            <h4 class="text-center mb-3">ADD AC(s) for service</h4>
             <div
-              class="mt-4 mb-4"
-              v-for="(sub_service_type, type_index) in this.data.sub_services[
-                selected_sub_service_index
-              ].sub_service_types"
+              class="mt-3 mb-3 container sub_service_type"
+              v-for="(sub_service_category, type_index) in this.data
+                .sub_services[selected_sub_service_index]
+                .sub_service_categories"
               :key="type_index"
             >
-              <h4>
-                <span class="float-left ml-5">{{ sub_service_type.name }}</span
-                ><span class="float-right">
-                  <div class="float-right" id="border">
-
-                    <button type="button" v-if="!in_cart(sub_service_type.id)" @click="add_to_cart(sub_service_type.id)"> + Add </button>
+              <div v-if="checkout == false">
+                <h4>
+                  {{ sub_service_category.name }}
+                </h4>
+                <div
+                  v-for="(
+                    sub_service_category_type, inner_index
+                  ) in sub_service_category.sub_service_category_types"
+                  :key="inner_index"
+                  class="sub-service-type-item"
+                >
+                  <div class="sub-service-type-item-heading">
+                    <h5 class="">
+                      {{ sub_service_category_type.name }}
+                    </h5>
+                  </div>
+                  <div class="sub-service-type-item-counter">
+                    <button
+                      type="button"
+                      class="add-btn"
+                      v-if="!in_cart(sub_service_category_type.id)"
+                      @click="add_to_cart(sub_service_category_type.id)"
+                    >
+                      <span>Add</span> <span>+</span>
+                    </button>
 
                     <div v-else>
-                      <button type="button" id="borderInl" @click="cart[ get_cart_index(sub_service_type.id) ].quantity--">
+                      <button
+                        type="button"
+                        class="borderInl"
+                        @click="
+                          cart[get_cart_index(sub_service_category_type.id)]
+                            .quantity--
+                        "
+                      >
                         -
                       </button>
-                      {{ cart[ get_cart_index(sub_service_type.id) ].quantity }}
-                      <button type="button" id="borderInr" @click="cart[ get_cart_index(sub_service_type.id) ].quantity++">
+                      {{
+                        cart[get_cart_index(sub_service_category_type.id)]
+                          .quantity
+                      }}
+                      <button
+                        type="button"
+                        class="borderInr"
+                        @click="
+                          cart[get_cart_index(sub_service_category_type.id)]
+                            .quantity++
+                        "
+                      >
                         +
                       </button>
                     </div>
-
                   </div>
-                </span>
-              </h4>
+                </div>
+              </div>
             </div>
-            <br />
-            <hr />
-            
+            <button @click="checkOut" v-if="checkout == false">
+              check out
+            </button>
+            <div v-if="checkout" class="billing_section">
+              <h1 class="text-center">Cart</h1>
+
+              <b-list-group>
+                <b-list-group-item class="border-0">
+                  <div class="cart_add">hello</div>
+                  <span class="cart_price">
+                    <span id="discount_price">₹3299</span>
+                    <span>₹2795</span>
+                  </span></b-list-group-item
+                >
+              </b-list-group>
+              <div id="total_div">
+                <div class="cart_add">Total</div>
+                <span class="cart_price">
+                  <span>₹2795</span>
+                </span>
+              </div>
+              <button id="paybtn" @click="rzpbutton1" class="text-center">
+                Pay
+              </button>
+            </div>
           </div>
         </b-modal>
         <div class="panel-services-info">
@@ -201,7 +264,6 @@
                 class="service-button"
                 v-for="(sub_service, index) in data.sub_services"
                 :key="index"
-                
                 v-b-modal.modal-tall
               >
                 <div class="service-icon">
@@ -372,7 +434,14 @@
         <div class="questions">
           <div class="question" v-for="(faq, index) in data.faqs" :key="index">
             <p>{{ faq.question }}</p>
-            <div class="open_arrow" @click=" selected_faq_index != -1 && selected_faq_index == index ? selected_faq_index = -1 : selected_faq_index = index">
+            <div
+              class="open_arrow"
+              @click="
+                selected_faq_index != -1 && selected_faq_index == index
+                  ? (selected_faq_index = -1)
+                  : (selected_faq_index = index)
+              "
+            >
               <span>
                 <b-icon icon="chevron-down"></b-icon>
               </span>
@@ -386,7 +455,7 @@
       <!-- --------FAQS END----------- -->
       <div id="aboutSection" v-html="data.about"></div>
     </div>
-  <Footer />
+    <Footer />
   </div>
 </template>
 
@@ -403,13 +472,15 @@ export default {
       data: {},
       selected_sub_service_index: -1,
       cart: [],
-
+      checkout: false,
       selected_faq_index: -1,
+      invoice_id: "",
+      allcookies: [],
     };
   },
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   mounted() {
     var url = window.location.href;
@@ -427,8 +498,82 @@ export default {
         }
       }
     });
+
+    this.$root.$on("bv::modal::hide", (bvEvent, modalId) => {
+      this.selected_sub_service_index = -1;
+    });
   },
   methods: {
+    rzpbutton1: function () {
+      var self = this;
+      var bodyFormData = new FormData();
+      bodyFormData.append('invoice_id', self.invoice_id);
+
+      axios.put('http://fixorie.herokuapp.com/payment/get_razorpay_order_id',bodyFormData,{
+        headers:{
+          "Authorization": "Token " + document.cookie.split("=")[1],
+        }
+      }).then(response =>{
+
+        var options = {
+          key: "rzp_test_WPiHKaTEOnIO4Z", // Enter the Key ID generated from the Dashboard
+          amount: response.data.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          currency: "INR",
+          name: "FixOrie",
+          description: "Test Transaction",
+          image: "/logo_light.png",
+          order_id: response.data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+          handler: function (response) {
+            console.log(response.razorpay_payment_id);
+            console.log(response.razorpay_order_id);
+            console.log(response.razorpay_signature);
+
+            var razorpay_payment_id = response.razorpay_payment_id;
+            var razorpay_order_id = response.razorpay_order_id;
+            var razorpay_signature = response.razorpay_signature;
+
+             axios.put('http://fixorie.herokuapp.com/fo/invoice_success',{
+                "invoice_id" : self.invoice_id,
+                "razorpay_order_id": razorpay_order_id,
+                "razorpay_payment_id": razorpay_payment_id,
+                "razorpay_signature": razorpay_signature
+             },{
+        headers:{
+          "Authorization": "Token " + document.cookie.split("=")[1],
+        }
+      }).then(response2 =>{
+        console.log(response2.data)
+      })
+
+          },
+          prefill: {
+            name: "Yug chandak",
+            email: "yugchandak1@gmail.com",
+            contact: "9530477997",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on("payment.failed", function (response) {
+          alert(response.error.code);
+          alert(response.error.description);
+          alert(response.error.source);
+          alert(response.error.step);
+          alert(response.error.reason);
+          alert(response.error.metadata.order_id);
+          alert(response.error.metadata.payment_id);
+        });
+  
+        console.log("hfsjfskldf=----------------");
+        rzp1.open();
+      })
+
+    },
     loadMore: function () {
       var x = document.getElementById("second-rating");
       var y = document.getElementById("load-more");
@@ -442,12 +587,10 @@ export default {
       else ans.style.display = "none";
     },
 
-
     ShowService: function (sub_service_index) {
       // console.log("---->>>>" + sub_service_index);
 
       this.selected_sub_service_index = sub_service_index;
-
     },
     increase: function () {
       this.counter++;
@@ -456,28 +599,69 @@ export default {
       this.counter--;
     },
 
-    add_to_cart(sub_service_type_id) {
+    add_to_cart(sub_service_category_type_id) {
       this.cart.push({
-        sub_service_type_id: sub_service_type_id,
+        sub_service_category_type_id: sub_service_category_type_id,
         quantity: 1,
       });
     },
 
-    in_cart(sub_service_type_id) {
-     for(var i=0;i<this.cart.length;i++) {
-        if(this.cart[i].sub_service_type_id == sub_service_type_id) {
+    in_cart(sub_service_category_type_id) {
+      for (var i = 0; i < this.cart.length; i++) {
+        if (
+          this.cart[i].sub_service_category_type_id ==
+          sub_service_category_type_id
+        ) {
           return true;
         }
       }
       return false;
     },
 
-    get_cart_index(sub_service_type_id) {
-      for(var i=0;i<this.cart.length;i++) {
-        if(this.cart[i].sub_service_type_id == sub_service_type_id) {
+    get_cart_index(sub_service_category_type_id) {
+      for (var i = 0; i < this.cart.length; i++) {
+        if (
+          this.cart[i].sub_service_category_type_id ==
+          sub_service_category_type_id
+        ) {
           return i;
         }
       }
+    },
+    checkOut() {
+      var self = this;
+      console.log("-->>>>>>>>" + document.cookie.split("=")[1]);
+      axios
+        .post(
+          "http://fixorie.herokuapp.com/fo/invoices/",
+          {},
+          {
+            headers: {
+              Authorization: "Token " + document.cookie.split("=")[1],
+            },
+          }
+        )
+        .then(function (response) {
+          self.invoice_id = response.data.id;
+          for (var i = 0; i < self.cart.length; i++) {
+            axios.post(
+              "http://fixorie.herokuapp.com/fo/invoice_details/",
+              {
+                invoice: self.invoice_id,
+                sub_service_category_type:
+                  self.cart[i].sub_service_category_type_id,
+                quantity: self.cart[i].quantity,
+              },
+              {
+                headers: {
+                  Authorization: "Token " + document.cookie.split("=")[1],
+                },
+              }
+            );
+          }
+        });
+
+      self.checkout = true;
     },
   },
 };
@@ -492,15 +676,86 @@ export default {
 #border {
   border: 1px solid #304ffe;
 }
-#borderInr {
+
+.sub_service_type h4 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.sub-service-type-item {
+  width: 100%;
+}
+.sub-service-type-item-heading {
+  padding: 20px 0 20px 24px;
+  vertical-align: top;
+  text-align: left;
+  width: 80%;
+  display: inline-block;
+}
+.sub-service-type-item-counter {
+  padding: 20px 24px 20px 0;
+  vertical-align: top;
+  text-align: left;
+  width: 20%;
+  display: inline-block;
+  height: 100%;
+  border-bottom: 2px solid #e2e2e2;
+}
+
+.add-btn {
+  background: #fff;
+  padding: 0;
+  width: 72px;
+  height: 28px;
+  border-radius: 2px;
+  border: 2px solid #8a8686;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn span:nth-child(1) {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  height: calc(100% - 2px);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  text-transform: uppercase;
+  width: 70%;
+}
+
+.add-btn span:nth-child(2) {
+  width: 30%;
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  background-color: #f0f0f0;
+  font-weight: 500;
+  height: 100%;
+}
+
+.borderInr {
   border-right: 1px solid #304ffe;
   background-color: transparent;
   border: none;
 }
-#borderInl {
+.borderInl {
   border-left: 1px solid #304ffe;
   background-color: transparent;
   border: none;
+}
+#paybtn {
+  background: #000;
+  color: #fff;
+  border: none;
+  width: 25%;
+  height: 35px;
+  padding-bottom: 5px;
+  border-radius: 10px;
 }
 .sub-service {
   width: 100%;
@@ -508,6 +763,36 @@ export default {
   text-align: left;
   border-bottom: 1px solid #e2e2e2;
 }
+#total_div {
+  width: 95%;
+  padding-left: 15px;
+}
+.cart_add {
+  padding: 28px 16px;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  line-height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #212121;
+}
+.cart_price {
+  /* width: 55px; */
+  text-align: center;
+  padding: 28px 16px;
+  display: table-cell;
+  vertical-align: middle;
+  /* cursor: pointer; */
+}
+#discount_price {
+  text-decoration: line-through;
+  padding-right: 9px;
+  color: grey;
+  font-size: 13px;
+}
+
 .sub-service-heading {
   padding: 28px 16px;
   display: table-cell;
@@ -570,14 +855,14 @@ h5 {
   width: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   position: relative;
-  padding-top:60px;
+  padding-top: 60px;
 }
 
 .mob-service-panel {
   display: none;
 }
 
-.header-img{
+.header-img {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -639,12 +924,12 @@ h5 {
   position: sticky;
 }
 
-.nav{
-    position: absolute;
+.nav {
+  position: absolute;
   top: 0;
   z-index: 5;
   width: 100%;
-  background:#fff;
+  background: #fff;
 }
 
 .nav-item {
@@ -752,16 +1037,16 @@ a.nav-link.active {
   height: 32px;
 }
 
-.mob-service-img{
-    display: inline-block;
+.mob-service-img {
+  display: inline-block;
   height: 32px;
   margin: 0px 16px 0px 0px;
   text-align: center;
   vertical-align: top;
 }
 
-.mob-service-img img{
-    width: 100%;
+.mob-service-img img {
+  width: 100%;
   height: 100%;
 }
 
@@ -1648,7 +1933,7 @@ a.nav-link.active {
     background-blend-mode: multiply;
     height: auto;
   }
-  .header-img{
+  .header-img {
     position: absolute;
     top: 0;
     left: 0;
