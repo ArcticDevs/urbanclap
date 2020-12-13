@@ -3,43 +3,68 @@
     <section id="bottomNavbarContainer">
       <div class="containerItem">
         <div class="containerItem-inner">
-          <div class="linkContainer active">
+          <router-link to="/">
+          <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'home'}">
             <span><b-icon icon="house-door-fill"></b-icon></span>
             <p>Home</p>
           </div>
+          </router-link>
           <span class="innerSpan"></span>
         </div>
       </div>
+
       <div class="containerItem">
         <div class="containerItem-inner">
-          <div class="linkContainer">
-            <span><b-icon icon="bookmark-star-fill"></b-icon></span>
-            <p>Bookings</p>
-          </div>
+          <router-link to="/bookings">
+            <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'bookings'}">
+              <span><b-icon icon="bookmark-star-fill"></b-icon></span>
+              <p>Bookings</p>
+            </div>
+          </router-link>
           <span class="innerSpan"></span>
         </div>
       </div>
+
       <div class="containerItem">
         <div class="containerItem-inner">
-          <div class="linkContainer">
+          <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'get_help'}">
             <span><b-icon icon="question-circle-fill"></b-icon></span>
             <p>Get Help</p>
           </div>
           <span class="innerSpan"></span>
         </div>
       </div>
+
       <div class="containerItem">
         <div class="containerItem-inner">
-          <div class="linkContainer">
-            <span><b-icon icon="person-fill"></b-icon></span>
-            <p>Profile</p>
-          </div>
+          <router-link to="/auth">
+            <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'profile'}">
+              <span><b-icon icon="person-fill"></b-icon></span>
+              <p>Profile</p>
+            </div>
+          </router-link>
           <span class="innerSpan"></span>
         </div>
       </div>
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    selectedMenu:''
+  },
+  mounted() {
+    $(document).ready(function () {
+      $(".linkContainer").click(function () {
+        $(".linkContainer").removeClass("activeNavItem");
+        $(this).addClass("activeNavItem");
+      });
+    });
+  },
+};
+</script>
 
 <style scoped>
 #bottomNavbarContainer {
@@ -74,15 +99,19 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: #bdbdbd;
+}
+
+.containerItem-inner a {
+  color: #bdbdbd;
+  text-decoration: none !important;
 }
 
 .linkContainer span {
-  color: #bdbdbd;
   font-size: 24px;
 }
 
 .linkContainer p {
-  color: #9e9e9e;
   line-height: 16px;
   font-size: 11px;
   margin: 0;
@@ -98,7 +127,7 @@
   top: -1px;
   left: -1px;
 }
-.active {
-  color: #000 !important;
+.activeNavItem {
+  color: #000;
 }
 </style>

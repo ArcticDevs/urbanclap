@@ -165,7 +165,8 @@ select {
   outline: 0;
   height: 100%;
   width: 100%;
-  padding: 10px 0;
+  min-width:130px;
+  padding: 10px 5px;
   border-radius: 4px;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -176,6 +177,14 @@ select {
   background-position-y: center;
   background-size: 15px;
 }
+
+@media(max-width:340px){
+  select{
+    padding:0;
+    background-position-x: 90%;
+  }
+}
+
 .search-form {
   display: block;
   text-align: center;

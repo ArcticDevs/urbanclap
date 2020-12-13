@@ -2,13 +2,27 @@
   <div class="nav container">
     <b-navbar toggleable="xl">
       <b-navbar-brand href="#" class="text-white">
-        <img src="/img/logo_light.png" />
+        <router-link to="/"><img src="/img/logo_light.png" /></router-link>
       </b-navbar-brand>
 
       <b-navbar-nav class="ml-auto nav-items">
-        <b-nav-item href="#">Blog</b-nav-item>
-        <b-nav-item href="#"><u>Register As A Professional</u></b-nav-item>
-        <b-nav-item href="#" v-b-toggle.login>Login / Sign Up</b-nav-item>
+        <b-nav-item><router-link to="/">Blog</router-link></b-nav-item>
+        <b-nav-item
+          ><router-link to="/"
+            ><u>Register As A Professional</u></router-link
+          ></b-nav-item
+        >
+        <b-nav-item v-if="isLoggedIn"
+          ><router-link to="/bookings">My Bookings</router-link></b-nav-item
+        >
+        <b-nav-item v-if="isLoggedIn" @click="logout"
+          ><router-link to="/"
+            >Logout - Verified Customer</router-link
+          ></b-nav-item
+        >
+        <b-nav-item v-b-toggle.login v-if="!isLoggedIn"
+          >Login / Sign Up</b-nav-item
+        >
 
         <b-sidebar
           id="login"
@@ -49,32 +63,28 @@
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
-                  id="otp"
-                  class="mr-2 ml-2 inputs"
+                  class="inputs otp"
                   v-model="otp1"
                   maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
-                  id="otp"
-                  class="mr-2 ml-2 inputs"
+                  class="inputs otp"
                   v-model="otp2"
                   maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
-                  id="otp"
-                  class="mr-2 ml-2 inputs"
+                  class="inputs otp"
                   v-model="otp3"
                   maxlength="1"
                 />
                 <input
                   type="tel"
                   pattern="[0-9]{1}"
-                  id="otp"
-                  class="mr-2 ml-2 inputs"
+                  class="inputs otp"
                   v-model="otp4"
                   maxlength="1"
                 />
@@ -104,6 +114,7 @@ export default {
       otp2: "",
       otp3: "",
       otp4: "",
+      isLoggedIn: false,
     };
   },
   mounted() {
@@ -112,6 +123,11 @@ export default {
         $(this).next(".inputs").focus();
       }
     });
+
+    var loginToken = document.cookie.split("=")[1].split(";")[0];
+    if (loginToken != "") {
+      this.isLoggedIn = true;
+    }
   },
   methods: {
     gen_otp() {
@@ -122,7 +138,6 @@ export default {
         })
         .then(function (response) {
           if (response.data.success != null) {
-            // console.log(response.data.success)
           }
         });
     },
@@ -135,12 +150,20 @@ export default {
         })
         .then(function (response) {
           if (response.data.token != null) {
-            console.log(response.data.token)(
-              // self.$store.commit('set_token', response.data.token);
-              (document.cookie = "token=" + response.data.token)
-            );
+            console.log(response.data.token);
+            document.cookie = "token=" + response.data.token;
           }
+          location.reload();
         });
+
+    },
+    logout() {
+      var d = new Date();
+      d.setTime(d.getTime());
+      var expires = "expires=" + d.toUTCString();
+      document.cookie =
+        "token" + "=" + "" + ";path=/;" + expires;
+        location.reload();
     },
   },
 };
@@ -168,6 +191,11 @@ export default {
   margin-right: 25px;
 }
 
+.nav-item a{
+  text-decoration:none !important;
+  color:#fff !important;
+}
+
 .navbar {
   height: 60px;
   max-width: 100%;
@@ -179,13 +207,15 @@ export default {
 #login {
   font-size: 14px !important;
   z-index: 10 !important;
+  background-color: transparent;
 }
 
-#otp {
+.otp {
   border: 1px solid #bdbdbd;
   height: 46px;
   width: 46px;
   text-align: center;
+  margin: 0 10px;
 }
 
 #country {
@@ -203,10 +233,7 @@ export default {
   padding-left: 16px;
   border: 1px solid #bdbdbd;
 }
-#login {
-  background-color: transparent;
-  z-index: 99 !important;
-}
+
 .input-group-text {
   background-color: transparent;
   border: none;

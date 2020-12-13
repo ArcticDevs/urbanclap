@@ -4,7 +4,7 @@
       <Navbar />
     </div>
     <div id="nav_bottom">
-      <NavbarBottom />
+      <NavbarBottom selectedMenu="home" />
     </div>
     <div id="header">
       <Header />

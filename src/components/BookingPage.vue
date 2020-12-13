@@ -1,6 +1,12 @@
 <template>
   <div>
-    <navbar />
+    <div class="navTop">
+      <Navbar />
+    </div>
+    
+    <div class="navBottom">
+    <NavbarBottom selectedMenu="bookings" />
+    </div>
     <div class="container mt-5">
       <h4 class="text-center">My Bookings</h4>
       <div class="text-center container mt-5">
@@ -28,7 +34,7 @@
         </table>
       </div>
       <div class="container">
-        <span class="btn">Book A Service</span>
+        <span class="btn"><router-link to="/">Book A Service</router-link></span>
       </div>
     </div>
   </div>
@@ -36,15 +42,18 @@
 
 <script>
 import Navbar from "./Navbar_dark.vue";
+import NavbarBottom from "./Navbar_bottom.vue";
 import axios from "axios";
 export default {
   data() {
     return {
       bookings: "",
-      // token:'5655b8137591d70dad0833134446b62b64d17c0a',
     };
   },
-  components: { Navbar },
+  components: {
+    Navbar,
+    NavbarBottom,
+  },
   mounted() {
     $(document).ready(function () {
       $(".button").click(function () {
@@ -56,7 +65,7 @@ export default {
     axios
       .get("http://fixorie.herokuapp.com/fo/invoices/", {
         headers: {
-          Authorization: "token 5655b8137591d70dad0833134446b62b64d17c0a",
+              Authorization: "Token " + document.cookie.split("=")[1],
         },
       })
       .then(function (response) {
@@ -92,5 +101,24 @@ export default {
 .activeButton {
   color: white;
   background-color: #000;
+}
+
+.navTop{
+  display:none;
+}
+
+.btn a{
+  text-decoration:none !important;
+  color:#fff !important;
+}
+
+@media(min-width:1200px){
+  .navBottom{
+    display:none;
+  }
+
+  .navTop{
+    display:block;
+  }
 }
 </style>

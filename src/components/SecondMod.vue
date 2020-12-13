@@ -45,15 +45,15 @@
       </div>
     </div>
     <div class="mobile-mainBlock">
-      <button class="free-delivery-btn">
-        <div>Get Free Salon Home Delivery</div>
+      <button class="free-delivery-btn" v-b-modal.modal-tall>
+        <div>Book Now</div>
       </button>
 
-      <div class="external-link">
+      <!-- <div class="external-link">
         <h5>Beauty Parlour at home in Delhi</h5>
         <p>Tired of going to the salon? Urban Comapny provides services ...</p>
-        <a href="#"><u>Men's Haircut and Grooming in Delhi</u></a>
-      </div>
+        <a v-b-modal.modal-tall><u>Men's Haircut and Grooming in Delhi</u></a>
+      </div> -->
 
       <section class="fulfilled">
         <section class="fulfilled-inner">
@@ -85,35 +85,53 @@
         </section>
       </section>
 
-      <section class="mob-beautician">
-        <div class="mob-beautician-heading">Beauticians</div>
-        <h2>1,253 Beauty Service Professionals in New Delhi</h2>
+      <section class="mob-beautician" v-if="data.features.length != 0">
+        <div class="mob-beautician-heading">{{ data.name }}</div>
+        <!-- <h2>1,253 Beauty Service Professionals in New Delhi</h2> -->
         <ul>
-          <li>
-            <span><b-icon icon="star-fill"></b-icon></span>
-            <span>Only 4+ star rated professionals</span>
+          <li
+            v-for="(feature, indexOfFeature) in data.features"
+            :key="indexOfFeature"
+          >
+            <span v-if="indexOfFeature == 0"><b-icon icon="star-fill"></b-icon></span>
+            <span v-if="indexOfFeature == 1"><b-icon icon="briefcase-fill"></b-icon></span>
+            <span v-if="indexOfFeature == 2"><b-icon icon="person-square"></b-icon></span>
+            <span>{{ feature.name }}</span>
           </li>
-          <li>
+          <!-- <li>
             <span><b-icon icon="briefcase-fill"></b-icon></span>
             <span>Minimum 3 years of experience</span>
           </li>
           <li>
             <span><b-icon icon="person-square"></b-icon></span>
             <span>Background verified and Urban Company trained</span>
-          </li>
+          </li> -->
         </ul>
-        <div class="mob-beautician-info">
+        <!-- <div class="mob-beautician-info">
           <div class="mob-beautician-info-inner">
             <ul>
-              <li>
-                <div class="mob-pro-list-root"></div>
+              <li v-for="(professional,proIndex) in data.professionals" :key="proIndex">
+                <div class="mob-pro-list-root">
+                  <div class="mob-pro-info">
+                    <div class="pro-details">
+                      <div class="pro-name"></div>
+                      <div class="pro-address">
+                        <span class="pro-address-inner">
+                          <span>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mob-pro-reviews"></div>
+                </div>
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </section>
 
-      <section class="mob-faqs">
+      <section class="mob-faqs" v-if="data.faqs.length != 0">
         <h2>Frequently Asked Questions</h2>
         <ul>
           <li v-for="(faq, index) in data.faqs" :key="index">
@@ -124,18 +142,18 @@
           </li>
         </ul>
         <div class="see-more-btn-root">
-          <button class="see-more-btn">
+          <button class="see-more-btn" @click="showFaqs">
             <div class="see-more-title">See More</div>
           </button>
         </div>
       </section>
 
       <section class="mob-about" v-html="data.about">
-        <div class="see-more-btn-root">
+        <!-- <div class="see-more-btn-root">
           <button class="see-more-btn">
             <div class="see-more-title">See More</div>
           </button>
-        </div>
+        </div> -->
       </section>
     </div>
 
@@ -148,9 +166,10 @@
           class="text-center panelModal"
           size="lg"
           body-class
+          scrollable
         >
           <div id="modal-serve" v-if="selected_sub_service_index == -1">
-            <h2 class="my-4 text-center">What Are You Looking For ?</h2>
+            <h3 class="my-4 text-center">What Are You Looking For ?</h3>
 
             <div
               class="sub-service"
@@ -167,7 +186,7 @@
           <div id="service_type" v-if="selected_sub_service_index != -1">
             <h4 class="text-center mb-3">ADD AC(s) for service</h4>
             <div
-              class="mt-3 mb-3 container sub_service_type"
+              class="container sub_service_type"
               v-for="(sub_service_category, type_index) in this.data
                 .sub_services[selected_sub_service_index]
                 .sub_service_categories"
@@ -199,7 +218,7 @@
                       <span>Add</span> <span>+</span>
                     </button>
 
-                    <div v-else>
+                    <div class="counterBtn" v-else>
                       <button
                         type="button"
                         class="borderInl"
@@ -210,10 +229,12 @@
                       >
                         -
                       </button>
-                      {{
-                        cart[get_cart_index(sub_service_category_type.id)]
-                          .quantity
-                      }}
+                      <div class="quantityCounter">
+                        {{
+                          cart[get_cart_index(sub_service_category_type.id)]
+                            .quantity
+                        }}
+                      </div>
                       <button
                         type="button"
                         class="borderInr"
@@ -229,30 +250,37 @@
                 </div>
               </div>
             </div>
-            <button @click="checkOut" v-if="checkout == false">
-              check out
-            </button>
+            <div class="proceedBtn" @click="checkOut" v-if="checkout == false">
+              <span
+                >Proceed <b-icon class="right-arrow" icon="arrow-right"></b-icon
+              ></span>
+            </div>
             <div v-if="checkout" class="billing_section">
               <h1 class="text-center">Cart</h1>
 
-              <b-list-group>
-                <b-list-group-item class="border-0">
-                  <div class="cart_add">hello</div>
+              <b-list-group
+                v-for="(
+                  invoice_det, invoiceIndex
+                ) in cartInvoice.invoice_detail"
+                :key="invoiceIndex"
+              >
+                <b-list-group-item class="billItem">
+                  <div class="cart_add">
+                    {{ invoice_det.sub_service_category_type.name }}
+                  </div>
                   <span class="cart_price">
-                    <span id="discount_price">₹3299</span>
-                    <span>₹2795</span>
+                    <!-- <span id="discount_price">₹3299</span> -->
+                    <span>₹{{ invoice_det.total }}</span>
                   </span></b-list-group-item
                 >
               </b-list-group>
               <div id="total_div">
                 <div class="cart_add">Total</div>
                 <span class="cart_price">
-                  <span>₹2795</span>
+                  <span>₹{{ cartInvoice.total_amount }}</span>
                 </span>
               </div>
-              <button id="paybtn" @click="rzpbutton1" class="text-center">
-                Pay
-              </button>
+              <button id="paybtn" @click="rzpbutton1" class="">Pay</button>
             </div>
           </div>
         </b-modal>
@@ -329,16 +357,16 @@
         </div>
       </div>
 
-      <div class="external-link">
+      <!-- <div class="external-link">
         <h5>Beauty Parlour at home in Delhi</h5>
         <p>Tired of going to the salon? Urban Comapny provides services ...</p>
         <a href="#"><u>Men's Haircut and Grooming in Delhi</u></a>
-      </div>
+      </div> -->
 
       <div class="beauticians">
         <div id="beauticians-heading">
-          <h5>Beauticians</h5>
-          <p>1,258 Beauty Service Professionals in New Delhi</p>
+          <h5>{{ data.name }}</h5>
+          <!-- <p>1,258 Beauty Service Professionals in New Delhi</p> -->
         </div>
         <!-- -------Employee reviews and ratings start-------- -->
         <div class="employee">
@@ -400,13 +428,13 @@
       <!-- -------Employee reviews and ratings end-------- -->
 
       <!-- ----------ALSO BOOKED-------- -->
-      <div class="also-booked">
+      <!-- <div class="also-booked">
         <div class="also-booked-heading">
           <h5>Customer in New Delhi also booked</h5>
         </div>
 
         <div class="also-booked-carousel"></div>
-      </div>
+      </div> -->
 
       <!-- ------------ALSO BOOKED END---------- -->
 
@@ -418,11 +446,11 @@
 
         <div class="popular-services-list">
           <ul>
-            <li>Electricians</li>
-            <li>Microwave Repair</li>
-            <li>Cleaning Services</li>
-            <li>Salons</li>
-            <li>Spa</li>
+            <li><router-link to="/">Electricians</router-link></li>
+            <li><router-link to="/">Microwave Repair</router-link></li>
+            <li><router-link to="/">Cleaning Services</router-link></li>
+            <li><router-link to="/">Salons</router-link></li>
+            <li><router-link to="/">Spa</router-link></li>
           </ul>
         </div>
       </div>
@@ -475,7 +503,7 @@ export default {
       checkout: false,
       selected_faq_index: -1,
       invoice_id: "",
-      allcookies: [],
+      cartInvoice: {},
     };
   },
   components: {
@@ -501,78 +529,92 @@ export default {
 
     this.$root.$on("bv::modal::hide", (bvEvent, modalId) => {
       this.selected_sub_service_index = -1;
+      this.checkout = false;
     });
   },
   methods: {
     rzpbutton1: function () {
       var self = this;
       var bodyFormData = new FormData();
-      bodyFormData.append('invoice_id', self.invoice_id);
+      bodyFormData.append("invoice_id", self.invoice_id);
 
-      axios.put('http://fixorie.herokuapp.com/payment/get_razorpay_order_id',bodyFormData,{
-        headers:{
-          "Authorization": "Token " + document.cookie.split("=")[1],
-        }
-      }).then(response =>{
+      axios
+        .put(
+          "http://fixorie.herokuapp.com/payment/get_razorpay_order_id",
+          bodyFormData,
+          {
+            headers: {
+              Authorization:
+                "Token " + document.cookie.split("=")[1].split(";")[0],
+            },
+          }
+        )
+        .then((response) => {
+          var options = {
+            key: "rzp_test_WPiHKaTEOnIO4Z", // Enter the Key ID generated from the Dashboard
+            amount: response.data.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            currency: "INR",
+            name: "FixOrie",
+            description: "Test Transaction",
+            image: "/logo_light.png",
+            order_id: response.data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            handler: function (response) {
+              console.log(response.razorpay_payment_id);
+              console.log(response.razorpay_order_id);
+              console.log(response.razorpay_signature);
 
-        var options = {
-          key: "rzp_test_WPiHKaTEOnIO4Z", // Enter the Key ID generated from the Dashboard
-          amount: response.data.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-          currency: "INR",
-          name: "FixOrie",
-          description: "Test Transaction",
-          image: "/logo_light.png",
-          order_id: response.data.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-          handler: function (response) {
-            console.log(response.razorpay_payment_id);
-            console.log(response.razorpay_order_id);
-            console.log(response.razorpay_signature);
+              var razorpay_payment_id = response.razorpay_payment_id;
+              var razorpay_order_id = response.razorpay_order_id;
+              var razorpay_signature = response.razorpay_signature;
 
-            var razorpay_payment_id = response.razorpay_payment_id;
-            var razorpay_order_id = response.razorpay_order_id;
-            var razorpay_signature = response.razorpay_signature;
+              axios
+                .put(
+                  "http://fixorie.herokuapp.com/fo/invoice_success",
+                  {
+                    invoice_id: self.invoice_id,
+                    razorpay_order_id: razorpay_order_id,
+                    razorpay_payment_id: razorpay_payment_id,
+                    razorpay_signature: razorpay_signature,
+                  },
+                  {
+                    headers: {
+                      Authorization:
+                        "Token " + document.cookie.split("=")[1].split(";")[0],
+                    },
+                  }
+                )
+                .then((response2) => {
+                  console.log(response2.data);
+                  alert(response2.data.success);
+                  self.$bvModal.hide("modal-tall");
+                });
+            },
+            prefill: {
+              name: "Yug chandak",
+              email: "yugchandak1@gmail.com",
+              contact: "9530477997",
+            },
+            notes: {
+              address: "Razorpay Corporate Office",
+            },
+            theme: {
+              color: "#3399cc",
+            },
+          };
+          var rzp1 = new Razorpay(options);
+          rzp1.on("payment.failed", function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+          });
 
-             axios.put('http://fixorie.herokuapp.com/fo/invoice_success',{
-                "invoice_id" : self.invoice_id,
-                "razorpay_order_id": razorpay_order_id,
-                "razorpay_payment_id": razorpay_payment_id,
-                "razorpay_signature": razorpay_signature
-             },{
-        headers:{
-          "Authorization": "Token " + document.cookie.split("=")[1],
-        }
-      }).then(response2 =>{
-        console.log(response2.data)
-      })
-
-          },
-          prefill: {
-            name: "Yug chandak",
-            email: "yugchandak1@gmail.com",
-            contact: "9530477997",
-          },
-          notes: {
-            address: "Razorpay Corporate Office",
-          },
-          theme: {
-            color: "#3399cc",
-          },
-        };
-        var rzp1 = new Razorpay(options);
-        rzp1.on("payment.failed", function (response) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
+          console.log("hfsjfskldf=----------------");
+          rzp1.open();
         });
-  
-        console.log("hfsjfskldf=----------------");
-        rzp1.open();
-      })
-
     },
     loadMore: function () {
       var x = document.getElementById("second-rating");
@@ -588,13 +630,17 @@ export default {
     },
 
     ShowService: function (sub_service_index) {
-      // console.log("---->>>>" + sub_service_index);
-
       this.selected_sub_service_index = sub_service_index;
     },
+    showFaqs() {
+      $(".see-more-btn-root").css("display", "none");
+      $(".mob-faqs").css("height", "auto");
+    },
+
     increase: function () {
       this.counter++;
     },
+
     decrease: function () {
       this.counter--;
     },
@@ -630,38 +676,72 @@ export default {
     },
     checkOut() {
       var self = this;
-      console.log("-->>>>>>>>" + document.cookie.split("=")[1]);
-      axios
-        .post(
-          "http://fixorie.herokuapp.com/fo/invoices/",
-          {},
-          {
-            headers: {
-              Authorization: "Token " + document.cookie.split("=")[1],
-            },
-          }
-        )
-        .then(function (response) {
-          self.invoice_id = response.data.id;
-          for (var i = 0; i < self.cart.length; i++) {
-            axios.post(
-              "http://fixorie.herokuapp.com/fo/invoice_details/",
-              {
-                invoice: self.invoice_id,
-                sub_service_category_type:
-                  self.cart[i].sub_service_category_type_id,
-                quantity: self.cart[i].quantity,
-              },
-              {
-                headers: {
-                  Authorization: "Token " + document.cookie.split("=")[1],
-                },
-              }
-            );
-          }
-        });
+      if(document.cookie.indexOf("token")) {
+        alert("Please Login first to book a service!");
+      } else {
+        console.log(document.cookie.split("=")[1].split(";")[0]);
 
-      self.checkout = true;
+        axios
+          .post(
+            "http://fixorie.herokuapp.com/fo/invoices/",
+            {},
+            {
+              headers: {
+                Authorization:
+                  "Token " + document.cookie.split("=")[1].split(";")[0],
+              },
+            }
+          )
+          .then(function (response) {
+            self.invoice_id = response.data.id;
+            var counter = 0;
+            for (var j = 0; j < self.cart.length; j++) {
+              axios
+                .post(
+                  "http://fixorie.herokuapp.com/fo/invoice_details/",
+                  {
+                    invoice: self.invoice_id,
+                    sub_service_category_type:
+                      self.cart[j].sub_service_category_type_id,
+                    quantity: self.cart[j].quantity,
+                  },
+                  {
+                    headers: {
+                      Authorization:
+                        "Token " + document.cookie.split("=")[1].split(";")[0],
+                    },
+                  }
+                )
+                .then((responseInvDetails) => {
+                  console.log(responseInvDetails);
+                  console.log("inside post response");
+                  counter++;
+                  if (counter == self.cart.length - 1) {
+                    console.log("inside post response if condi");
+  
+                    axios
+                      .get(
+                        "http://fixorie.herokuapp.com/fo/invoices/" +
+                          self.invoice_id,
+                        {
+                          headers: {
+                            Authorization:
+                              "Token " +
+                              document.cookie.split("=")[1].split(";")[0],
+                          },
+                        }
+                      )
+                      .then((responseInvoice) => {
+                        console.log(responseInvoice.data);
+                        self.cartInvoice = responseInvoice.data;
+                      });
+                  }
+                });
+            }
+          });
+  
+        self.checkout = true;
+      }
     },
   },
 };
@@ -670,11 +750,10 @@ export default {
 
 <style scoped>
 /* modal CSS */
-.modal-content {
-  height: 100% !important;
-}
-#border {
-  border: 1px solid #304ffe;
+
+.sub_service_type {
+  margin-top: 30px;
+  margin-bottom: 25px;
 }
 
 .sub_service_type h4 {
@@ -684,22 +763,21 @@ export default {
 
 .sub-service-type-item {
   width: 100%;
+  border-bottom: 2px solid #e2e2e2;
 }
 .sub-service-type-item-heading {
-  padding: 20px 0 20px 24px;
+  padding: 10px 0 10px 24px;
   vertical-align: top;
   text-align: left;
   width: 80%;
   display: inline-block;
 }
 .sub-service-type-item-counter {
-  padding: 20px 24px 20px 0;
+  padding: 10px 24px 10px 0;
   vertical-align: top;
   text-align: left;
   width: 20%;
   display: inline-block;
-  height: 100%;
-  border-bottom: 2px solid #e2e2e2;
 }
 
 .add-btn {
@@ -738,37 +816,102 @@ export default {
   height: 100%;
 }
 
+.counterBtn {
+  border: 1px solid #000;
+  width: 71px;
+  height: 100%;
+}
+
 .borderInr {
-  border-right: 1px solid #304ffe;
-  background-color: transparent;
+  background-color: #000;
   border: none;
+  width: 35%;
+  color: #fff;
+  height: 100%;
+  padding-bottom: 0;
+  padding-top: 0;
 }
+
+.quantityCounter {
+  width: 30%;
+  display: inline-block;
+  text-align: center;
+  height: 100%;
+}
+
 .borderInl {
-  border-left: 1px solid #304ffe;
-  background-color: transparent;
+  background-color: #000;
   border: none;
+  width: 35%;
+  height: 100%;
+  color: #fff;
+  padding-bottom: 0;
+  padding-top: 0;
 }
+
+.proceedBtn {
+  background-color: #212121;
+  color: #fff;
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 4px;
+  line-height: 48px;
+  font-size: 14px;
+  padding: 0 16px;
+  margin: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.proceedBtn > span {
+  color: #fff;
+  font-weight: 700;
+  text-transform: none;
+  line-height: 48px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.proceedBtn .right-arrow {
+  color: #fff;
+  font-weight: 700;
+  line-height: 48px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.billItem {
+  border: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 #paybtn {
   background: #000;
   color: #fff;
   border: none;
-  width: 25%;
-  height: 35px;
-  padding-bottom: 5px;
-  border-radius: 10px;
+  width: 200px;
+  height: 45px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 .sub-service {
   width: 100%;
   cursor: pointer;
   text-align: left;
-  border-bottom: 1px solid #e2e2e2;
+  border-top: 1px solid #e2e2e2;
 }
 #total_div {
-  width: 95%;
-  padding-left: 15px;
+  width: 100%;
+  padding: 0 1.25rem;
+  border-top: 1px solid #e2e2e2;
 }
 .cart_add {
-  padding: 28px 16px;
+  padding: 15px 16px;
   display: table-cell;
   vertical-align: middle;
   width: 100%;
@@ -779,19 +922,17 @@ export default {
   color: #212121;
 }
 .cart_price {
-  /* width: 55px; */
   text-align: center;
-  padding: 28px 16px;
+  padding: 15px 16px;
   display: table-cell;
   vertical-align: middle;
-  /* cursor: pointer; */
 }
-#discount_price {
+/* #discount_price {
   text-decoration: line-through;
   padding-right: 9px;
   color: grey;
   font-size: 13px;
-}
+} */
 
 .sub-service-heading {
   padding: 28px 16px;
@@ -1846,7 +1987,7 @@ a.nav-link.active {
 }
 
 .mob-about {
-  height: 500px;
+  /* height: 500px; */
   overflow: hidden;
   border: none;
   padding: 28px 16px 24px;

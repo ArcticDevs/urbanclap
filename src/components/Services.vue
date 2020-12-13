@@ -101,9 +101,7 @@ export default {
   width: 15%;
   margin-top: 10px;
   margin-right: 10px;
-
   height: 90px;
-  text-decoration: none;
   color: #212121;
 }
 
@@ -128,10 +126,6 @@ export default {
 img {
   height: 35px;
   width: 35px;
-}
-
-a .flex-item router-link:hover {
-  background-color: #dddddd;
 }
 
 button,
@@ -210,7 +204,6 @@ color:#000;
   object-fit: cover;
   object-position: center;
   border-radius: 4px;
-  /* margin-right: 16px; */
 }
 
 .container {
