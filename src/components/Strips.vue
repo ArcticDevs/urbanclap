@@ -36,7 +36,7 @@
         </button>
 
         <b-sidebar v-model="ModelOpenStatus" right shadow backdrop>
-          <div class="px-1 py-2">
+          <div class="py-2">
             <ul class="list-group mt-3">
               <li
                 class="list-group-item"
@@ -102,15 +102,10 @@ export default {
 }
 
 .poster img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
-@media (max-width: 600px) {
-  .poster img {
-    width: 160%;
-    margin-left: -30%;
-  }
-}
+
 
 .photo:hover {
   transition: 0.3s ease-out;

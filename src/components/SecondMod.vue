@@ -10,8 +10,12 @@
       <div class="container">
         <div class="breadcrumbs">
           <b-breadcrumb>
-            <b-breadcrumb-item href="#">Home</b-breadcrumb-item>
-            <b-breadcrumb-item href="#">New Delhi</b-breadcrumb-item>
+            <b-breadcrumb-item
+              ><router-link to="/">Home</router-link></b-breadcrumb-item
+            >
+            <b-breadcrumb-item
+              ><router-link to="/">New Delhi</router-link></b-breadcrumb-item
+            >
             <b-breadcrumb-item active>{{ data.name }}</b-breadcrumb-item>
           </b-breadcrumb>
         </div>
@@ -93,19 +97,17 @@
             v-for="(feature, indexOfFeature) in data.features"
             :key="indexOfFeature"
           >
-            <span v-if="indexOfFeature == 0"><b-icon icon="star-fill"></b-icon></span>
-            <span v-if="indexOfFeature == 1"><b-icon icon="briefcase-fill"></b-icon></span>
-            <span v-if="indexOfFeature == 2"><b-icon icon="person-square"></b-icon></span>
+            <span v-if="indexOfFeature == 0"
+              ><b-icon icon="star-fill"></b-icon
+            ></span>
+            <span v-if="indexOfFeature == 1"
+              ><b-icon icon="briefcase-fill"></b-icon
+            ></span>
+            <span v-if="indexOfFeature == 2"
+              ><b-icon icon="person-square"></b-icon
+            ></span>
             <span>{{ feature.name }}</span>
           </li>
-          <!-- <li>
-            <span><b-icon icon="briefcase-fill"></b-icon></span>
-            <span>Minimum 3 years of experience</span>
-          </li>
-          <li>
-            <span><b-icon icon="person-square"></b-icon></span>
-            <span>Background verified and Urban Company trained</span>
-          </li> -->
         </ul>
         <!-- <div class="mob-beautician-info">
           <div class="mob-beautician-info-inner">
@@ -255,6 +257,9 @@
                 >Proceed <b-icon class="right-arrow" icon="arrow-right"></b-icon
               ></span>
             </div>
+            <!-- <div id="authSection">
+              <Auth />
+            </div> -->
             <div v-if="checkout" class="billing_section">
               <h1 class="text-center">Cart</h1>
 
@@ -326,17 +331,31 @@
       <div class="page-nav">
         <b-navbar toggleable="xl">
           <b-navbar-nav class="mx-auto nav-items">
-            <b-nav-item href="#" active>How it Works</b-nav-item>
-            <b-nav-item href="#">Beauticians</b-nav-item>
-            <b-nav-item href="#">Blogs</b-nav-item>
-            <b-nav-item href="#">FAQs</b-nav-item>
-            <b-nav-item href="#">About Salon at Home</b-nav-item>
+            <b-nav-item
+              class="serviceNavActive"
+              @click="functionforscroll('howItWorks')"
+              >How it Works</b-nav-item
+            >
+            <b-nav-item href="#" class="serviceNavItem">Beauticians</b-nav-item>
+            <b-nav-item href="#" class="serviceNavItem">Blogs</b-nav-item>
+            <b-nav-item
+              href="#"
+              class="serviceNavItem"
+              @click="functionforscroll('FAQs')"
+              >FAQs</b-nav-item
+            >
+            <b-nav-item
+              href="#"
+              class="serviceNavItem"
+              @click="functionforscroll('aboutSection')"
+              >About Salon at Home</b-nav-item
+            >
           </b-navbar-nav>
         </b-navbar>
       </div>
       <!-- ***********Nav End************** -->
 
-      <div class="working">
+      <div class="working" id="howItWorks">
         <div id="working-heading">
           <h5>How it Works</h5>
         </div>
@@ -363,12 +382,10 @@
         <a href="#"><u>Men's Haircut and Grooming in Delhi</u></a>
       </div> -->
 
-      <div class="beauticians">
+      <!--   <div class="beauticians">
         <div id="beauticians-heading">
           <h5>{{ data.name }}</h5>
-          <!-- <p>1,258 Beauty Service Professionals in New Delhi</p> -->
         </div>
-        <!-- -------Employee reviews and ratings start-------- -->
         <div class="employee">
           <div class="info">
             <img src="/employee.jpeg" />
@@ -400,7 +417,6 @@
               </div>
             </div>
 
-            <!-- ------second rating(Hidden)---------- -->
             <div id="second-rating">
               <div class="emp-rating-complete">
                 <div class="initial-profile"></div>
@@ -424,7 +440,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- -------Employee reviews and ratings end-------- -->
 
       <!-- ----------ALSO BOOKED-------- -->
@@ -446,30 +462,32 @@
 
         <div class="popular-services-list">
           <ul>
-            <li><router-link to="/">Electricians</router-link></li>
-            <li><router-link to="/">Microwave Repair</router-link></li>
-            <li><router-link to="/">Cleaning Services</router-link></li>
-            <li><router-link to="/">Salons</router-link></li>
-            <li><router-link to="/">Spa</router-link></li>
+            <li><router-link to="/delhi-ncr-electricians">Electricians</router-link></li>
+            <li><router-link to="/delhi-ncr-microwave-repair">Microwave Repair</router-link></li>
+            <li><router-link to="/delhi-ncr-professional-home-cleaning">Cleaning Services</router-link></li>
+            <li><router-link to="/delhi-ncr-salon-at-home">Salons</router-link></li>
+            <li><router-link to="/delhi-ncr-spa-at-home">Spa</router-link></li>
           </ul>
         </div>
       </div>
       <!-- ---------POPULAR SERVICES END----------- -->
 
       <!-- --------FAQS START----------- -->
-      <div class="FAQ">
+      <div class="FAQ" id="FAQs">
         <h5>Frequently Asked Questions</h5>
         <div class="questions">
-          <div class="question" v-for="(faq, index) in data.faqs" :key="index">
+          <div
+            class="question"
+            v-for="(faq, index) in data.faqs"
+            :key="index"
+            @click="
+              selected_faq_index != -1 && selected_faq_index == index
+                ? (selected_faq_index = -1)
+                : (selected_faq_index = index)
+            "
+          >
             <p>{{ faq.question }}</p>
-            <div
-              class="open_arrow"
-              @click="
-                selected_faq_index != -1 && selected_faq_index == index
-                  ? (selected_faq_index = -1)
-                  : (selected_faq_index = index)
-              "
-            >
+            <div class="open_arrow">
               <span>
                 <b-icon icon="chevron-down"></b-icon>
               </span>
@@ -483,20 +501,22 @@
       <!-- --------FAQS END----------- -->
       <div id="aboutSection" v-html="data.about"></div>
     </div>
-    <Footer />
+    <div class="secondModFooter">
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar_dark.vue";
 import Footer from "@/components/Footer.vue";
+import Auth from "@/components/Login_Mobile.vue";
 
 import axios from "axios";
 export default {
   name: "second-mod",
   data() {
     return {
-      counter: 0,
       data: {},
       selected_sub_service_index: -1,
       cart: [],
@@ -504,11 +524,13 @@ export default {
       selected_faq_index: -1,
       invoice_id: "",
       cartInvoice: {},
+      isLoggedIn:false,
     };
   },
   components: {
     Navbar,
     Footer,
+    Auth,
   },
   mounted() {
     var url = window.location.href;
@@ -526,10 +548,18 @@ export default {
         }
       }
     });
-
+  
     this.$root.$on("bv::modal::hide", (bvEvent, modalId) => {
       this.selected_sub_service_index = -1;
       this.checkout = false;
+    });
+
+    // NAV ACTIVE ITEM
+    $(document).ready(function () {
+      $(".serviceNavItem").click(function () {
+        $(".serviceNavItem").removeClass("serviceNavActive");
+        $(this).addClass("serviceNavActive");
+      });
     });
   },
   methods: {
@@ -611,8 +641,6 @@ export default {
             alert(response.error.metadata.order_id);
             alert(response.error.metadata.payment_id);
           });
-
-          console.log("hfsjfskldf=----------------");
           rzp1.open();
         });
     },
@@ -637,13 +665,6 @@ export default {
       $(".mob-faqs").css("height", "auto");
     },
 
-    increase: function () {
-      this.counter++;
-    },
-
-    decrease: function () {
-      this.counter--;
-    },
 
     add_to_cart(sub_service_category_type_id) {
       this.cart.push({
@@ -676,8 +697,9 @@ export default {
     },
     checkOut() {
       var self = this;
-      if(document.cookie.indexOf("token")) {
+      if (document.cookie.indexOf("token")) {
         alert("Please Login first to book a service!");
+        router.push({ path: 'auth' })
       } else {
         console.log(document.cookie.split("=")[1].split(";")[0]);
 
@@ -718,7 +740,7 @@ export default {
                   counter++;
                   if (counter == self.cart.length - 1) {
                     console.log("inside post response if condi");
-  
+
                     axios
                       .get(
                         "http://fixorie.herokuapp.com/fo/invoices/" +
@@ -739,9 +761,13 @@ export default {
                 });
             }
           });
-  
+
         self.checkout = true;
       }
+    },
+    functionforscroll(id) {
+      var reqId = "#" + id;
+      window.scrollTo(0, $(reqId).offset().top - 20);
     },
   },
 };
@@ -749,6 +775,7 @@ export default {
 
 
 <style scoped>
+
 /* modal CSS */
 
 .sub_service_type {
@@ -994,9 +1021,7 @@ h5 {
 .header {
   height: 70vh;
   width: 100%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   position: relative;
-  padding-top: 60px;
 }
 
 .mob-service-panel {
@@ -1011,6 +1036,7 @@ h5 {
   left: 0;
   object-fit: cover;
   z-index: -1;
+  filter: brightness(0.5);
 }
 
 .breadcrumb {
@@ -1062,15 +1088,15 @@ h5 {
   display: flex;
   justify-content: initial;
   align-items: center;
-  position: sticky;
 }
 
 .nav {
-  position: absolute;
+  position: sticky;
   top: 0;
   z-index: 5;
   width: 100%;
   background: #fff;
+  box-shadow: inset 0 -1px 0 0 hsla(0, 0%, 92.2%, 0.96);
 }
 
 .nav-item {
@@ -1083,8 +1109,8 @@ a.nav-link {
   padding-top: 20px;
 }
 
-a.nav-link.active {
-  border-bottom: solid 2px #000 !important;
+.serviceNavActive {
+  border-bottom: solid 2px #000;
 }
 
 .navbar {
@@ -1103,8 +1129,8 @@ a.nav-link.active {
   top: 52%;
   border-radius: 4px;
   transform: translateY(-50%);
-  right: calc(50% - 588px);
-  z-index: 2;
+  right: calc(50% - 600px);
+  /* z-index: -1; */
   width: 360px;
   border-bottom: none;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 13px 31px -5px;
@@ -1627,6 +1653,7 @@ a.nav-link.active {
   margin-bottom: 16px;
   border: solid 1px rgb(218, 215, 215);
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .question p {
@@ -2040,6 +2067,11 @@ a.nav-link.active {
 .see-more-title {
   font-size: 12px;
   color: #fd5c63;
+}
+
+.secondModFooter{
+  position:relative;
+  /* z-index:2; */
 }
 
 /* VIEW CHANGE MEDIA QUERY */

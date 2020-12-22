@@ -4,10 +4,15 @@
       <div class="containerItem">
         <div class="containerItem-inner">
           <router-link to="/">
-          <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'home'}">
-            <span><b-icon icon="house-door-fill"></b-icon></span>
-            <p>Home</p>
-          </div>
+            <div
+              :class="{
+                linkContainer: true,
+                activeNavItem: selectedMenu == 'home',
+              }"
+            >
+              <span><b-icon icon="house-door-fill"></b-icon></span>
+              <p>Home</p>
+            </div>
           </router-link>
           <span class="innerSpan"></span>
         </div>
@@ -16,7 +21,12 @@
       <div class="containerItem">
         <div class="containerItem-inner">
           <router-link to="/bookings">
-            <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'bookings'}">
+            <div
+              :class="{
+                linkContainer: true,
+                activeNavItem: selectedMenu == 'bookings',
+              }"
+            >
               <span><b-icon icon="bookmark-star-fill"></b-icon></span>
               <p>Bookings</p>
             </div>
@@ -27,7 +37,12 @@
 
       <div class="containerItem">
         <div class="containerItem-inner">
-          <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'get_help'}">
+          <div
+            :class="{
+              linkContainer: true,
+              activeNavItem: selectedMenu == 'get_help',
+            }"
+          >
             <span><b-icon icon="question-circle-fill"></b-icon></span>
             <p>Get Help</p>
           </div>
@@ -38,7 +53,12 @@
       <div class="containerItem">
         <div class="containerItem-inner">
           <router-link to="/auth">
-            <div :class="{'linkContainer': true, 'activeNavItem': selectedMenu == 'profile'}">
+            <div
+              :class="{
+                linkContainer: true,
+                activeNavItem: selectedMenu == 'profile',
+              }"
+            >
               <span><b-icon icon="person-fill"></b-icon></span>
               <p>Profile</p>
             </div>
@@ -52,8 +72,13 @@
 
 <script>
 export default {
+  data() {
+    return {
+      // loggedIn: false,
+    };
+  },
   props: {
-    selectedMenu:''
+    selectedMenu: "",
   },
   mounted() {
     $(document).ready(function () {
@@ -61,6 +86,9 @@ export default {
         $(".linkContainer").removeClass("activeNavItem");
         $(this).addClass("activeNavItem");
       });
+
+      // var loginTok = document.cookie.split("=")[1].split(";")[0];
+      // if (loginTok != undefined) this.loggedIn = true;
     });
   },
 };

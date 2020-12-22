@@ -45,38 +45,33 @@
                 </p>
               </div>
               <div class="otpField">
-                <div class="otpInputContainer">
                   <input
                     class="otpInput"
                     pattern="[0-9]{1}"
-                    v-model="otp1"
-                    :maxlength="1"
+                    v-model="authOTP1"
+                    maxlength="1"
                   />
-                </div>
-                <div class="otpInputContainer">
+
                   <input
                     class="otpInput"
                     pattern="[0-9]{1}"
-                    v-model="otp2"
-                    :maxlength="1"
+                    v-model="authOTP2"
+                    maxlength="1"
                   />
-                </div>
-                <div class="otpInputContainer">
+
                   <input
                     class="otpInput"
                     pattern="[0-9]{1}"
-                    v-model="otp3"
-                    :maxlength="1"
+                    v-model="authOTP3"
+                    maxlength="1"
                   />
-                </div>
-                <div class="otpInputContainer">
+
                   <input
                     class="otpInput"
                     pattern="[0-9]{1}"
-                    v-model="otp4"
-                    :maxlength="1"
+                    v-model="authOTP4"
+                    maxlength="1"
                   />
-                </div>
               </div>
               <div class="otpError">Please enter correct OTP</div>
               <div class="otpResend" @click="gen_otp">
@@ -102,33 +97,34 @@
         </button>
       </div>
     </div>
-    <NavbarBottom selectedMenu="profile" />
   </div>
 </template>
 
 <script>
-import NavbarBottom from "@/components/Navbar_bottom.vue";
 import axios from "axios";
 export default {
   data() {
     return {
       mobile: "",
-      otp1: "",
-      otp2: "",
-      otp3: "",
-      otp4: "",
+      authOTP1: "",
+      authOTP2: "",
+      authOTP3: "",
+      authOTP4: "",
       isLoggedIn: false,
-      maxlength: 1,
     };
   },
   components: {
-    NavbarBottom,
   },
   mounted() {
-    $(".otpInput").keyup(function () {
-      if (this.value.length == this.maxLength) {
-        $(this).next(".otpInput").focus();
-      }
+      $(".otpInput").keyup(function (e) {
+        if(e.keyCode == 8){
+          $(this).prev(".otpInput").focus();
+        }
+        else{
+          if (this.value.length == this.maxLength) {
+            $(this).next(".otpInput").focus();
+          }
+        }
     });
 
     var loginToken = document.cookie.split("=")[1].split(";")[0];
@@ -166,7 +162,7 @@ export default {
       axios
         .post("http://fixorie.herokuapp.com/accounts/login/", {
           username: "+91" + this.mobile,
-          password: self.otp1 + self.otp2 + self.otp3 + self.otp4,
+          password: self.authOTP1 + self.authOTP2 + self.authOTP3 + self.authOTP4,
         })
         .then(function (response) {
           if (response.data.token != null) {
@@ -401,11 +397,9 @@ h2 {
   margin-top: 27px;
 }
 
-.otpInputContainer {
-  padding: 0 6px;
-}
 
 .otpInput {
+  margin: 0 8px;
   width: 48px;
   height: 48px;
   border-radius: 4px;

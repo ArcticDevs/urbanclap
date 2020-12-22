@@ -90,6 +90,7 @@ export default {};
 <style scoped>
 .container-fluid {
   background-color: #000;
+  z-index:5;
 }
 
 #links {

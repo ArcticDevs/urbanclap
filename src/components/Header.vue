@@ -87,8 +87,7 @@ section {
   padding-top: 25vh;
 }
 .bg {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)),
-    url("/img/Header.jpeg") center no-repeat;
+  background:url("/img/Header.jpeg") center no-repeat;
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -97,6 +96,7 @@ section {
   left: 0;
   padding: 0;
   z-index: -1;
+  filter:brightness(0.5);
 }
 
 .mob-bg-bottom {
