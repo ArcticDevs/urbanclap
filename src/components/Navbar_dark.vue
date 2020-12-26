@@ -12,47 +12,43 @@
         right
         shadow
         backdrop
-        :no-close-on-backdrop="false"
-        :no-close-on-esc="false"
+        no-close-on-backdrop
+        no-close-on-esc
         is-nav
       >
         <div class="sidebar-contents">
           <ul>
             <li>
-              <b-nav-item class="sidebar-item" v-if="!isLoggedIn">
+              <b-nav-item
+                class="sidebar-item"
+                v-b-toggle.login
+                v-if="!loggedIn"
+              >
                 Login / Sign Up
               </b-nav-item>
-              <b-nav-item class="sidebar-item" v-if="isLoggedIn">
+              <b-nav-item class="sidebar-item" v-if="loggedIn" @click="logout">
                 Logout
               </b-nav-item>
             </li>
-            <li><b-nav-item  class="sidebar-item">Blog</b-nav-item></li>
+            <!-- <li><b-nav-item class="sidebar-item">Blog</b-nav-item></li> -->
             <li>
-              <b-nav-item  class="sidebar-item">About Us</b-nav-item>
+              <b-nav-item class="sidebar-item">About Us</b-nav-item>
             </li>
             <li>
-              <b-nav-item  class="sidebar-item">Contact Us</b-nav-item>
+              <b-nav-item class="sidebar-item">Contact Us</b-nav-item>
             </li>
             <li>
-              <b-nav-item  class="sidebar-item"
-                >Terms Of Use</b-nav-item
-              >
+              <b-nav-item class="sidebar-item">Terms Of Use</b-nav-item>
             </li>
             <li>
-              <b-nav-item  class="sidebar-item">
-                Privacy Policy
-              </b-nav-item>
+              <b-nav-item class="sidebar-item"> Privacy Policy </b-nav-item>
             </li>
             <li>
-              <b-nav-item  class="sidebar-item">
-                Customer Support
-              </b-nav-item>
+              <b-nav-item class="sidebar-item"> Customer Support </b-nav-item>
             </li>
-            <li>
-              <b-nav-item  class="sidebar-item">
-                We Are Hiring!
-              </b-nav-item>
-            </li>
+            <!-- <li>
+              <b-nav-item class="sidebar-item"> We Are Hiring! </b-nav-item>
+            </li> -->
           </ul>
         </div>
       </b-sidebar>
@@ -66,96 +62,90 @@
               ><u>Register As A Professional</u></router-link
             ></b-nav-item
           >
-          <b-nav-item v-if="isLoggedIn"
+          <b-nav-item v-if="loggedIn"
             ><router-link to="/bookings">My Bookings</router-link></b-nav-item
           >
-          <b-nav-item v-if="isLoggedIn" @click="logout"
+          <b-nav-item v-if="loggedIn" @click="logout"
             ><router-link to="/"
               >Logout - Verified Customer</router-link
             ></b-nav-item
           >
-          <b-nav-item v-b-toggle.login v-if="!isLoggedIn"
+          <b-nav-item v-b-toggle.login v-if="!loggedIn"
             >Login / Sign Up</b-nav-item
           >
-
-          <b-sidebar
-            id="login"
-            title="Please login to continue"
-            right
-            shadow
-            backdrop
-            no-close-on-backdrop="false"
-            no-close-on-esc="false"
-          >
-            <b-input-group prepend="+91" id="bg">
-              <input
-                v-model="mobile"
-                type="tel"
-                placeholder="Your phone number "
-                id="tel"
-                maxlength="10"
-              />
-            </b-input-group>
-
-            <input
-              v-b-toggle.sidebar-OTP
-              type="submit"
-              value="Continue"
-              id="btn"
-              @click="gen_otp"
-            />
-            <b-sidebar
-              id="sidebar-OTP"
-              title="Please login to continue"
-              right
-              shadow
-            >
-              <div class="px-3 py-2">
-                <h5>Enter Verification Code</h5>
-                <span>We have sent a 4 digit OPT on {{ mobile }}</span>
-                <div class="mt-4">
-                  <input
-                    type="tel"
-                    pattern="[0-9]{1}"
-                    class="inputs otp"
-                    v-model="otp1"
-                    maxlength="1"
-                  />
-                  <input
-                    type="tel"
-                    pattern="[0-9]{1}"
-                    class="inputs otp"
-                    v-model="otp2"
-                    maxlength="1"
-                  />
-                  <input
-                    type="tel"
-                    pattern="[0-9]{1}"
-                    class="inputs otp"
-                    v-model="otp3"
-                    maxlength="1"
-                  />
-                  <input
-                    type="tel"
-                    pattern="[0-9]{1}"
-                    class="inputs otp"
-                    v-model="otp4"
-                    maxlength="1"
-                  />
-                </div>
-              </div>
-              <input
-                v-b-toggle.sidebar-OTP
-                type="submit"
-                value="Log In"
-                id="btn"
-                @click="login"
-              />
-            </b-sidebar>
-          </b-sidebar>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+    <b-sidebar
+      id="login"
+      title="Please login to continue"
+      right
+      shadow
+      backdrop
+      no-close-on-backdrop
+      no-close-on-esc
+    >
+      <b-input-group prepend="+91" id="bg">
+        <input
+          v-model="mobile"
+          type="tel"
+          placeholder="Your phone number "
+          id="tel"
+          maxlength="10"
+          class="phno"
+        />
+      </b-input-group>
+
+      <input
+        v-b-toggle.sidebar-OTP
+        type="submit"
+        value="Continue"
+        id="btn"
+        @click="gen_otp"
+      />
+      <b-sidebar id="sidebar-OTP" title="Please login to continue" right shadow>
+        <div class="px-3 py-2">
+          <h5>Enter Verification Code</h5>
+          <span>We have sent a 4 digit OPT on {{ mobile }}</span>
+          <span class="otpMobileEdit" v-b-toggle.sidebar-OTP> Edit </span>
+          <div class="mt-4">
+            <input
+              type="tel"
+              pattern="[0-9]{1}"
+              class="inputs otp"
+              v-model="otp1"
+              maxlength="1"
+            />
+            <input
+              type="tel"
+              pattern="[0-9]{1}"
+              class="inputs otp"
+              v-model="otp2"
+              maxlength="1"
+            />
+            <input
+              type="tel"
+              pattern="[0-9]{1}"
+              class="inputs otp"
+              v-model="otp3"
+              maxlength="1"
+            />
+            <input
+              type="tel"
+              pattern="[0-9]{1}"
+              class="inputs otp"
+              v-model="otp4"
+              maxlength="1"
+            />
+          </div>
+          <div class="otpError">Please enter correct OTP</div>
+          <div class="otpResend" @click="gen_otp">
+            <span>Resend OTP</span>
+          </div>
+        </div>
+        <input type="submit" value="Log In" id="btn" @click="login" />
+      </b-sidebar>
+    </b-sidebar>
   </div>
 </template>
 
@@ -169,20 +159,28 @@ export default {
       otp2: "",
       otp3: "",
       otp4: "",
-      isLoggedIn: false,
+      loggedIn: false,
     };
   },
   mounted() {
+    $(".phno").keyup(function () {
+      if (/\D/g.test(this.value)) {
+        // Filter non-digits from input value.
+        this.value = this.value.replace(/\D/g, "");
+      }
+    });
     $(".inputs").keyup(function () {
+      if (/\D/g.test(this.value)) {
+        // Filter non-digits from input value.
+        this.value = this.value.replace(/\D/g, "");
+      }
       if (this.value.length == this.maxLength) {
         $(this).next(".inputs").focus();
       }
     });
 
-    var loginToken = document.cookie.split("=")[1].split(";")[0];
-    if (loginToken != "") {
-      this.isLoggedIn = true;
-    }
+    if (this.$store.getters.get_login_status == true) this.loggedIn = true;
+    else this.loggedIn = false;
   },
   methods: {
     gen_otp() {
@@ -205,16 +203,19 @@ export default {
         })
         .then(function (response) {
           if (response.data.token != null) {
-            document.cookie = "token=" + response.data.token;
+            self.$store.commit("set_token", response.data.token);
           }
           location.reload();
+        })
+        .catch(function (err) {
+          $(".otpError").css("display", "block");
+          setTimeout(() => {
+            $(".otpError").css("display", "none");
+          }, 5000);
         });
     },
     logout() {
-      var d = new Date();
-      d.setTime(d.getTime());
-      var expires = "expires=" + d.toUTCString();
-      document.cookie = "token" + "=" + "" + ";path=/;" + expires;
+      this.$store.commit("delete_token");
       location.reload();
     },
   },
@@ -310,6 +311,7 @@ export default {
   background-color: transparent;
   border: none;
 }
+
 #bg {
   padding-top: 35px;
 }
@@ -321,6 +323,44 @@ export default {
   height: 50px;
   border: none;
   margin-top: 22px;
+}
+
+.otpError {
+  display: none;
+  color: #dd0017;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.otpResend,
+.otpResend:focus,
+.otpResend:active {
+  border: none;
+  outline: none;
+  padding: 18px 24px 0;
+  text-align: center;
+  color: #49ad49;
+}
+
+.otpResend span {
+  cursor: pointer;
+  color: #304ffe;
+  padding: 18px 24px 0;
+  text-align: center;
+}
+
+.otpMobileEdit,
+.otpMobileEdit:focus,
+.otpMobileEdit:active {
+  border: none;
+  outline: none;
+  margin-left: 10px;
+  color: #304ffe;
+  cursor: pointer;
+  line-height: 20px;
+  font-size: 12px;
+  margin: 9px 0 0;
 }
 
 ::placeholder {

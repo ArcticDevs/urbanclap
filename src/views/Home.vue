@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div id="navbar" style="z-index:8;">
+    <div id="navbar">
       <Navbar />
     </div>
     <div id="nav_bottom">
@@ -86,16 +86,18 @@ export default {
 
 #header {
   position: relative;
+  z-index:0;
 }
 
 #service {
   background: #fff;
+  z-index: 5 !important;
 }
 
 #navbar {
   position: absolute;
   top: 0;
-  z-index: 3;
+  z-index: 6;
   width: 100%;
 }
 

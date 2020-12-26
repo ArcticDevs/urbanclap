@@ -95,7 +95,7 @@ export default {
     axios
       .get("http://fixorie.herokuapp.com/fo/invoices/", {
         headers: {
-          Authorization: "Token " + document.cookie.split("=")[1],
+          Authorization: "Token " + self.$store.getters.get_token,
         },
       })
       .then(function (response) {

@@ -224,10 +224,7 @@
                       <button
                         type="button"
                         class="borderInl"
-                        @click="
-                          cart[get_cart_index(sub_service_category_type.id)]
-                            .quantity--
-                        "
+                        @click="reduceQuantity(sub_service_category_type.id)"
                       >
                         -
                       </button>
@@ -240,10 +237,7 @@
                       <button
                         type="button"
                         class="borderInr"
-                        @click="
-                          cart[get_cart_index(sub_service_category_type.id)]
-                            .quantity++
-                        "
+                        @click="increaseQuantity(sub_service_category_type.id)"
                       >
                         +
                       </button>
@@ -256,6 +250,9 @@
               <span
                 >Proceed <b-icon class="right-arrow" icon="arrow-right"></b-icon
               ></span>
+              <!-- <div class="login_sidebar"> -->
+                <LoginSidebar :loginSidebar="loginSidebar"/>
+              <!-- </div> -->
             </div>
             <!-- <div id="authSection">
               <Auth />
@@ -332,7 +329,7 @@
         <b-navbar toggleable="xl">
           <b-navbar-nav class="mx-auto nav-items">
             <b-nav-item
-              class="serviceNavActive"
+              class="serviceNavActive serviceNavItem"
               @click="functionforscroll('howItWorks')"
               >How it Works</b-nav-item
             >
@@ -462,10 +459,24 @@
 
         <div class="popular-services-list">
           <ul>
-            <li><router-link to="/delhi-ncr-electricians">Electricians</router-link></li>
-            <li><router-link to="/delhi-ncr-microwave-repair">Microwave Repair</router-link></li>
-            <li><router-link to="/delhi-ncr-professional-home-cleaning">Cleaning Services</router-link></li>
-            <li><router-link to="/delhi-ncr-salon-at-home">Salons</router-link></li>
+            <li>
+              <router-link to="/delhi-ncr-electricians"
+                >Electricians</router-link
+              >
+            </li>
+            <li>
+              <router-link to="/delhi-ncr-microwave-repair"
+                >Microwave Repair</router-link
+              >
+            </li>
+            <li>
+              <router-link to="/delhi-ncr-professional-home-cleaning"
+                >Cleaning Services</router-link
+              >
+            </li>
+            <li>
+              <router-link to="/delhi-ncr-salon-at-home">Salons</router-link>
+            </li>
             <li><router-link to="/delhi-ncr-spa-at-home">Spa</router-link></li>
           </ul>
         </div>
@@ -511,7 +522,7 @@
 import Navbar from "@/components/Navbar_dark.vue";
 import Footer from "@/components/Footer.vue";
 import Auth from "@/components/Login_Mobile.vue";
-
+import LoginSidebar from '@/components/Login_Sidebar';
 import axios from "axios";
 export default {
   name: "second-mod",
@@ -524,15 +535,25 @@ export default {
       selected_faq_index: -1,
       invoice_id: "",
       cartInvoice: {},
-      isLoggedIn:false,
+      isLoggedIn: false,
+      loginSidebar:false,
     };
   },
   components: {
     Navbar,
     Footer,
     Auth,
+    LoginSidebar,
   },
   mounted() {
+    // NAV ACTIVE ITEM
+    $(document).ready(function () {
+      $(".serviceNavItem a").on("click", function () {
+        console.log("clicked");
+        $(".serviceNavItem").removeClass("serviceNavActive");
+        $(this).addClass("serviceNavActive");
+      });
+    });
     var url = window.location.href;
     var service_url = "/" + url.substring(url.lastIndexOf("/") + 1);
 
@@ -548,18 +569,10 @@ export default {
         }
       }
     });
-  
+
     this.$root.$on("bv::modal::hide", (bvEvent, modalId) => {
       this.selected_sub_service_index = -1;
       this.checkout = false;
-    });
-
-    // NAV ACTIVE ITEM
-    $(document).ready(function () {
-      $(".serviceNavItem").click(function () {
-        $(".serviceNavItem").removeClass("serviceNavActive");
-        $(this).addClass("serviceNavActive");
-      });
     });
   },
   methods: {
@@ -574,8 +587,7 @@ export default {
           bodyFormData,
           {
             headers: {
-              Authorization:
-                "Token " + document.cookie.split("=")[1].split(";")[0],
+              Authorization: "Token " + self.$store.getters.get_token,
             },
           }
         )
@@ -608,8 +620,7 @@ export default {
                   },
                   {
                     headers: {
-                      Authorization:
-                        "Token " + document.cookie.split("=")[1].split(";")[0],
+                      Authorization: "Token " + self.$store.getters.get_token,
                     },
                   }
                 )
@@ -665,7 +676,6 @@ export default {
       $(".mob-faqs").css("height", "auto");
     },
 
-
     add_to_cart(sub_service_category_type_id) {
       this.cart.push({
         sub_service_category_type_id: sub_service_category_type_id,
@@ -695,74 +705,87 @@ export default {
         }
       }
     },
+    reduceQuantity(sub_service_category_type_id) {
+      if (
+        this.cart[this.get_cart_index(sub_service_category_type_id)].quantity >
+        0
+      )
+        this.cart[this.get_cart_index(sub_service_category_type_id)].quantity--;
+    },
+    increaseQuantity(sub_service_category_type_id) {
+      if (
+        this.cart[this.get_cart_index(sub_service_category_type_id)].quantity <
+        3
+      )
+        this.cart[this.get_cart_index(sub_service_category_type_id)].quantity++;
+    },
     checkOut() {
       var self = this;
       if (document.cookie.indexOf("token")) {
-        alert("Please Login first to book a service!");
-        router.push({ path: 'auth' })
+        this.loginSidebar=true;
       } else {
-        console.log(document.cookie.split("=")[1].split(";")[0]);
+        console.log(this.cart.length)
+        if(this.cart.length<=0)
+        alert("Please select something");
+        else
+        {
 
-        axios
-          .post(
-            "http://fixorie.herokuapp.com/fo/invoices/",
-            {},
-            {
-              headers: {
-                Authorization:
-                  "Token " + document.cookie.split("=")[1].split(";")[0],
-              },
-            }
-          )
-          .then(function (response) {
-            self.invoice_id = response.data.id;
-            var counter = 0;
-            for (var j = 0; j < self.cart.length; j++) {
-              axios
-                .post(
-                  "http://fixorie.herokuapp.com/fo/invoice_details/",
-                  {
-                    invoice: self.invoice_id,
-                    sub_service_category_type:
-                      self.cart[j].sub_service_category_type_id,
-                    quantity: self.cart[j].quantity,
-                  },
-                  {
-                    headers: {
-                      Authorization:
-                        "Token " + document.cookie.split("=")[1].split(";")[0],
+          axios
+            .post(
+              "http://fixorie.herokuapp.com/fo/invoices/",
+              {},
+              {
+                headers: {
+                  Authorization: "Token " + self.$store.getters.get_token,
+                },
+              }
+            )
+            .then(function (response) {
+              self.invoice_id = response.data.id;
+              var counter = 0;
+              for (var j = 0; j < self.cart.length; j++) {
+                axios
+                  .post(
+                    "http://fixorie.herokuapp.com/fo/invoice_details/",
+                    {
+                      invoice: self.invoice_id,
+                      sub_service_category_type:
+                        self.cart[j].sub_service_category_type_id,
+                      quantity: self.cart[j].quantity,
                     },
-                  }
-                )
-                .then((responseInvDetails) => {
-                  console.log(responseInvDetails);
-                  console.log("inside post response");
-                  counter++;
-                  if (counter == self.cart.length - 1) {
-                    console.log("inside post response if condi");
-
-                    axios
-                      .get(
-                        "http://fixorie.herokuapp.com/fo/invoices/" +
-                          self.invoice_id,
-                        {
-                          headers: {
-                            Authorization:
-                              "Token " +
-                              document.cookie.split("=")[1].split(";")[0],
-                          },
-                        }
-                      )
-                      .then((responseInvoice) => {
-                        console.log(responseInvoice.data);
-                        self.cartInvoice = responseInvoice.data;
-                      });
-                  }
-                });
-            }
-          });
-
-        self.checkout = true;
+                    {
+                      headers: {
+                        Authorization: "Token " + self.$store.getters.get_token,
+                      },
+                    }
+                  )
+                  .then((responseInvDetails) => {
+                    // console.log(responseInvDetails);
+                    // console.log("inside post response");
+                    counter++;
+                    if (counter == self.cart.length - 1) {
+                      axios
+                        .get(
+                          "http://fixorie.herokuapp.com/fo/invoices/" +
+                            self.invoice_id,
+                          {
+                            headers: {
+                              Authorization:
+                                "Token " + self.$store.getters.get_token,
+                            },
+                          }
+                        )
+                        .then((responseInvoice) => {
+                          // console.log(responseInvoice.data);
+                          self.cartInvoice = responseInvoice.data;
+                        });
+                    }
+                  });
+              }
+            });
+  
+          self.checkout = true;
+        }
       }
     },
     functionforscroll(id) {
@@ -775,7 +798,6 @@ export default {
 
 
 <style scoped>
-
 /* modal CSS */
 
 .sub_service_type {
@@ -845,6 +867,7 @@ export default {
 
 .counterBtn {
   border: 1px solid #000;
+  border-radius:4px;
   width: 71px;
   height: 100%;
 }
@@ -1109,7 +1132,7 @@ a.nav-link {
   padding-top: 20px;
 }
 
-.serviceNavActive {
+.serviceNavActive a {
   border-bottom: solid 2px #000;
 }
 
@@ -2069,8 +2092,8 @@ a.nav-link {
   color: #fd5c63;
 }
 
-.secondModFooter{
-  position:relative;
+.secondModFooter {
+  position: relative;
   /* z-index:2; */
 }
 

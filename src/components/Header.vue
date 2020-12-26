@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style scoped>
-* {
+.header {
   z-index: 1;
 }
 section {
@@ -250,6 +250,9 @@ select {
 }
 
 @media (max-width: 1200px) {
+  *{
+    z-index:1;
+  }
   section {
     height: 350px;
     background-color: #000;

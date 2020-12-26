@@ -18,19 +18,19 @@
         </div>
       </div>
 
-      <div class="containerItem">
+      <div class="containerItem" @click="goToBookings">
         <div class="containerItem-inner">
-          <router-link to="/bookings">
-            <div
-              :class="{
-                linkContainer: true,
-                activeNavItem: selectedMenu == 'bookings',
-              }"
-            >
-              <span><b-icon icon="bookmark-star-fill"></b-icon></span>
-              <p>Bookings</p>
-            </div>
-          </router-link>
+          <!-- <router-link to="/bookings"> -->
+          <div
+            :class="{
+              linkContainer: true,
+              activeNavItem: selectedMenu == 'bookings',
+            }"
+          >
+            <span><b-icon icon="bookmark-star-fill"></b-icon></span>
+            <p>Bookings</p>
+          </div>
+          <!-- </router-link> -->
           <span class="innerSpan"></span>
         </div>
       </div>
@@ -74,22 +74,37 @@
 export default {
   data() {
     return {
-      // loggedIn: false,
+      loggedIn: false,
     };
   },
   props: {
     selectedMenu: "",
   },
   mounted() {
+    
+  this.loggedIn = this.$store.getters.get_login_status;
+  console.log("login status: "+this.$store.getters.get_login_status)
+
     $(document).ready(function () {
       $(".linkContainer").click(function () {
         $(".linkContainer").removeClass("activeNavItem");
         $(this).addClass("activeNavItem");
       });
-
-      // var loginTok = document.cookie.split("=")[1].split(";")[0];
-      // if (loginTok != undefined) this.loggedIn = true;
     });
+
+  },
+  methods: {
+    goToBookings() {
+      // console.log("token status-->>" + self.$store.getters.get_token);
+      if (this.loggedIn == false) {
+        console.log("redirecting to auth");
+        this.$router.push("/auth");
+      } else {
+        console.log(this.loggedIn);
+        console.log("open bookings");
+        this.$router.push("/bookings");
+      }
+    },
   },
 };
 </script>
@@ -103,7 +118,7 @@ export default {
   position: fixed;
   width: 100%;
   bottom: 0;
-  z-index: 3;
+  z-index: 10;
   transition: transform 0.3s ease-out;
   transform: translateY(0);
 }

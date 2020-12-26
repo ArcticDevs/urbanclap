@@ -1,30 +1,7 @@
 <template>
-  <div class="nav container">
-    <b-navbar toggleable="xl">
-      <b-navbar-brand href="#" class="text-white">
-        <router-link to="/"><img src="/img/logo_light.png" /></router-link>
-      </b-navbar-brand>
-
-      <b-navbar-nav class="ml-auto nav-items">
-        <b-nav-item><router-link to="/">Blog</router-link></b-nav-item>
-        <b-nav-item
-          ><router-link to="/"
-            ><u>Register As A Professional</u></router-link
-          ></b-nav-item
-        >
-        <b-nav-item v-if="loggedIn"
-          ><router-link to="/bookings">My Bookings</router-link></b-nav-item
-        >
-        <b-nav-item v-if="loggedIn" @click="logout"
-          ><router-link to="/"
-            >Logout - Verified Customer</router-link
-          ></b-nav-item
-        >
-        <b-nav-item v-b-toggle.login v-if="!loggedIn"
-          >Login / Sign Up</b-nav-item
-        >
-
-        <b-sidebar
+    <div id="sidebar">
+     <b-sidebar
+     v-model="loginSidebar"
           id="login"
           title="Please login to continue"
           right
@@ -99,9 +76,7 @@
             <input type="submit" value="Log In" id="btn" @click="login" />
           </b-sidebar>
         </b-sidebar>
-      </b-navbar-nav>
-    </b-navbar>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -114,8 +89,10 @@ export default {
       otp2: "",
       otp3: "",
       otp4: "",
-      loggedIn: false,
     };
+  },
+  props:{
+    loginSidebar:Boolean,
   },
   mounted() {
     $(".phno").keyup(function () {
@@ -134,8 +111,6 @@ export default {
       }
     });
 
-    if (this.$store.getters.get_login_status == true) this.loggedIn = true;
-    else this.loggedIn = false;
   },
   methods: {
     gen_otp() {
@@ -176,41 +151,8 @@ export default {
   },
 };
 </script>
+
 <style scoped>
-.navbar .navbar-brand img {
-  margin: 0 0 0 30px;
-  height: 100%;
-  width: 80px;
-}
-
-.b-sidebar-backdrop {
-  opacity: 0.7 !important;
-}
-
-.input-group-text {
-  background-color: #fff !important ;
-  border: 1px solid #bdbdbd !important;
-  margin-left: 19px;
-}
-
-.navbar a.nav-link {
-  color: #fff !important;
-  padding: 0;
-  margin-right: 25px;
-}
-
-.nav-item a {
-  text-decoration: none !important;
-  color: #fff !important;
-}
-
-.navbar {
-  height: 60px;
-  max-width: 100%;
-  width: 100%;
-  font-size: 16px;
-  font-weight: bolder;
-}
 
 #login {
   font-size: 14px !important;
@@ -225,13 +167,6 @@ export default {
   margin: 0 10px;
 }
 
-/* #country {
-  height: 54px;
-  width: 65px;
-  outline-color: none;
-  padding-left: 10px;
-  border: 1px solid #bdbdbd;
-} */
 #tel {
   height: 54px;
   width: 234px;

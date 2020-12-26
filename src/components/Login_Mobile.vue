@@ -1,7 +1,7 @@
 <template>
   <div id="LoginMob">
     <div class="mainContainer">
-      <div class="authScreenContainer" v-if="isLoggedIn == false">
+      <div class="authScreenContainer" v-if="loggedIn == false">
         <div class="authHeader">
           <p>Please login to continue</p>
         </div>
@@ -22,6 +22,7 @@
                     @keyup="checkValidity"
                     v-model="mobile"
                     maxlength="10"
+                    @keyup.enter="gen_otp"
                   />
                 </div>
               </div>
@@ -45,33 +46,33 @@
                 </p>
               </div>
               <div class="otpField">
-                  <input
-                    class="otpInput"
-                    pattern="[0-9]{1}"
-                    v-model="authOTP1"
-                    maxlength="1"
-                  />
+                <input
+                  class="otpInput"
+                  pattern="[0-9]{1}"
+                  v-model="authOTP1"
+                  maxlength="1"
+                />
 
-                  <input
-                    class="otpInput"
-                    pattern="[0-9]{1}"
-                    v-model="authOTP2"
-                    maxlength="1"
-                  />
+                <input
+                  class="otpInput"
+                  pattern="[0-9]{1}"
+                  v-model="authOTP2"
+                  maxlength="1"
+                />
 
-                  <input
-                    class="otpInput"
-                    pattern="[0-9]{1}"
-                    v-model="authOTP3"
-                    maxlength="1"
-                  />
+                <input
+                  class="otpInput"
+                  pattern="[0-9]{1}"
+                  v-model="authOTP3"
+                  maxlength="1"
+                />
 
-                  <input
-                    class="otpInput"
-                    pattern="[0-9]{1}"
-                    v-model="authOTP4"
-                    maxlength="1"
-                  />
+                <input
+                  class="otpInput"
+                  pattern="[0-9]{1}"
+                  v-model="authOTP4"
+                  maxlength="1"
+                />
               </div>
               <div class="otpError">Please enter correct OTP</div>
               <div class="otpResend" @click="gen_otp">
@@ -110,27 +111,32 @@ export default {
       authOTP2: "",
       authOTP3: "",
       authOTP4: "",
-      isLoggedIn: false,
+      loggedIn: false,
     };
   },
-  components: {
-  },
   mounted() {
-      $(".otpInput").keyup(function (e) {
-        if(e.keyCode == 8){
-          $(this).prev(".otpInput").focus();
+    $(".otpInput").keyup(function (e) {
+      if (e.keyCode == 8) {
+        $(this).prev(".otpInput").focus();
+      } else {
+        if (this.value.length == this.maxLength) {
+          $(this).next(".otpInput").focus();
         }
-        else{
-          if (this.value.length == this.maxLength) {
-            $(this).next(".otpInput").focus();
-          }
-        }
-    });
+      }
 
-    var loginToken = document.cookie.split("=")[1].split(";")[0];
-    if (loginToken != "") {
-      this.isLoggedIn = true;
-    }
+      if (/\D/g.test(this.value)) {
+        // Filter non-digits from input value.
+        this.value = this.value.replace(/\D/g, "");
+      }
+    });
+    console.log("login token status " + this.$store.getters.get_token);
+
+    this.loggedIn = this.$store.getters.get_login_status;
+  },
+  computed: {
+    getLoginStatus() {
+      return this.$store.getters.get_login_status;
+    },
   },
   methods: {
     gen_otp() {
@@ -162,24 +168,31 @@ export default {
       axios
         .post("http://fixorie.herokuapp.com/accounts/login/", {
           username: "+91" + this.mobile,
-          password: self.authOTP1 + self.authOTP2 + self.authOTP3 + self.authOTP4,
+          password:
+            self.authOTP1 + self.authOTP2 + self.authOTP3 + self.authOTP4,
         })
         .then(function (response) {
           if (response.data.token != null) {
             console.log(response.data.token);
-            document.cookie = "token=" + response.data.token;
+            self.$store.commit("set_token", response.data.token);
+            // this.loggedIn = this.getLoginStatus();
+            // console.log("get token : "+self.$store.getters.get_token)
           }
           location.reload();
         })
         .catch(function (err) {
           $(".otpError").css("display", "block");
+          setTimeout(() => {
+            $(".otpError").css("display", "none");
+          }, 5000);
         });
     },
     logout() {
-      var d = new Date();
-      d.setTime(d.getTime());
-      var expires = "expires=" + d.toUTCString();
-      document.cookie = "token" + "=" + "" + ";path=/;" + expires;
+      // var d = new Date();
+      // d.setTime(d.getTime());
+      // var expires = "expires=" + d.toUTCString();
+      // document.cookie = "token" + "=" + "" + ";path=/;" + expires;
+      this.$store.commit("delete_token");
       location.reload();
     },
     editNumber() {
@@ -396,7 +409,6 @@ h2 {
   align-items: center;
   margin-top: 27px;
 }
-
 
 .otpInput {
   margin: 0 8px;

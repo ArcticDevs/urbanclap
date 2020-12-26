@@ -17,7 +17,10 @@
           </div>
         </router-link>
 
-        <button v-if="service.category_services.length > 1" @click="selected_service_category_index = index">
+        <button
+          v-if="service.category_services.length > 1"
+          @click="selected_service_category_index = index"
+        >
           <span @click="ModelOpenStatus = true">
             <img :src="service.icon_path" alt="" class="mt-2 mb-2" />
             <p>{{ service.name }}</p>
@@ -25,18 +28,21 @@
         </button>
       </div>
 
-      <b-sidebar 
-      v-model="ModelOpenStatus" 
-      right 
-      shadow 
-      backdrop
-      :title="services[selected_service_category_index].name" 
-      v-if="selected_service_category_index != -1">
+      <b-sidebar
+        v-model="ModelOpenStatus"
+        right
+        shadow
+        backdrop
+        :title="services[selected_service_category_index].name"
+        v-if="selected_service_category_index != -1"
+      >
         <div class="">
           <ul class="list-group mt-3">
             <li
               class="list-group-item"
-              v-for="(sidebar_service, service_index) in services[selected_service_category_index].category_services"
+              v-for="(sidebar_service, service_index) in services[
+                selected_service_category_index
+              ].category_services"
               :key="service_index"
             >
               <router-link
@@ -58,17 +64,28 @@
         </div>
       </b-sidebar>
     </div>
+    <!-- <div class="sidebar">
+        <Sidebar
+          :services="services"
+          :ModelOpenStatus="ModelOpenStatus"
+          :selected_service_category_index="selected_service_category_index"
+        />
+      </div> -->
   </div>
 </template>
 <script>
 import axios from "axios";
+// import Sidebar from "./Service_Sidebar.vue";
 export default {
   data() {
     return {
       services: [],
       ModelOpenStatus: false,
-      selected_service_category_index:-1
+      selected_service_category_index: -1,
     };
+  },
+  components: {
+    // Sidebar,
   },
   mounted() {
     var self = this;
@@ -85,7 +102,7 @@ export default {
   background: #fff !important;
   position: relative;
   top: -60px;
-  z-index: 5 !important;
+  /* z-index: 5 !important; */
 }
 
 #flexbox {
@@ -110,7 +127,7 @@ export default {
   color: #000;
 }
 
-.flex-item a{
+.flex-item a {
   text-decoration: none !important;
 }
 
@@ -144,7 +161,12 @@ button span {
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
 }
+/* 
+.sidebar {
+  z-index: 100 !important;
+} */
 
 .b-sidebar-outer {
   z-index: 100 !important;
@@ -226,7 +248,6 @@ color:#000;
   #flexbox {
     padding: 20px 2vw 20px 2vw;
   }
-
   .service {
     top: 0;
   }
